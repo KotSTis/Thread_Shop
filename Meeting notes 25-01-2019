@@ -1,0 +1,13 @@
+- Met up at 4.00pm @ 4th floor of PG Center
+- Decided on the amount of classes to create
+- Finalized individual class structures
+- Split the developement and testing responsibilities for the project as follows:
+  * Konstantinos - Proccessor, Menu
+  * Giorgos - GUI, Item
+  * Jeese - Name, CSVReader
+  * Alex - Order, GUI
+- Split up the diagram creating responsibilities as follows:
+  * Konstantinos - Activity Diagram
+  * Giorgos - Sequence Diagram
+  * Jeese - Use Case Diagram
+  * Alex - Class Diagram
