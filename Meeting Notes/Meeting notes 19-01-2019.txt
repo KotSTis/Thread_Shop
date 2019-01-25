@@ -1,0 +1,5 @@
+- Met up at 4.00pm @ Linux Lab
+- Created a WhatsApp group to communicate 
+- Decided to have weekly meetings 
+- Created an initial application structure 
+- Split up the classes to think about their internal structure
