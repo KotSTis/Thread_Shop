@@ -5,9 +5,6 @@ import java.util.HashMap;
 public class Order {
 	private String TimeStamp;
 	private String CustomerID;
-	private Menu menu;
-	private String ItemID;
-	private int Quantity;
 	private HashMap<String,Integer> Items;
 	
 	
@@ -26,9 +23,6 @@ public class Order {
 		
 	}
 
-	public Menu getmenu() {
-		return menu;
-	}
 	public String getTimeStamp() {
 		return TimeStamp;
 	}
