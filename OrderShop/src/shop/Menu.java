@@ -22,6 +22,9 @@ public class Menu{
 		menu.remove(menuItem);
 	}
 	
+	public Item getItem(String itemID) {
+		return null;
+	}
 	
 	public void displayMenu (){
 		Iterator<Item> iterator;

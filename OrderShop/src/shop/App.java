@@ -1,6 +1,7 @@
 package shop;
 import java.io.IOException;
 
+
 public class App  {
 
 	public static void main(String[] args) throws IOException {
@@ -11,7 +12,7 @@ public class App  {
 //		
 //	    System.out.println(orders.calculateBill());
 //	    
-    new GUI(orders);
+    //new GUI(orders);
 //	    
 
 //	    orders.FinalReport("Report.csv", "CUST1009");

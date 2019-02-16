@@ -26,6 +26,9 @@ public class CsvReader {
 			String customerID = values[1];
 			String itemOrdered = values[2];
 			Order OrderedItem = new Order(timestamp, customerID, itemOrdered);
+			for (Order ord: orderList)
+				if(ord.getCustomerID() == customerID && ord.getTimeStamp() == timestamp)
+					ord.addItem(itemOrdered, 1);
 			orderList.add(OrderedItem);
 		}
 		sc2.close();
