@@ -5,31 +5,81 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 import shop.Item.Category;
+import java.util.concurrent.ThreadLocalRandom;
+
+
 
 public class AllOrders{
 
 	private ArrayList <Order> orderList;
-	private ArrayList <Item> itemList;
+	private HashMap <String, Item> itemList;
 	private HashMap<String, ArrayList<Order>> allOrders;
-	private TreeSet <Item> menu;
+	private HashMap<String,Integer> summary;
+
 
 	AllOrders() throws FileNotFoundException {
 		
 		CsvReader reader = new CsvReader();
 		this.orderList = reader.readOrdersInfo("Orders.csv");
-
+		System.out.println("read orderlist");
+		System.out.println(this.orderList.toArray()[1].toString());
+		TreeSet <Item> menu;
+		menu = reader.readMenuInfo("Menu.csv");
+		Iterator<Item> iterator;
+		iterator = menu.iterator();
+	    while (iterator.hasNext()) {
+	    	Item item = iterator.next(); 
+	        itemList.put(item.getItemID(), item);
+	    }
+		
 //		this.allOrders = new HashMap<String, ArrayList<Order>>();
 //		this.itemList = new ArrayList<>();
 	}
 
-	public double calculateBill() {
-		double bill = 0; 
-		for (Item item : itemList) {
-			bill += item.getPrice() ;			
+	public void makeOrder(HashMap<Item,Integer> incoming) {
+		Item item;
+		ArrayList<Order> ord = null;
+		int quantity;
+		String custID = "CUST" + ThreadLocalRandom.current().nextInt(0, 5000 + 1);
+		String timestamp = "1235490802";
+		Order newOrder = new Order(timestamp, custID);
+		for (HashMap.Entry<Item,Integer> entry : incoming.entrySet())
+		{
+		    item = entry.getKey();
+		    quantity = entry.getValue();
+		    if(summary.containsKey(item.getItemID()))
+		    	summary.put(item.getItemID(), summary.get(item.getItemID()) + quantity);
+		    else
+		    	summary.put(item.getItemID(), quantity);
+		    
+		    
+		    newOrder.addItem(item, quantity);
+		    
 		}
+		Double price = calculateBill(newOrder);
+		if ( allOrders.containsKey(custID))
+	    	allOrders.get(custID).add(newOrder);
+	    else
+	    	ord = new ArrayList <Order>();
+			ord.add(newOrder);
+			allOrders.put(custID, ord);
+		
+		
+	}
+	
+	public double calculateBill(Order order) {
+		double bill = 0; 
+		for (HashMap.Entry<String,Integer> entry : order.getItems().entrySet())
+		{
+		    String ID = entry.getKey();
+		    Integer quantity = entry.getValue();
+		    bill += itemList.get(ID).getPrice() * quantity;
+		}
+		
 		return bill;	
 	}
 
@@ -37,13 +87,13 @@ public class AllOrders{
 	public String calculateFrequency() {
 
 		String frequency = "";		
-		for (Order order: orderList) {
-			for (Item item: itemList){
-				if (item.getItemID().equals(order.getItemID())){
-					frequency += item.getName() + " has been bought "  + " times.\n";
-				}
-			}
+		for (HashMap.Entry<String,Integer> entry : summary.entrySet())
+		{
+		    String item = entry.getKey();
+		    Integer quantity = entry.getValue();
+		    frequency += "item " + item + " was bought " + quantity + " times\n";
 		}
+
 		return frequency;
 	}
 
@@ -60,8 +110,15 @@ public class AllOrders{
 		String OrderDetails = "Customer " + customer + " ordered:\n";
 		for (Order order : orderList) {
 		
-			if (customer.equals(order.getCustomerID())) 
-				OrderDetails +=  " x" + order.getItemID() +  " (" + getDescription(order.getItemID()) + ") at " + order.getTimeStamp().substring(0, 2)  +
+			if (customer.equals(order.getCustomerID()))
+				for (HashMap.Entry<String,Integer> entry : order.getItems().entrySet())
+				{
+				    String ID = entry.getKey();
+				    Integer quantity = entry.getValue();
+				    OrderDetails +=  quantity + " x " + ID + " (" + getDescription(ID) + ")\n" ;
+				    
+				}
+				OrderDetails += " at " + order.getTimeStamp().substring(0, 2)  +
 				":" + order.getTimeStamp().substring(2, 4)  + ":" + order.getTimeStamp().substring(4, 6)  +
 				" in " + order.getTimeStamp().substring(6, 8) + "/" + order.getTimeStamp().substring(8, 10) +".\n" ;	
 		}		
@@ -69,24 +126,21 @@ public class AllOrders{
 		return OrderDetails + "\n";
 	}
 
-	public Item findByItemID(String itemID) {
-
-		for (Item item : itemList) {
-
-			if (itemID.equals(item.getItemID()))
-				return item;
-		}
-
-		return null;
-	}
-
 	public String getAllCustomerOrders(){
 		String OrderDetails = "\nCustomer ";
-
+		
 		for (Order order : orderList) {
+			OrderDetails += order.getCustomerID() + "ordered:\n" ;
+			for (HashMap.Entry<String,Integer> entry : order.getItems().entrySet())
+			{
+			    String ID = entry.getKey();
+			    Integer quantity = entry.getValue();
+			    OrderDetails +=  quantity + " x " + ID + " (" + getDescription(ID) + ")\n" ;
+			    
+			}
 
 
-			OrderDetails += order.getCustomerID() + "ordered:\n"  + " x" + order.getItemID() +  " (" + ") at " + order.getTimeStamp().substring(0, 2)  +
+			OrderDetails += " at " + order.getTimeStamp().substring(0, 2)  +
 					":" + order.getTimeStamp().substring(2, 4)  + ":" + order.getTimeStamp().substring(4, 6)  +
 					" in " + order.getTimeStamp().substring(6, 8) + "/" + order.getTimeStamp().substring(8, 10) +".\n";
 
@@ -113,10 +167,10 @@ public class AllOrders{
 	public String getDescription(String itemID) {
 		String description = "";
 		for (Order order : orderList) {
-			if(itemID.equals(order.getItemID())){
-				for (Item item : itemList) {
-					if(itemID.equals(item.getItemID())){
-						description += item.getDescription();
+			if(order.getItems().containsKey(itemID)){
+				for (HashMap.Entry<String,Item> entry : itemList.entrySet()) {
+					if(itemID.equals(entry.getKey())){
+						description += entry.getValue().getDescription();
 						return description;
 					}
 				}
