@@ -20,8 +20,7 @@ public class AllOrders{
 		
 		CsvReader reader = new CsvReader();
 		this.orderList = reader.readOrdersInfo("Orders.csv");
-		System.out.println("read orderlist");
-		System.out.println(this.orderList.toArray()[1].toString());
+
 //		this.allOrders = new HashMap<String, ArrayList<Order>>();
 //		this.itemList = new ArrayList<>();
 	}
@@ -34,16 +33,7 @@ public class AllOrders{
 		return bill;	
 	}
 
-	public double calculateDiscounts(){
-		double totalPrice = calculateBill();
-		double discount = 0;
-		for (Item item: itemList){
-			if (item.getCategory() == "Food"){
-				discount = item.getPrice()*0.9;
-			}
-		}
-		return discount;
-	}
+
 	public String calculateFrequency() {
 
 		String frequency = "";		

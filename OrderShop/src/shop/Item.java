@@ -19,7 +19,7 @@ public class Item {
 		this.description = Description;
 		this.price = Price;
 		this.itemID = ItemID;
-		this.categoryItem = CategoryItem;
+		this.setCategoryItem(CategoryItem);
 	}
 	
 	public String getName() {
@@ -38,6 +38,14 @@ public class Item {
 		this.description = Description;
 	}
 	
+	public String getCategoryItem() {
+		return categoryItem;
+	}
+
+	public void setCategoryItem(String categoryItem) {
+		this.categoryItem = categoryItem;
+	}
+
 	public double getPrice () {
 		return price;
 	}
@@ -50,17 +58,14 @@ public class Item {
 		this.itemID = ItemID;
 	}
 	
-	public String getCategory() {
-		return categoryItem;
-	}
+//	public String getCategory() {
+//		return getCategoryItem();
+//	}
+//	
+//	public void setCategory(String CategoryItem) {
+//		this.setCategoryItem(CategoryItem);
+//	}
 	
-	public void setCategory(String CategoryItem) {
-		this.categoryItem = CategoryItem;
-	}
-	
-	public String displayMenu (){
-		String menu = name + "" + description + "" + itemID + "" + price + "£";
-		return menu;
-	}
+
 
 }
