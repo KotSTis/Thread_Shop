@@ -66,9 +66,13 @@ public class Item {
 //		this.setCategoryItem(CategoryItem);
 //	}
 	
+<<<<<<< HEAD
+
+=======
 	public String displayMenu (){
 		String menu = name + "" + description + "" + itemID + "" + price + "£";
 		return menu;
 	}
+>>>>>>> master
 
 }

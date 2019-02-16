@@ -9,6 +9,7 @@ public class App  {
 		AllOrders orders = new AllOrders();
 		Menu menu = new Menu();
 		menu.displayMenu();
+		System.out.println(menu.displayDessert());
 //		
 //	    System.out.println(orders.calculateBill());
 //	    
@@ -18,4 +19,5 @@ public class App  {
 //	    orders.FinalReport("Report.csv", "CUST1009");
 
 	}
+
 }
