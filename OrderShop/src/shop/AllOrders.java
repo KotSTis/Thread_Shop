@@ -22,7 +22,7 @@ public class AllOrders{
 
 
 	AllOrders() throws FileNotFoundException {
-		
+		this.itemList = new HashMap<String,Item>();
 		CsvReader reader = new CsvReader();
 		this.orderList = reader.readOrdersInfo("Orders.csv");
 		System.out.println("read orderlist");

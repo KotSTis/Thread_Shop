@@ -16,7 +16,7 @@ public class Order {
 	}
 	
 	public Order(String TimeStamp, String CustomerID, String itemID){
-		
+		this.Items = new HashMap<String,Integer>();
 		this.TimeStamp = TimeStamp;
 		this.CustomerID = CustomerID;
 		this.Items.put(itemID, 1);

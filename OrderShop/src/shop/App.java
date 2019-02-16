@@ -13,7 +13,7 @@ public class App  {
 //		
 //	    System.out.println(orders.calculateBill());
 //	    
-    //new GUI(orders);
+    new GUI(menu);
 //	    
 
 //	    orders.FinalReport("Report.csv", "CUST1009");
