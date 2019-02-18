@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
-import shop.Item.Category;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -25,8 +24,6 @@ public class AllOrders{
 		this.itemList = new HashMap<String,Item>();
 		CsvReader reader = new CsvReader();
 		this.orderList = reader.readOrdersInfo("Orders.csv");
-		System.out.println("read orderlist");
-		System.out.println(this.orderList.toArray()[1].toString());
 		TreeSet <Item> menu;
 		menu = reader.readMenuInfo("Menu.csv");
 		Iterator<Item> iterator;
@@ -60,7 +57,7 @@ public class AllOrders{
 		    newOrder.addItem(item, quantity);
 		    
 		}
-		Double price = calculateBill(newOrder);
+		
 		if ( allOrders.containsKey(custID))
 	    	allOrders.get(custID).add(newOrder);
 	    else
