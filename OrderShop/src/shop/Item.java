@@ -21,7 +21,9 @@ public class Item {
 		this.itemID = ItemID;
 		this.setCategoryItem(CategoryItem);
 	}
-	
+
+
+
 	public String getName() {
 		return name;
 	}
@@ -57,14 +59,6 @@ public class Item {
 	public void setItemID(String ItemID) {
 		this.itemID = ItemID;
 	}
-	
-//	public String getCategory() {
-//		return getCategoryItem();
-//	}
-//	
-//	public void setCategory(String CategoryItem) {
-//		this.setCategoryItem(CategoryItem);
-//	}
 	
 
 
