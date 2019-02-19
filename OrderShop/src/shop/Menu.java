@@ -43,7 +43,9 @@ public class Menu{
 		while (iterator.hasNext()) {
 			Item next = iterator.next();
 			if ("Food".equals(next.getCategoryItem())){
-				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice()+ "," +  "\n";
+
+				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
+
 			}
 		}
 		return menuDetails;
@@ -56,7 +58,8 @@ public class Menu{
 		while (iterator.hasNext()) {
 			Item next = iterator.next();
 			if ("Dessert".equals(next.getCategoryItem())){
-				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + "," +  "\n";
+				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
+
 			}
 		}
 		return menuDetails;
@@ -69,7 +72,8 @@ public class Menu{
 		while (iterator.hasNext()) {
 			Item next = iterator.next();
 			if ("Beverage".equals(next.getCategoryItem())){
-				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + "," +  "\n";
+				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
+
 			}
 		}
 		return menuDetails;

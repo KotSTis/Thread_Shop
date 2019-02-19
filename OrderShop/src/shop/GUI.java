@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.Position;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GUI extends JFrame implements ActionListener {
@@ -22,7 +23,9 @@ public class GUI extends JFrame implements ActionListener {
 	private Menu menu;
 
 	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton,
-			finishButton;
+
+	finishButton;
+
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 
 	private JTable table1, table2, table3;
@@ -57,8 +60,10 @@ public class GUI extends JFrame implements ActionListener {
 
 		// Set up the title for different panels
 		panel1.setBorder(BorderFactory.createTitledBorder("FOOD"));
-		panel3.setBorder(BorderFactory.createTitledBorder("DESSERTS"));
+
 		panel2.setBorder(BorderFactory.createTitledBorder("BEVERAGES"));
+		panel3.setBorder(BorderFactory.createTitledBorder("DESSERTS"));
+
 
 		proceedButton = new JButton("PROCEED >");
 		proceedButton.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -104,6 +109,9 @@ public class GUI extends JFrame implements ActionListener {
 		removeButton.setEnabled(false);
 		removeButton.addActionListener(this);
 
+		JLabel lblNewLabel = new JLabel("If you want to remove an item, click \"REMOVE\" button.");
+
+
 		textBillArea = new JTextArea();
 		textBillArea.setFont(new Font("Monospaced", Font.BOLD, 13));
 		textBillArea.setBackground(SystemColor.activeCaption);
@@ -115,109 +123,117 @@ public class GUI extends JFrame implements ActionListener {
 		scrollOrders = new JScrollPane();
 		scrollOrders.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollOrders.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		
-		JTextPane txtpnIfYouWant = new JTextPane();
-		txtpnIfYouWant.setBackground(SystemColor.inactiveCaptionBorder);
-		txtpnIfYouWant.setText("If you want to remove an item, click on it and then, click \"REMOVE\" button");
+
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(panel2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(panel1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
-							.addGap(30)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
-							.addGap(27)
-							.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+
+						.addContainerGap()
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-										.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(addFoodButton, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-										.addComponent(addBeverageButton, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)))
+										.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 724, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(addDessertButton, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)))
-							.addGap(52)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtpnIfYouWant, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
+										.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+										.addGap(30))
+								.addGroup(groupLayout.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addComponent(panel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.RELATED)))
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
+										.addGap(27)
+										.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
-									.addComponent(removeButton, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(258)
-							.addComponent(lblOrders)))
-					.addGap(1353))
-		);
+										.addGroup(groupLayout.createSequentialGroup()
+												.addGap(366)
+												.addComponent(removeButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addGap(228))
+										.addGroup(groupLayout.createSequentialGroup()
+												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+														.addGroup(groupLayout.createSequentialGroup()
+																.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+																		.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+																		.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+																		.addComponent(addFoodButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+																		.addComponent(addBeverageButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
+														.addGroup(groupLayout.createSequentialGroup()
+																.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(addDessertButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
+												.addGap(120)
+												.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+														.addGroup(groupLayout.createSequentialGroup()
+																.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+																		.addComponent(lblOrders, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+																		.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+																.addPreferredGap(ComponentPlacement.RELATED)
+																.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(ComponentPlacement.RELATED))
+														.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)))))
+						.addGap(30))
+				);
+
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(140)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(49)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+
+						.addGap(10)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-										.addComponent(addFoodButton))
-									.addGap(60)))
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGap(49)
+										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+												.addGroup(groupLayout.createSequentialGroup()
+														.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+																.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+																.addComponent(addFoodButton))
+														.addGap(40)))
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addGroup(groupLayout.createSequentialGroup()
+														.addGap(90) //distance spinnerFood to spinnerBeverage 
+														.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+																.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+																.addComponent(addBeverageButton)))
+												.addGroup(groupLayout.createSequentialGroup()
+														.addGap(40) //distance panel1 to panel2
+														.addComponent(panel2, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addGroup(groupLayout.createSequentialGroup()
+														.addGap(90) //distance spinnerBeverage to spinnerDessert
+														.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+																.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+																.addComponent(addDessertButton)))
+												.addGroup(groupLayout.createSequentialGroup()
+														.addGap(40) //distance panel2 to panel3
+														.addComponent(panel3, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))
+										.addGap(11))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(panel2, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(41)
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-										.addComponent(addBeverageButton))))
-							.addGap(42)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(36)
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-										.addComponent(addDessertButton)))
-								.addComponent(panel3, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(36)
-							.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollOrders, GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtpnIfYouWant, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(14)
-							.addComponent(removeButton, GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGap(78)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
-						.addComponent(proceedButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-						.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-					.addGap(1302))
-		);
+										.addGap(31)
+										.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)
+												.addComponent(scrollOrders, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(removeButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addGap(30)))
+						.addGap(78)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(finishButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+								.addComponent(proceedButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+								.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+						.addGap(30))
+				);
+
 
 		list = new JList<String>(model);
 		scrollOrders.setViewportView(list);
@@ -262,10 +278,12 @@ public class GUI extends JFrame implements ActionListener {
 		table2 = new JTable() {
 			private static final long serialVersionUID = 1L;
 
+
 			public boolean isCellEditable(int row, int column) {
 
 				spinnerBeverage.setEnabled(true);
 				addBeverageButton.setEnabled(true);
+
 
 				return false;
 			}
@@ -335,6 +353,7 @@ public class GUI extends JFrame implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 
+
 	}
 
 	public void addFoodToList() {
@@ -355,40 +374,40 @@ public class GUI extends JFrame implements ActionListener {
 		return (int) spinnerDessert.getValue();
 	}
 
-//	public String displayOrder(Item item) {
-//		double totalBill = 0;
-//		double bill = 0;
-//		String orders ="";
-//		String orderBill = "";
-//		String orderList = "";
-//		double discount = 0;
-//		for (HashMap.Entry<Item, Integer> entry : newOrders.entrySet()) {
-//
-//			item = entry.getKey();
-//			int quantity = entry.getValue();
-//			order[0] = item.getName();
-//			order[1] = String.valueOf(quantity);
-//			order[2] = String.valueOf(item.getPrice());
-//
-//			orders += order[0] + " x " + order[1] + " (" + order[2] + "�)";
-//			orderList = orders;
-//			bill = Integer.parseInt(order[1]) * Double.parseDouble(order[2]);
-//			
-//			totalBill += bill;
-//			orderBill = String.format("Total price is:\n" + "%.2f", totalBill);
-//
-//			textBillArea.setText(orderBill + "�");
-//			textOrderArea.append(String.valueOf(orders));
-//			
-//				
-//		}
-//		return orderList + "\n";
-//
-//	}
+	//	public String displayOrder(Item item) {
+	//		double totalBill = 0;
+	//		double bill = 0;
+	//		String orders ="";
+	//		String orderBill = "";
+	//		String orderList = "";
+	//		double discount = 0;
+	//		for (HashMap.Entry<Item, Integer> entry : newOrders.entrySet()) {
+	//
+	//			item = entry.getKey();
+	//			int quantity = entry.getValue();
+	//			order[0] = item.getName();
+	//			order[1] = String.valueOf(quantity);
+	//			order[2] = String.valueOf(item.getPrice());
+	//
+	//			orders += order[0] + " x " + order[1] + " (" + order[2] + "£)";
+	//			orderList = orders;
+	//			bill = Integer.parseInt(order[1]) * Double.parseDouble(order[2]);
+	//			
+	//			totalBill += bill;
+	//			orderBill = String.format("Total price is:\n" + "%.2f", totalBill);
+	//
+	//			textBillArea.setText(orderBill + "£");
+	//			textOrderArea.append(String.valueOf(orders));
+	//			
+	//				
+	//		}
+	//		return orderList + "\n";
+	//
+	//	}
 
 	public void addOrderstoList(Item item, int quantity) {
 
-		String order = item.getName() + " x " + quantity + " (" + item.getPrice() + "�)";
+		String order = item.getName() + " x " + quantity + " (" + item.getPrice() + "£)";
 
 		if (quantity != 0) {
 			model.add(0, order);
@@ -400,55 +419,82 @@ public class GUI extends JFrame implements ActionListener {
 		double totalBill = 0;
 		double bill = 0;
 		String orderBill = "";
-		double discount =  0;
-		String discountBill = "";
+
 		for (HashMap.Entry<Item, Integer> entry : newOrders.entrySet()) {
 			item = entry.getKey();
 			quantity = entry.getValue();
 			bill = item.getPrice() * quantity;
 			totalBill += bill;
-			if (quantity>0 ) {
-				resetButton.setEnabled(true);
 			orderBill = String.format("Total price is:\n" + "%.2f", totalBill);
-			textBillArea.setText(orderBill + "�");
-
-			}
-			if (totalBill > 50) 
-				totalBill = totalBill * 0.95;
-				discountBill = String.format("Total price is:\n" + "%.2f", totalBill);
-				textBillArea.setText(discountBill + "�");			
-
+			textBillArea.setText(orderBill + "£");
+			resetButton.setEnabled(true);
+			//System.out.println(entry.getKey().getName() + " " + entry.getValue());
 		}
-
+		if  (model.size() == 0){
+				textBillArea.setText(" ");
+			}
 		return totalBill;
 	}
 
-//	public void discount(Item item, int quantity) {
-//		double discount = 0;
-//		String discountBill = "";
-//		double currentBill = (displayBill(item, quantity));
-//		if (currentBill > 50.0) {
-////			JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50�.");
-//		discount = currentBill * 0.95;
-//		discountBill = String.format("Total price with 5% discount is:\n" + "%.2f", discount);
-//		textBillArea.setText(discountBill + "�");
-//		}
-//	}
 
-	public void removeOrdersFromList() {
-
-		model.remove(list.getSelectedIndex());
-
+	public void discount (Item item, int quantity) {
+		double discount = 0;
+		String discountBill = "";
+		double currentBill = (displayBill(item, quantity));
+		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) < 80.0){ 
+			discount = currentBill *0.95;
+			discountBill = String.format("Total price is:\n" + "%.2f", discount);
+			textBillArea.setText(discountBill + "£");
+			
+		}
+		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) < 100.0){ 
+			discount = currentBill *0.90;
+			discountBill = String.format("Total price is:\n" + "%.2f", discount);
+			textBillArea.setText(discountBill + "£");
+		}
+		else if (displayBill(item, quantity) > 100.0 ){ 
+			discount = currentBill *0.85;
+			discountBill = String.format("Total price is:\n" + "%.2f", discount);
+			textBillArea.setText(discountBill + "£");
+		}
 	}
 
+	public void removeOrdersFromList() {
+		Item item = null;
+		int quantity = 0;
+		String element = model.getElementAt(list.getSelectedIndex());
+		int x = element.indexOf("x");
+		String name = element.substring(0, x-1);
+		for (HashMap.Entry<Item, Integer> entry : newOrders.entrySet()) {
+			if (entry.getKey().getName().equals(name)){
+				item = entry.getKey();
+				quantity = entry.getValue();
+			}
+		}
+		newOrders.remove(item);
+		model.remove(list.getSelectedIndex());
+		displayBill(item, quantity);
+	}
+
+	int counter1 = 0;//counter for displaying 5% discount message
+	int counter2 = 0;//counter for displaying 10% discount message
+	int counter3 = 0;//counter for displaying 15% discount message
+
 	public void actionPerformed(ActionEvent e) {
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////REMOVE BUTTON////////////////////
 		if (e.getSource() == removeButton) {
-			int back = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove one of your orders?", null,
-					JOptionPane.YES_NO_OPTION);
+			int back = JOptionPane.showConfirmDialog(null,
+					"Are you sure you want to remove one of the items from your order?", null, JOptionPane.YES_NO_OPTION);
 			if (back == JOptionPane.YES_OPTION) {
 				removeOrdersFromList();
 			}
-		} else if (e.getSource() == addFoodButton) {
+		} 
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////ADD BUTTONS////////////////////
+		else if (e.getSource() == addFoodButton) { //addFoodButton
+
 
 			Item itemFood = new Item(table1.getValueAt(table1.getSelectedRow(), 0).toString(),
 					table1.getValueAt(table1.getSelectedRow(), 1).toString(),
@@ -456,13 +502,44 @@ public class GUI extends JFrame implements ActionListener {
 					table1.getValueAt(table1.getSelectedRow(), 2).toString(), "Food");
 
 			if (getQuantityFood() > 0) {
-				newOrders.put(itemFood, getQuantityFood());
+				if (newOrders.containsKey(itemFood)){
+					String element = itemFood.getName();
+					int index = list.getNextMatch(element,0,Position.Bias.Forward);
+					model.setElementAt(itemFood.getName() + " x " + getQuantityFood() + " (" + itemFood.getPrice() + "£)", index);
+					newOrders.put(itemFood, getQuantityFood());
+					displayBill(itemFood, (Integer) getQuantityFood());
+				}
+				else{
+					newOrders.put(itemFood, getQuantityFood());
+					addOrderstoList(itemFood, (Integer) getQuantityFood());
+					displayBill(itemFood, (Integer) getQuantityFood());
+				}
 			}
-			addOrderstoList(itemFood, (Integer) getQuantityFood());
-			displayBill(itemFood, (Integer) getQuantityFood());
-			//discount(itemFood, (Integer) getQuantityFood());
+			//////////////////////////////DISCOUNTS/////////////////////////////////////
+			if (displayBill(itemFood, (Integer) getQuantityFood()) > 50.0 
+					&& displayBill(itemFood, (Integer) getQuantityFood()) < 80.0 && counter1 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50£.");
+				discount(itemFood, (Integer) getQuantityFood());
+				counter1 = 1;
+			}
+			else if (displayBill(itemFood, (Integer) getQuantityFood()) > 80.0 
+					&& displayBill(itemFood, (Integer) getQuantityFood()) < 100.0 && counter2 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80£.");
+				discount(itemFood, (Integer) getQuantityFood());
+				counter2 = 1;
+			}
+			else if (displayBill(itemFood, (Integer) getQuantityFood()) > 100 && counter3 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100£.");
+				discount(itemFood, (Integer) getQuantityFood());
+				counter3 = 1;
+			}
+			else {
+				discount(itemFood, (Integer) getQuantityFood());
+			}
+		} 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		else if (e.getSource() == addBeverageButton) { //addBeverageButton
 
-		} else if (e.getSource() == addBeverageButton) {
 
 			Item itemBeverage = new Item(table2.getValueAt(table2.getSelectedRow(), 0).toString(),
 					table2.getValueAt(table2.getSelectedRow(), 1).toString(),
@@ -470,15 +547,43 @@ public class GUI extends JFrame implements ActionListener {
 					table2.getValueAt(table2.getSelectedRow(), 2).toString(), "Beverage");
 
 			if (getQuantityBeverage() > 0) {
-				newOrders.put(itemBeverage, getQuantityBeverage());
+				if (newOrders.containsKey(itemBeverage)){
+					String element = itemBeverage.getName();
+					int index = list.getNextMatch(element,0,Position.Bias.Forward);
+					model.setElementAt(itemBeverage.getName() + " x " + getQuantityBeverage() + " (" + itemBeverage.getPrice() + "£)", index);
+					newOrders.put(itemBeverage, getQuantityBeverage());
+					displayBill(itemBeverage, (Integer) getQuantityBeverage());
+				}
+				else{
+					newOrders.put(itemBeverage, getQuantityBeverage());
+					addOrderstoList(itemBeverage, (Integer) getQuantityBeverage());
+					displayBill(itemBeverage, (Integer) getQuantityBeverage());
+				}
 			}
-
-			addOrderstoList(itemBeverage, (Integer) getQuantityBeverage());
-			displayBill(itemBeverage, (Integer) getQuantityBeverage());
-		//	discount(itemBeverage, (Integer) getQuantityBeverage());
-
-		} else if (e.getSource() == addDessertButton) {
-			
+			//////////////////////////////DISCOUNTS/////////////////////////////////////
+			if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 50.0 
+					&& displayBill(itemBeverage, (Integer) getQuantityBeverage()) < 80.0 && counter1 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50£.");
+				discount(itemBeverage, (Integer) getQuantityBeverage());
+				counter1 = 1;
+			}
+			else if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 80.0 
+					&& displayBill(itemBeverage, (Integer) getQuantityBeverage()) < 100.0 && counter2 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80£.");
+				discount(itemBeverage, (Integer) getQuantityBeverage());
+				counter2 = 1;
+			}
+			else if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 100 && counter3 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100£.");
+				discount(itemBeverage, (Integer) getQuantityBeverage());
+				counter3 = 1;
+			}
+			else {
+				discount(itemBeverage, (Integer) getQuantityFood());
+			}
+		} 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		else if (e.getSource() == addDessertButton) { //addDessertButton
 
 			Item itemDessert = new Item(table3.getValueAt(table3.getSelectedRow(), 0).toString(),
 					table3.getValueAt(table3.getSelectedRow(), 1).toString(),
@@ -486,23 +591,63 @@ public class GUI extends JFrame implements ActionListener {
 					table3.getValueAt(table3.getSelectedRow(), 2).toString(), "Dessert");
 
 			if (getQuantityDessert() > 0) {
-				newOrders.put(itemDessert, getQuantityDessert());
+				if (newOrders.containsKey(itemDessert)){
+					String element = itemDessert.getName();
+					int index = list.getNextMatch(element,0,Position.Bias.Forward);
+					model.setElementAt(itemDessert.getName() + " x " + getQuantityDessert() + " (" + itemDessert.getPrice() + "£)", index);
+					newOrders.put(itemDessert, getQuantityDessert());
+					displayBill(itemDessert, (Integer) getQuantityDessert());
+				}
+				else{
+					newOrders.put(itemDessert, getQuantityDessert());
+					addOrderstoList(itemDessert, (Integer) getQuantityDessert());
+					displayBill(itemDessert, (Integer) getQuantityDessert());
+				}
 			}
+			//////////////////////////////DISCOUNTS/////////////////////////////////////
+			if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 50.0 
+					&& displayBill(itemDessert, (Integer) getQuantityDessert()) < 80.0 && counter1 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50£.");
+				discount(itemDessert, (Integer) getQuantityDessert());
+				counter1 = 1;
+			}
+			else if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 80.0 
+					&& displayBill(itemDessert, (Integer) getQuantityDessert()) < 100.0 && counter2 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80£.");
+				discount(itemDessert, (Integer) getQuantityDessert());
+				counter2 = 1;
+			}
+			else if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 100 && counter3 == 0){
+				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100£.");
+				discount(itemDessert, (Integer) getQuantityDessert());
+				counter3 = 1;
+			}
+			else {
+				discount(itemDessert, (Integer) getQuantityDessert());
+			}
+		} 
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////PROCEED BUTTON////////////////////
+		else if (e.getSource() == proceedButton) {
 
-			addOrderstoList(itemDessert, (Integer) getQuantityDessert());
-			displayBill(itemDessert, (Integer) getQuantityDessert());
-		//	discount(itemDessert, (Integer) getQuantityDessert());
-
-		} else if (e.getSource() == proceedButton) {
 			JOptionPane.showMessageDialog(null,
 					"Are you sure you sure you want to continue?\nThe total cost will be displayed.");
 			resetButton.setEnabled(true);
 
-		} else if (e.getSource() == resetButton) {
-			JOptionPane.showMessageDialog(null, "Are you sure you sure you want to reset all values?");
+
+		} 
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////RESET BUTTON////////////////////	
+		else if (e.getSource() == resetButton) {
+			JOptionPane.showMessageDialog(null,
+					"Are you sure you sure you want to reset all values?");
 			clear();
 
-		} else if (e.getSource() == finishButton) {
+		} 
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////FINISH BUTTON////////////////////		
+		else if (e.getSource() == finishButton) {
+
 			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you wish to exit the application?", null,
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
@@ -511,11 +656,13 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////CLEAR BUTTON////////////////////
+
 	public void clear() {
 		spinnerFood.setValue(0);
 		spinnerBeverage.setValue(0);
 		spinnerDessert.setValue(0);
-		textBillArea.setText("");
 		addFoodButton.setEnabled(false);
 		addBeverageButton.setEnabled(false);
 		addDessertButton.setEnabled(false);
@@ -523,5 +670,8 @@ public class GUI extends JFrame implements ActionListener {
 		removeButton.setEnabled(false);
 		list.removeAll();
 		model.removeAllElements();
+		newOrders.clear();
+		textBillArea.setText(" ");
+
 	}
 }

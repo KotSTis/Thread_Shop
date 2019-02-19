@@ -10,11 +10,14 @@ public class App  {
 		AllOrders orders = new AllOrders();
 		Menu menu = new Menu();
 
+		menu.displayMenu();
+		System.out.println(menu.displayFood());
 //		
 //	    System.out.println(orders.calculateBill());
-//	    
-        HashMap <Item, Integer> newOrders = new HashMap <>();
-		new GUI2(menu, newOrders);
+//	 
+    HashMap<Item,Integer> newOrders = new HashMap<>();
+   GUI gui = new GUI(menu,newOrders);
+
 
 //	    
 
