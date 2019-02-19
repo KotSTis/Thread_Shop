@@ -58,6 +58,7 @@ public class Item {
 		this.itemID = ItemID;
 	}
 
+
 	//	public String getCategory() {
 	//		return getCategoryItem();
 	//	}
@@ -70,6 +71,7 @@ public class Item {
 	public int hashCode(){
 		return this.getItemID().hashCode();
 	}
+
 
 
 	@Override

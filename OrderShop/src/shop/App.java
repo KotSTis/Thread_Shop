@@ -9,6 +9,7 @@ public class App  {
 
 		AllOrders orders = new AllOrders();
 		Menu menu = new Menu();
+
 		menu.displayMenu();
 		System.out.println(menu.displayFood());
 //		
@@ -16,6 +17,7 @@ public class App  {
 //	 
     HashMap<Item,Integer> newOrders = new HashMap<>();
    GUI gui = new GUI(menu,newOrders);
+
 
 //	    
 

@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class Menu{
 
 	private TreeSet<Item> menu;
-	Item i;
+
 	
 	Menu () throws FileNotFoundException{
 		CsvReader reader = new CsvReader();
@@ -43,7 +43,9 @@ public class Menu{
 		while (iterator.hasNext()) {
 			Item next = iterator.next();
 			if ("Food".equals(next.getCategoryItem())){
+
 				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
+
 			}
 		}
 		return menuDetails;
@@ -57,6 +59,7 @@ public class Menu{
 			Item next = iterator.next();
 			if ("Dessert".equals(next.getCategoryItem())){
 				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
+
 			}
 		}
 		return menuDetails;
@@ -70,6 +73,7 @@ public class Menu{
 			Item next = iterator.next();
 			if ("Beverage".equals(next.getCategoryItem())){
 				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
+
 			}
 		}
 		return menuDetails;

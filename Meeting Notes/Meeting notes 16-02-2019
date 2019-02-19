@@ -1,0 +1,4 @@
+- Updated Menu CSV file (Georgios wanted to put the items in random order so that we can sort them afterwards with the comparator)
+- AllOrders class finished by Kostas
+- Some JUnit testings for each class have been made by Jesse. We will upload them all in the end.
+- GUI almost done by Alex and Georgios
