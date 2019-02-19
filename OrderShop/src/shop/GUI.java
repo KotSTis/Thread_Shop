@@ -23,9 +23,7 @@ public class GUI extends JFrame implements ActionListener {
 	private Menu menu;
 
 	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton,
-
 	finishButton;
-
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 
 	private JTable table1, table2, table3;
@@ -60,7 +58,6 @@ public class GUI extends JFrame implements ActionListener {
 
 		// Set up the title for different panels
 		panel1.setBorder(BorderFactory.createTitledBorder("FOOD"));
-
 		panel2.setBorder(BorderFactory.createTitledBorder("BEVERAGES"));
 		panel3.setBorder(BorderFactory.createTitledBorder("DESSERTS"));
 
@@ -108,9 +105,7 @@ public class GUI extends JFrame implements ActionListener {
 		removeButton = new JButton("REMOVE");
 		removeButton.setEnabled(false);
 		removeButton.addActionListener(this);
-
 		JLabel lblNewLabel = new JLabel("If you want to remove an item, click \"REMOVE\" button.");
-
 
 		textBillArea = new JTextArea();
 		textBillArea.setFont(new Font("Monospaced", Font.BOLD, 13));
@@ -124,12 +119,10 @@ public class GUI extends JFrame implements ActionListener {
 		scrollOrders.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollOrders.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-
 						.addContainerGap()
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
@@ -179,11 +172,9 @@ public class GUI extends JFrame implements ActionListener {
 														.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)))))
 						.addGap(30))
 				);
-
 		groupLayout.setVerticalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-
 						.addGap(10)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
@@ -234,7 +225,6 @@ public class GUI extends JFrame implements ActionListener {
 						.addGap(30))
 				);
 
-
 		list = new JList<String>(model);
 		scrollOrders.setViewportView(list);
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -278,12 +268,10 @@ public class GUI extends JFrame implements ActionListener {
 		table2 = new JTable() {
 			private static final long serialVersionUID = 1L;
 
-
 			public boolean isCellEditable(int row, int column) {
 
 				spinnerBeverage.setEnabled(true);
 				addBeverageButton.setEnabled(true);
-
 
 				return false;
 			}
@@ -353,7 +341,6 @@ public class GUI extends JFrame implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 
-
 	}
 
 	public void addFoodToList() {
@@ -389,14 +376,14 @@ public class GUI extends JFrame implements ActionListener {
 	//			order[1] = String.valueOf(quantity);
 	//			order[2] = String.valueOf(item.getPrice());
 	//
-	//			orders += order[0] + " x " + order[1] + " (" + order[2] + "Â£)";
+	//			orders += order[0] + " x " + order[1] + " (" + order[2] + "£)";
 	//			orderList = orders;
 	//			bill = Integer.parseInt(order[1]) * Double.parseDouble(order[2]);
 	//			
 	//			totalBill += bill;
 	//			orderBill = String.format("Total price is:\n" + "%.2f", totalBill);
 	//
-	//			textBillArea.setText(orderBill + "Â£");
+	//			textBillArea.setText(orderBill + "£");
 	//			textOrderArea.append(String.valueOf(orders));
 	//			
 	//				
@@ -407,7 +394,7 @@ public class GUI extends JFrame implements ActionListener {
 
 	public void addOrderstoList(Item item, int quantity) {
 
-		String order = item.getName() + " x " + quantity + " (" + item.getPrice() + "Â£)";
+		String order = item.getName() + " x " + quantity + " (" + item.getPrice() + "£)";
 
 		if (quantity != 0) {
 			model.add(0, order);
@@ -426,13 +413,13 @@ public class GUI extends JFrame implements ActionListener {
 			bill = item.getPrice() * quantity;
 			totalBill += bill;
 			orderBill = String.format("Total price is:\n" + "%.2f", totalBill);
-			textBillArea.setText(orderBill + "Â£");
+			textBillArea.setText(orderBill + "£");
 			resetButton.setEnabled(true);
 			//System.out.println(entry.getKey().getName() + " " + entry.getValue());
 		}
 		if  (model.size() == 0){
-				textBillArea.setText(" ");
-			}
+			textBillArea.setText(" ");
+		}
 		return totalBill;
 	}
 
@@ -444,18 +431,18 @@ public class GUI extends JFrame implements ActionListener {
 		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) < 80.0){ 
 			discount = currentBill *0.95;
 			discountBill = String.format("Total price is:\n" + "%.2f", discount);
-			textBillArea.setText(discountBill + "Â£");
-			
+			textBillArea.setText(discountBill + "£");
+
 		}
 		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) < 100.0){ 
 			discount = currentBill *0.90;
 			discountBill = String.format("Total price is:\n" + "%.2f", discount);
-			textBillArea.setText(discountBill + "Â£");
+			textBillArea.setText(discountBill + "£");
 		}
 		else if (displayBill(item, quantity) > 100.0 ){ 
 			discount = currentBill *0.85;
 			discountBill = String.format("Total price is:\n" + "%.2f", discount);
-			textBillArea.setText(discountBill + "Â£");
+			textBillArea.setText(discountBill + "£");
 		}
 	}
 
@@ -474,6 +461,24 @@ public class GUI extends JFrame implements ActionListener {
 		newOrders.remove(item);
 		model.remove(list.getSelectedIndex());
 		displayBill(item, quantity);
+		String text = textBillArea.getText();
+		if (!text.equals(" ")){
+			double price = Double.parseDouble(text.substring(15,21));
+			if (price < 50){
+				counter1 = 0;
+			}
+			if (price < 80){
+				counter2 = 0;
+			}
+			if (price < 100){
+				counter3 = 0;
+			}
+		}
+		else{
+			counter1 = 0;
+			counter2 = 0;
+			counter3 = 0;
+		}
 	}
 
 	int counter1 = 0;//counter for displaying 5% discount message
@@ -481,7 +486,6 @@ public class GUI extends JFrame implements ActionListener {
 	int counter3 = 0;//counter for displaying 15% discount message
 
 	public void actionPerformed(ActionEvent e) {
-
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////REMOVE BUTTON////////////////////
 		if (e.getSource() == removeButton) {
@@ -495,17 +499,15 @@ public class GUI extends JFrame implements ActionListener {
 		////////////////////////ADD BUTTONS////////////////////
 		else if (e.getSource() == addFoodButton) { //addFoodButton
 
-
 			Item itemFood = new Item(table1.getValueAt(table1.getSelectedRow(), 0).toString(),
 					table1.getValueAt(table1.getSelectedRow(), 1).toString(),
 					Double.parseDouble(table1.getValueAt(table1.getSelectedRow(), 3).toString()),
 					table1.getValueAt(table1.getSelectedRow(), 2).toString(), "Food");
-
 			if (getQuantityFood() > 0) {
 				if (newOrders.containsKey(itemFood)){
 					String element = itemFood.getName();
 					int index = list.getNextMatch(element,0,Position.Bias.Forward);
-					model.setElementAt(itemFood.getName() + " x " + getQuantityFood() + " (" + itemFood.getPrice() + "Â£)", index);
+					model.setElementAt(itemFood.getName() + " x " + getQuantityFood() + " (" + itemFood.getPrice() + "£)", index);
 					newOrders.put(itemFood, getQuantityFood());
 					displayBill(itemFood, (Integer) getQuantityFood());
 				}
@@ -518,18 +520,18 @@ public class GUI extends JFrame implements ActionListener {
 			//////////////////////////////DISCOUNTS/////////////////////////////////////
 			if (displayBill(itemFood, (Integer) getQuantityFood()) > 50.0 
 					&& displayBill(itemFood, (Integer) getQuantityFood()) < 80.0 && counter1 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50£.");
 				discount(itemFood, (Integer) getQuantityFood());
 				counter1 = 1;
 			}
 			else if (displayBill(itemFood, (Integer) getQuantityFood()) > 80.0 
 					&& displayBill(itemFood, (Integer) getQuantityFood()) < 100.0 && counter2 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80£.");
 				discount(itemFood, (Integer) getQuantityFood());
 				counter2 = 1;
 			}
 			else if (displayBill(itemFood, (Integer) getQuantityFood()) > 100 && counter3 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100£.");
 				discount(itemFood, (Integer) getQuantityFood());
 				counter3 = 1;
 			}
@@ -537,20 +539,18 @@ public class GUI extends JFrame implements ActionListener {
 				discount(itemFood, (Integer) getQuantityFood());
 			}
 		} 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		else if (e.getSource() == addBeverageButton) { //addBeverageButton
-
 
 			Item itemBeverage = new Item(table2.getValueAt(table2.getSelectedRow(), 0).toString(),
 					table2.getValueAt(table2.getSelectedRow(), 1).toString(),
 					Double.parseDouble(table2.getValueAt(table2.getSelectedRow(), 3).toString()),
 					table2.getValueAt(table2.getSelectedRow(), 2).toString(), "Beverage");
-
 			if (getQuantityBeverage() > 0) {
 				if (newOrders.containsKey(itemBeverage)){
 					String element = itemBeverage.getName();
 					int index = list.getNextMatch(element,0,Position.Bias.Forward);
-					model.setElementAt(itemBeverage.getName() + " x " + getQuantityBeverage() + " (" + itemBeverage.getPrice() + "Â£)", index);
+					model.setElementAt(itemBeverage.getName() + " x " + getQuantityBeverage() + " (" + itemBeverage.getPrice() + "£)", index);
 					newOrders.put(itemBeverage, getQuantityBeverage());
 					displayBill(itemBeverage, (Integer) getQuantityBeverage());
 				}
@@ -563,18 +563,18 @@ public class GUI extends JFrame implements ActionListener {
 			//////////////////////////////DISCOUNTS/////////////////////////////////////
 			if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 50.0 
 					&& displayBill(itemBeverage, (Integer) getQuantityBeverage()) < 80.0 && counter1 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50£.");
 				discount(itemBeverage, (Integer) getQuantityBeverage());
 				counter1 = 1;
 			}
 			else if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 80.0 
 					&& displayBill(itemBeverage, (Integer) getQuantityBeverage()) < 100.0 && counter2 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80£.");
 				discount(itemBeverage, (Integer) getQuantityBeverage());
 				counter2 = 1;
 			}
 			else if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 100 && counter3 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100£.");
 				discount(itemBeverage, (Integer) getQuantityBeverage());
 				counter3 = 1;
 			}
@@ -582,19 +582,17 @@ public class GUI extends JFrame implements ActionListener {
 				discount(itemBeverage, (Integer) getQuantityFood());
 			}
 		} 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		else if (e.getSource() == addDessertButton) { //addDessertButton
-
 			Item itemDessert = new Item(table3.getValueAt(table3.getSelectedRow(), 0).toString(),
 					table3.getValueAt(table3.getSelectedRow(), 1).toString(),
 					Double.parseDouble(table3.getValueAt(table3.getSelectedRow(), 3).toString()),
 					table3.getValueAt(table3.getSelectedRow(), 2).toString(), "Dessert");
-
 			if (getQuantityDessert() > 0) {
 				if (newOrders.containsKey(itemDessert)){
 					String element = itemDessert.getName();
 					int index = list.getNextMatch(element,0,Position.Bias.Forward);
-					model.setElementAt(itemDessert.getName() + " x " + getQuantityDessert() + " (" + itemDessert.getPrice() + "Â£)", index);
+					model.setElementAt(itemDessert.getName() + " x " + getQuantityDessert() + " (" + itemDessert.getPrice() + "£)", index);
 					newOrders.put(itemDessert, getQuantityDessert());
 					displayBill(itemDessert, (Integer) getQuantityDessert());
 				}
@@ -607,18 +605,18 @@ public class GUI extends JFrame implements ActionListener {
 			//////////////////////////////DISCOUNTS/////////////////////////////////////
 			if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 50.0 
 					&& displayBill(itemDessert, (Integer) getQuantityDessert()) < 80.0 && counter1 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50£.");
 				discount(itemDessert, (Integer) getQuantityDessert());
 				counter1 = 1;
 			}
 			else if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 80.0 
 					&& displayBill(itemDessert, (Integer) getQuantityDessert()) < 100.0 && counter2 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80£.");
 				discount(itemDessert, (Integer) getQuantityDessert());
 				counter2 = 1;
 			}
 			else if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 100 && counter3 == 0){
-				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100Â£.");
+				JOptionPane.showMessageDialog(null, "You will get  15% off because the total cost is over 100£.");
 				discount(itemDessert, (Integer) getQuantityDessert());
 				counter3 = 1;
 			}
@@ -629,11 +627,9 @@ public class GUI extends JFrame implements ActionListener {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////PROCEED BUTTON////////////////////
 		else if (e.getSource() == proceedButton) {
-
 			JOptionPane.showMessageDialog(null,
 					"Are you sure you sure you want to continue?\nThe total cost will be displayed.");
 			resetButton.setEnabled(true);
-
 
 		} 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -647,7 +643,6 @@ public class GUI extends JFrame implements ActionListener {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////FINISH BUTTON////////////////////		
 		else if (e.getSource() == finishButton) {
-
 			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you wish to exit the application?", null,
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
@@ -655,10 +650,8 @@ public class GUI extends JFrame implements ActionListener {
 			}
 		}
 	}
-
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////CLEAR BUTTON////////////////////
-
 	public void clear() {
 		spinnerFood.setValue(0);
 		spinnerBeverage.setValue(0);
@@ -672,6 +665,8 @@ public class GUI extends JFrame implements ActionListener {
 		model.removeAllElements();
 		newOrders.clear();
 		textBillArea.setText(" ");
-
+		counter1 = 0;//counter for displaying 5% discount message
+		counter2 = 0;//counter for displaying 10% discount message
+		counter3 = 0;//counter for displaying 15% discount message
 	}
 }
