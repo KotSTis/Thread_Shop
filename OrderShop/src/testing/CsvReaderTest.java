@@ -9,12 +9,15 @@ import org.junit.Test;
 
 import shop.CsvReader;
 import shop.Item;
+import shop.ItemComparator;
 import shop.Order;
 
 public class CsvReaderTest {
 
 	ArrayList<Order> orderFile = new ArrayList<Order>();
 	TreeSet<Item> menuFile = new TreeSet<Item>();
+	private TreeSet<Item> itemList = new TreeSet<Item>(new ItemComparator());
+
 
 	@Test
 	public void testReadOrdersInfo() throws FileNotFoundException {
@@ -38,6 +41,7 @@ public class CsvReaderTest {
 		String itemID = "FOOD1254";
 		Item item = new Item("Guac 'n Chips", "Homemade guacamole with crispy corn tortilla and plantain chips", 5.29,
 				"FOOD1254", "Food");
+			
 		assertEquals(item.getItemID(), itemID);
 	}
 }
