@@ -8,8 +8,34 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderCustomerID;
+import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidPriceException;
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
 
 public class AllOrders {
+
+	private ArrayList<Order> orderList;
+	private HashMap<String, Item> itemList;
+	private HashMap<String, ArrayList<Order>> allOrders = new HashMap<String, ArrayList<Order>> ();
+	private HashMap<String, Integer> summary;
+	private TreeSet<Item> existingOrders = new TreeSet<Item>();
+	private HashMap<String, ArrayList<String>>incoming = new HashMap<String, ArrayList<String>>();
+	
+
+	public AllOrders() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
+
+		this.itemList = new HashMap<String, Item>();
+		CsvReader reader = new CsvReader();
+		try {
+		this.existingOrders = reader.readMenuInfo("Menu.csv");
+		} catch (InvalidItemIDLengthException invalidDost) {
+			System.err.print("Invalid cost");
+		} catch (InvalidItemException invalidItem) {
+			System.err.print("Invalid item");
+		}
 
 	private ArrayList<Order> orderList;
 	private HashMap<String, Item> itemList;
@@ -52,17 +78,6 @@ public class AllOrders {
 		
 	}
 
-//	public String getNewOrders(HashMap<String, ArrayList<String>>incoming) throws FileNotFoundException  {
-//		String nO = "";
-//		GUI gui = new GUI();
-//		incoming = gui.outcoming();
-//		for (HashMap.Entry<String, ArrayList<String>> entry : incoming.entrySet()) {
-//
-//		}
-//		nO = "" + incoming;
-//		return nO;
-//		
-//	}
 
 	public double calculateBill(Order order) {
 		double bill = 0;
@@ -153,6 +168,15 @@ public class AllOrders {
 		return null;
 	}
 
+	public String totalIncome() {
+		
+		double total = 0;
+		for (Item item : existingOrders) {
+			total += item.getPrice()*quantity(item);
+		}
+		String income = String.format("Total income is: " + "%.2f", total);
+		return income;
+	}
 	public void FinalReport(String filename) throws IOException {
 
 		FileWriter fw = new FileWriter(filename);
@@ -162,6 +186,7 @@ public class AllOrders {
 					+ quantity(item) + " times.\n");
 		}
 		fw.write("\n" + makeOrder(incoming));
+		fw.write("\n" + totalIncome() + "\u00a3.");
 		fw.close();
 
 	}

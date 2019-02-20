@@ -11,19 +11,25 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidPriceException;
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
+import ourExceptions.InvalidOrderCustomerID;
 public class GUI extends JFrame implements ActionListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7483455288689655101L;
-	private Menu menu = new Menu();
-	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton, finishButton;
+	
 
+	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton, finishButton;
+	private Menu menu = new Menu();
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 	private AllOrders allOrders = new AllOrders();
 	private JTable table1, table2, table3;
@@ -35,7 +41,8 @@ public class GUI extends JFrame implements ActionListener {
 	private JList<String> list = new JList<>();
 	private HashMap <String, ArrayList<String>> orders = new HashMap <String, ArrayList<String>>();
 
-	public GUI() throws FileNotFoundException {
+public GUI() throws FileNotFoundException, InvalidItemIDLengthException, InvalidOrderCustomerID, InvalidOrderTimeStamp, InvalidItemException, InvalidPriceException, InvalidCategoryException {
+
 
 		
 		JFrame();
@@ -698,5 +705,4 @@ public class GUI extends JFrame implements ActionListener {
 		counter2 = 0;//counter for displaying 10% discount message
 		counter3 = 0;//counter for displaying 15% discount message
 	}
-
 }
