@@ -3,7 +3,6 @@ package shop;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IllegalFormatConversionException;
@@ -12,12 +11,16 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidPriceException;
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
+import ourExceptions.InvalidOrderCustomerID;
 public class GUI extends JFrame implements ActionListener {
-
 	/**
 	 * 
 	 */
@@ -420,13 +423,13 @@ public class GUI extends JFrame implements ActionListener {
 		String discountBill = "";
 		double currentBill = (displayBill(item, quantity));
 		try {
-		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) < 80.0){ 
+		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) =< 80.0){ 
 			discount = currentBill *0.95;
 			discountBill = String.format("Total price with 5%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
 
 		}
-		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) < 100.0){ 
+		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) =< 100.0){ 
 			discount = currentBill *0.90;
 			discountBill = String.format("Total price with 10%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
@@ -705,5 +708,4 @@ public class GUI extends JFrame implements ActionListener {
 		counter2 = 0;//counter for displaying 10% discount message
 		counter3 = 0;//counter for displaying 15% discount message
 	}
-
 }

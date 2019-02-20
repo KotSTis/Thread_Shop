@@ -1,43 +1,44 @@
 package testing;
 
 import static org.junit.Assert.*;
+import shop.*;
 
-import java.util.HashMap;
+import org.junit.Before;
 import org.junit.Test;
-
-import shop.Item;
-import shop.Order;
+import java.util.HashMap;
 
 public class OrderTest {
 
+	private Order o1;
+	private Order o2;
+	private Item i = new Item("Blue Mountain","Jamaican Blue Mountain Coffee",12.50,"BEVE2367","beverage");
+	
+	private String TimeStamp = "1235490802";
+	private String CustomerID = "CUST1009";
+	
+	private HashMap<String,Integer> Items;
+	
+	
+	@Before
+	public void setUp() throws Exception {
+		o1 = new Order(TimeStamp,CustomerID);
+		o2 = new Order(TimeStamp,CustomerID,i);
+	}
+
 	@Test
 	public void testGetTimeStamp() {
-		Item item = new Item("Guac 'n Chips", "Homemade guacamole with crispy corn tortilla and plantain chips", 5.29,
-				"FOOD1254", "Food");
-		Order order = new Order("1134270902", "CUST1009", item);
-		String result = order.getTimeStamp();
-		assertEquals(result, "1134270902");
+		assertEquals("1235490802",o1.getTimeStamp());
 	}
 
 	@Test
 	public void testGetItemDescription() {
-		Item item = new Item("Grilled Top Sirloin Steak",
-				"Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli", 17.49,
-				"FOOD2435", "Food");
-		Order order = new Order("1523580902", "CUST1544", item);
-		String result = order.getItemDescription(item);
-		assertEquals(result, "Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli");
-
+		i = new Item("Blue Mountain","Jamaican Blue Mountain Coffee",12.50,"BEVE2367","beverage");
+		assertEquals("Jamaican Blue Mountain Coffee",o1.getItemDescription(i));
 	}
 
 	@Test
 	public void testGetCustomerID() {
-		Item item = new Item("Grilled Top Sirloin Steak",
-				"Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli", 17.49,
-				"FOOD2435", "Food");
-		Order order = new Order("1523580902", "CUST1544", item);
-		String result = order.getCustomerID();
-		assertEquals(result, "CUST1544");
+		assertEquals("CUST1009",o1.getCustomerID());
 	}
 
 	@Test
@@ -48,6 +49,8 @@ public class OrderTest {
 		int quantity = 4;
 
 		order.addItem(item, quantity);
+		
+		
 	}
 
 	@Test
@@ -77,4 +80,6 @@ public class OrderTest {
 		HashMap<String, Integer> result = order.getItems();
 		assertEquals(result, order.getItems());
 	}
+
 }
+

@@ -3,7 +3,7 @@ package testing;
 import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -16,6 +16,8 @@ import shop.Order;
 
 public class AllOrdersTest {
 
+	
+	
 	@Test
 	public void testMakeOrder() {
 
@@ -31,7 +33,7 @@ public class AllOrdersTest {
 //		String newOrders = "";
 //		GUI gui = new GUI();
 //		newOrders += gui.outcoming();
-//		assertEquals(newOrders, "{CUST2730=[Honey Bun x 1 (7.99£), Pinot Grigio x 1 (30.0£)]}");
+//		assertEquals(newOrders, "{CUST2730=[Honey Bun x 1 (7.99ï¿½), Pinot Grigio x 1 (30.0ï¿½)]}");
 //	}
 
 	@Test
@@ -119,7 +121,7 @@ public class AllOrdersTest {
 		AllOrders allOrders = new AllOrders();
 		String details = item.getMenu() + " (" + item.getDescription() + ").\nItem " + item.getItemID() + " is ordered "
 				+ allOrders.quantity(item) + " times.\n";
-		String itemDetails = "Black Bean BBQ Burgercosts11.29£." + " ("
+		String itemDetails = "Black Bean BBQ Burgercosts11.29ï¿½." + " ("
 				+ "Glazed with guava BBQ sauce and served with melted pepper jack cheese" + ").\nItem " + "FOOD5476"
 				+ " is ordered " + 3 + " times.\n";
 		assertEquals(details, itemDetails);

@@ -3,15 +3,17 @@ package shop;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderCustomerID;
+import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidPriceException;
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
 
 public class AllOrders {
 
@@ -22,7 +24,7 @@ public class AllOrders {
 	private HashMap<String, ArrayList<String>>incoming = new HashMap<String, ArrayList<String>>();
 	
 
-	public AllOrders() throws FileNotFoundException {
+	public AllOrders() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
 
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
