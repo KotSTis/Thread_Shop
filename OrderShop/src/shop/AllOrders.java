@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
-
 import ourExceptions.InvalidItemIDLengthException;
 import ourExceptions.InvalidOrderCustomerID;
 import ourExceptions.InvalidOrderTimeStamp;
@@ -37,6 +36,20 @@ public class AllOrders {
 		} catch (InvalidItemException invalidItem) {
 			System.err.print("Invalid item");
 		}
+
+	private ArrayList<Order> orderList;
+	private HashMap<String, Item> itemList;
+	private HashMap<String, ArrayList<Order>> allOrders = new HashMap<String, ArrayList<Order>> ();
+	private HashMap<String, Integer> summary;
+	private TreeSet<Item> existingOrders = new TreeSet<Item>();
+	private HashMap<String, ArrayList<String>>incoming = new HashMap<String, ArrayList<String>>();
+	
+
+	public AllOrders() throws FileNotFoundException {
+
+		this.itemList = new HashMap<String, Item>();
+		CsvReader reader = new CsvReader();
+		this.existingOrders = reader.readMenuInfo("Menu.csv");
 		this.orderList = reader.readOrdersInfo("Orders.csv");
 	}
 
@@ -164,7 +177,6 @@ public class AllOrders {
 		String income = String.format("Total income is: " + "%.2f", total);
 		return income;
 	}
-	
 	public void FinalReport(String filename) throws IOException {
 
 		FileWriter fw = new FileWriter(filename);

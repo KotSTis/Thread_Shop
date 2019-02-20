@@ -41,7 +41,8 @@ public class GUI extends JFrame implements ActionListener {
 	private JList<String> list = new JList<>();
 	private HashMap <String, ArrayList<String>> orders = new HashMap <String, ArrayList<String>>();
 
-	public GUI() throws FileNotFoundException, InvalidItemIDLengthException, InvalidOrderCustomerID, InvalidOrderTimeStamp, InvalidItemException, InvalidPriceException, InvalidCategoryException {
+public GUI() throws FileNotFoundException, InvalidItemIDLengthException, InvalidOrderCustomerID, InvalidOrderTimeStamp, InvalidItemException, InvalidPriceException, InvalidCategoryException {
+
 
 		
 		JFrame();
@@ -77,15 +78,15 @@ public class GUI extends JFrame implements ActionListener {
 		resetButton = new JButton("RESET");
 		resetButton.setForeground(Color.BLACK);
 		resetButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		resetButton.setBackground(Color.RED);
+		resetButton.setBackground(Color.LIGHT_GRAY);
 		resetButton.addActionListener(this);
 		resetButton.setEnabled(false);
 
 		finishButton = new JButton("EXIT");
-		finishButton.setForeground(Color.BLACK);
+		finishButton.setForeground(Color.WHITE);
 		finishButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		finishButton.setEnabled(true);
-		finishButton.setBackground(Color.BLUE);
+		finishButton.setBackground(Color.RED);
 		finishButton.addActionListener(this);
 
 		spinnerFood = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
@@ -133,52 +134,47 @@ public class GUI extends JFrame implements ActionListener {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 724, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+						.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+						.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 724, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-								.addPreferredGap(ComponentPlacement.RELATED)))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(addFoodButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(addBeverageButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(addDessertButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
-								.addPreferredGap(ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(proceedButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblOrders, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(scrollOrders, Alignment.TRAILING)
-									.addComponent(lblNewLabel))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-								.addGap(313))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(312)
-								.addComponent(removeButton)
-								.addContainerGap()))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(124)
-							.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(addFoodButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(addBeverageButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(addDessertButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
+									.addGap(79)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblOrders, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(33)
+											.addComponent(scrollOrders))
+										.addComponent(lblNewLabel)
+										.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+									.addGap(10))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(124)
+									.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap())))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(342)
+							.addComponent(removeButton)
 							.addContainerGap())))
 		);
 		groupLayout.setVerticalGroup(
@@ -219,12 +215,14 @@ public class GUI extends JFrame implements ActionListener {
 							.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(scrollOrders, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+									.addGap(88)))))
 					.addGap(75)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
@@ -263,14 +261,22 @@ public class GUI extends JFrame implements ActionListener {
 			}
 			model1.addRow(rowData);
 		}
-
+		
+		panel1.add(new JScrollPane(table1));
 		String header1[] = { "Name", "Description", "ItemID", "Price" };
+		
+		TableColumnModel columnModel1 = table1.getColumnModel();
+		columnModel1.getColumn(0).setPreferredWidth(200);
+		columnModel1.getColumn(1).setPreferredWidth(600);
+		columnModel1.getColumn(2).setPreferredWidth(150);
+		columnModel1.getColumn(3).setPreferredWidth(80);
 
 		for (int i = 0; i < table1.getColumnCount(); i++) {
 			TableColumn column = table1.getTableHeader().getColumnModel().getColumn(i);
 
 			column.setHeaderValue(header1[i]);
 		}
+		
 		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
 
 		table2 = new JTable() {
@@ -300,9 +306,16 @@ public class GUI extends JFrame implements ActionListener {
 			}
 			model2.addRow(rowData);
 		}
-
+		
+		panel2.add(new JScrollPane(table2));
 		String header2[] = { "Name", "Description", "ItemID", "Price" };
-
+		
+		TableColumnModel columnModel2 = table2.getColumnModel();
+		columnModel2.getColumn(0).setPreferredWidth(200);
+		columnModel2.getColumn(1).setPreferredWidth(600);
+		columnModel2.getColumn(2).setPreferredWidth(150);
+		columnModel2.getColumn(3).setPreferredWidth(80);
+		
 		for (int i = 0; i < table2.getColumnCount(); i++) {
 			TableColumn column = table2.getTableHeader().getColumnModel().getColumn(i);
 
@@ -335,9 +348,15 @@ public class GUI extends JFrame implements ActionListener {
 			model3.addRow(rowData);
 		}
 		
-		
+		panel3.add(new JScrollPane(table3));
 		String header3[] = { "Name", "Description", "ItemID", "Price" };
 
+		TableColumnModel columnModel3 = table3.getColumnModel();
+		columnModel3.getColumn(0).setPreferredWidth(200);
+		columnModel3.getColumn(1).setPreferredWidth(600);
+		columnModel3.getColumn(2).setPreferredWidth(150);
+		columnModel3.getColumn(3).setPreferredWidth(80);
+		
 		for (int i = 0; i < table3.getColumnCount(); i++) {
 			TableColumn column = table3.getTableHeader().getColumnModel().getColumn(i);
 
@@ -407,13 +426,13 @@ public class GUI extends JFrame implements ActionListener {
 		String discountBill = "";
 		double currentBill = (displayBill(item, quantity));
 		try {
-		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) < 80.0){ 
+		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) <= 80.0){ 
 			discount = currentBill *0.95;
 			discountBill = String.format("Total price with 5%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
 
 		}
-		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) < 100.0){ 
+		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) <= 100.0){ 
 			discount = currentBill *0.90;
 			discountBill = String.format("Total price with 10%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
@@ -485,7 +504,7 @@ public class GUI extends JFrame implements ActionListener {
 			newOrderList = entry.getValue();	
 		}
 		orders.put(custID, newOrderList);
-		System.out.println(orders);
+
 		return orders;
 	}
 	
@@ -527,13 +546,13 @@ public class GUI extends JFrame implements ActionListener {
 				}
 			}
 			//////////////////////////////DISCOUNTS/////////////////////////////////////
-			if (displayBill(itemFood, (Integer) getQuantityFood()) > 50.0 
+			if (displayBill(itemFood, (Integer) getQuantityFood()) > 50.0
 					&& displayBill(itemFood, (Integer) getQuantityFood()) < 80.0 && counter1 == 0){
 				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50\u00a3.");
 				discount(itemFood, (Integer) getQuantityFood());
 				counter1 = 1;
 			}
-			else if (displayBill(itemFood, (Integer) getQuantityFood()) > 80.0 
+			else if (displayBill(itemFood, (Integer) getQuantityFood()) > 80.0
 					&& displayBill(itemFood, (Integer) getQuantityFood()) < 100.0 && counter2 == 0){
 				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80\u00a3.");
 				discount(itemFood, (Integer) getQuantityFood());
@@ -547,7 +566,7 @@ public class GUI extends JFrame implements ActionListener {
 			else {
 				discount(itemFood, (Integer) getQuantityFood());
 			}
-		} 
+		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		else if (e.getSource() == addBeverageButton) { //addBeverageButton
 
@@ -572,13 +591,13 @@ public class GUI extends JFrame implements ActionListener {
 				}
 			}
 			//////////////////////////////DISCOUNTS/////////////////////////////////////
-			if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 50.0 
+			if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 50.0
 					&& displayBill(itemBeverage, (Integer) getQuantityBeverage()) < 80.0 && counter1 == 0){
 				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50\u00a3.");
 				discount(itemBeverage, (Integer) getQuantityBeverage());
 				counter1 = 1;
 			}
-			else if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 80.0 
+			else if (displayBill(itemBeverage, (Integer) getQuantityBeverage()) > 80.0
 					&& displayBill(itemBeverage, (Integer) getQuantityBeverage()) < 100.0 && counter2 == 0){
 				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80\u00a3.");
 				discount(itemBeverage, (Integer) getQuantityBeverage());
@@ -590,9 +609,9 @@ public class GUI extends JFrame implements ActionListener {
 				counter3 = 1;
 			}
 			else {
-				discount(itemBeverage, (Integer) getQuantityFood());
+				discount(itemBeverage, (Integer) getQuantityBeverage());
 			}
-		} 
+		}
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		else if (e.getSource() == addDessertButton) { //addDessertButton
 			Item itemDessert = new Item(table3.getValueAt(table3.getSelectedRow(), 0).toString(),
@@ -615,13 +634,13 @@ public class GUI extends JFrame implements ActionListener {
 				}
 			}
 			//////////////////////////////DISCOUNTS/////////////////////////////////////
-			if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 50.0 
+			if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 50.0
 					&& displayBill(itemDessert, (Integer) getQuantityDessert()) < 80.0 && counter1 == 0){
 				JOptionPane.showMessageDialog(null, "You will get  5% off because the total cost is over 50\u00a3.");
 				discount(itemDessert, (Integer) getQuantityDessert());
 				counter1 = 1;
 			}
-			else if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 80.0 
+			else if (displayBill(itemDessert, (Integer) getQuantityDessert()) > 80.0
 					&& displayBill(itemDessert, (Integer) getQuantityDessert()) < 100.0 && counter2 == 0){
 				JOptionPane.showMessageDialog(null, "You will get  10% off because the total cost is over 80\u00a3.");
 				discount(itemDessert, (Integer) getQuantityDessert());
@@ -635,7 +654,7 @@ public class GUI extends JFrame implements ActionListener {
 			else {
 				discount(itemDessert, (Integer) getQuantityDessert());
 			}
-		} 
+		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////PROCEED BUTTON////////////////////
 		else if (e.getSource() == proceedButton) {
@@ -686,5 +705,4 @@ public class GUI extends JFrame implements ActionListener {
 		counter2 = 0;//counter for displaying 10% discount message
 		counter3 = 0;//counter for displaying 15% discount message
 	}
-
 }

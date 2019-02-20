@@ -19,7 +19,6 @@ public class CsvReader {
 	private TreeSet<Item> itemList = new TreeSet<Item>(new ItemComparator());
 
 	public CsvReader() {
-
 	}
 
 	public TreeSet<Item> readMenuInfo(String filename) throws InvalidItemIDLengthException, FileNotFoundException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException {
@@ -110,7 +109,6 @@ public class CsvReader {
 
 	}
 
-
 	public Item findItem(String itemID) {
 
 		for (Item item : itemList) {
@@ -119,5 +117,27 @@ public class CsvReader {
 			}
 		}
 		return null;
+	}
+
+	public TreeSet<Item> readMenuInfo(String filename) throws FileNotFoundException {
+		File file1 = new File(filename);
+		Scanner sc1 = new Scanner(file1);
+		// we don't need a Map since we don't have a key for the menu, we don't need a
+		// set since we don't want to get rid of the duplicates
+		String line = sc1.nextLine();
+		while (sc1.hasNextLine()) {
+			line = sc1.nextLine();
+			String[] values = line.split(",");
+			String name = values[0];
+			String description = values[1];
+			double price = Double.parseDouble(values[2]);
+			String itemID = values[3];
+			String category = values[4];
+
+			Item menuItem = new Item(name, description, price, itemID, category);
+			itemList.add(menuItem);
+		}
+		sc1.close();
+		return itemList;
 	}
 }
