@@ -1,77 +1,93 @@
 
 package shop;
-
 import java.io.FileNotFoundException;
+import java.util.Comparator;
 import java.util.TreeSet;
-
-import ourExceptions.InvalidItemIDLengthException;
-import ourExceptions.InvalidPriceException;
-import ourExceptions.InvalidCategoryException;
-import ourExceptions.InvalidItemException;
-
 import java.util.Iterator;
 
-public class Menu {
+public class Menu{
 
-	private TreeSet<Item> menu = new TreeSet<Item>();
+	private TreeSet<Item> menu;
 
-	public Menu() throws FileNotFoundException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException {
+	
+	Menu () throws FileNotFoundException{
 		CsvReader reader = new CsvReader();
 		this.menu = reader.readMenuInfo("Menu.csv");
 	}
-
-	public void displayMenu() {
+	
+	public void add(Item menuItem) {
+		menu.add(menuItem);
+	}
+	
+	public void remove(String menuItem) {
+		menu.remove(menuItem);
+	}
+	
+	public Item getItem(String itemID) {
+		return null;
+	}
+	
+	public void displayMenu (){
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
-		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getItemID() + " ");
-		}
+	    while (iterator.hasNext()) {
+	         System.out.println(iterator.next().getItemID() + " ");
+	    }
 	}
+	
 
-	public String displayFood() {
+	public String displayFood (){
 		String menuDetails = "";
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
 		while (iterator.hasNext()) {
 			Item next = iterator.next();
-			if ("Food".equals(next.getCategoryItem())) {
+			if ("Food".equals(next.getCategoryItem())){
 
-				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + ","
-						+ next.getPrice() + ",";
+				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
 
 			}
 		}
 		return menuDetails;
 	}
 
-	public String displayDessert() {
+	public String displayDessert (){
 		String menuDetails = "";
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
 		while (iterator.hasNext()) {
 			Item next = iterator.next();
-			if ("Dessert".equals(next.getCategoryItem())) {
-				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + ","
-						+ next.getPrice() + ",";
+			if ("Dessert".equals(next.getCategoryItem())){
+				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
 
 			}
 		}
 		return menuDetails;
 	}
-
-	public String displayBeverage() {
+	
+	public String displayBeverage (){
 		String menuDetails = "";
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
 		while (iterator.hasNext()) {
 			Item next = iterator.next();
-			if ("Beverage".equals(next.getCategoryItem())) {
-				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + ","
-						+ next.getPrice() + ",";
+			if ("Beverage".equals(next.getCategoryItem())){
+				menuDetails += next.getName() + "," + next.getDescription() + "," + next.getItemID() + "," + next.getPrice() + ",";
 
 			}
 		}
 		return menuDetails;
 	}
+	
+	
+	public void something (){
+		
+		Iterator<Item> iterator;
+		iterator = menu.iterator();
+		while (iterator.hasNext()) {
+			Item next = iterator.next();	
+		}
 
+	}
 }
+
