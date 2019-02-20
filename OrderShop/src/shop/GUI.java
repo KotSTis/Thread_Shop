@@ -419,13 +419,13 @@ public class GUI extends JFrame implements ActionListener {
 		String discountBill = "";
 		double currentBill = (displayBill(item, quantity));
 		try {
-		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) < 80.0){ 
+		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) <= 80.0){ 
 			discount = currentBill *0.95;
 			discountBill = String.format("Total price with 5%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
 
 		}
-		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) < 100.0){ 
+		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) <= 100.0){ 
 			discount = currentBill *0.90;
 			discountBill = String.format("Total price with 10%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
