@@ -24,7 +24,7 @@ public class App {
 		reader.readOrdersInfo("Orders.csv");
 		
 	    AllOrders orders = new AllOrders();
-	    orders.FinalReport("Report.csv");
+	    
 	   
 	    new GUI();
 

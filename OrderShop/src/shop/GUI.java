@@ -21,15 +21,13 @@ import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 import ourExceptions.InvalidOrderCustomerID;
 public class GUI extends JFrame implements ActionListener {
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7483455288689655101L;
-	
-
-	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton, finishButton;
 	private Menu menu = new Menu();
+	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton, finishButton;
+
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 	private AllOrders allOrders = new AllOrders();
 	private JTable table1, table2, table3;
@@ -41,8 +39,7 @@ public class GUI extends JFrame implements ActionListener {
 	private JList<String> list = new JList<>();
 	private HashMap <String, ArrayList<String>> orders = new HashMap <String, ArrayList<String>>();
 
-public GUI() throws FileNotFoundException, InvalidItemIDLengthException, InvalidOrderCustomerID, InvalidOrderTimeStamp, InvalidItemException, InvalidPriceException, InvalidCategoryException {
-
+	public GUI() throws FileNotFoundException {
 
 		
 		JFrame();
@@ -426,13 +423,13 @@ public GUI() throws FileNotFoundException, InvalidItemIDLengthException, Invalid
 		String discountBill = "";
 		double currentBill = (displayBill(item, quantity));
 		try {
-		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) <= 80.0){ 
+		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) =< 80.0){ 
 			discount = currentBill *0.95;
 			discountBill = String.format("Total price with 5%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
 
 		}
-		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) <= 100.0){ 
+		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) =< 100.0){ 
 			discount = currentBill *0.90;
 			discountBill = String.format("Total price with 10%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
@@ -504,7 +501,7 @@ public GUI() throws FileNotFoundException, InvalidItemIDLengthException, Invalid
 			newOrderList = entry.getValue();	
 		}
 		orders.put(custID, newOrderList);
-
+		System.out.println(orders);
 		return orders;
 	}
 	
@@ -662,8 +659,9 @@ public GUI() throws FileNotFoundException, InvalidItemIDLengthException, Invalid
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
 				
-				allOrders.makeOrder(outcoming());
-			resetButton.setEnabled(true);
+			allOrders.makeOrder(newOrders);
+			allOrders.getAllCustomerOrders();
+			clear();
 			}
 		} 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -682,6 +680,11 @@ public GUI() throws FileNotFoundException, InvalidItemIDLengthException, Invalid
 			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you wish to exit the application?", null,
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
+			    try {
+					allOrders.FinalReport("Report.csv");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				System.exit(0);
 			}
 		}
