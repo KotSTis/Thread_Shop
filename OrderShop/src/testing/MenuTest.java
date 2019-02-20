@@ -1,19 +1,30 @@
 package testing;
 
 import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.TreeSet;
+
+import org.junit.Before;
 import org.junit.Test;
 
+import shop.CsvReader;
 import shop.Item;
-
-
-
 
 public class MenuTest {
 
 	private TreeSet<Item> menu = new TreeSet<Item>();
-
+	CsvReader reader;
+	String menuFileName;
+	
+	@Before
+	public void setUp() throws FileNotFoundException{
+		reader = new CsvReader();
+		menuFileName = "Menu.csv";
+		this.menu = reader.readMenuInfo(menuFileName);
+	}
+	
 	@Test
 	public void testdisplayMenu() {
 		Item item = new Item("Grilled Top Sirloin Steak",
