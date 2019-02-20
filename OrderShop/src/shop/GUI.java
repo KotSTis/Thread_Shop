@@ -3,6 +3,7 @@ package shop;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IllegalFormatConversionException;
@@ -497,7 +498,7 @@ public class GUI extends JFrame implements ActionListener {
 			newOrderList = entry.getValue();	
 		}
 		orders.put(custID, newOrderList);
-
+		System.out.println(orders);
 		return orders;
 	}
 	
@@ -655,8 +656,9 @@ public class GUI extends JFrame implements ActionListener {
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
 				
-				allOrders.makeOrder(outcoming());
-			resetButton.setEnabled(true);
+			allOrders.makeOrder(newOrders);
+			allOrders.getAllCustomerOrders();
+			clear();
 			}
 		} 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -675,6 +677,11 @@ public class GUI extends JFrame implements ActionListener {
 			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you wish to exit the application?", null,
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
+			    try {
+					allOrders.FinalReport("Report.csv");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				System.exit(0);
 			}
 		}

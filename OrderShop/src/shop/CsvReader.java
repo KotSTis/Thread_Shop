@@ -3,6 +3,7 @@ package shop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -18,7 +19,6 @@ public class CsvReader {
 
 		File file2 = new File(filename);
 		Scanner sc2 = new Scanner(file2);
-
 		String line = sc2.nextLine();
 		while (sc2.hasNextLine()) {
 			line = sc2.nextLine();
@@ -27,6 +27,11 @@ public class CsvReader {
 			String customerID = values[1];
 			Item itemOrdered = findItem(values[2]);
 			Order OrderedItem = new Order(timestamp, customerID, itemOrdered);
+			for (Order ord: orderList) {
+				if(ord.getCustomerID().equals(customerID) && ord.getTimeStamp().equals(timestamp)) {
+					ord.addItem(itemOrdered, 1);
+				}
+			}
 			orderList.add(OrderedItem);
 		}
 		sc2.close();
