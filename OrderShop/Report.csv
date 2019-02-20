@@ -1,100 +1,34 @@
-Customer CUST1009 ordered:
- xFOOD1005 (Sliced chicken with onions sweet peppers and spinach) at 12:35:49 in 08/02.
- xFOOD1005 (Sliced chicken with onions sweet peppers and spinach) at 12:35:49 in 08/02.
- xBEVE2506 (A rich honey ale) at 12:35:49 in 08/02.
- xFOOD1254 (Homemade guacamole with crispy corn tortilla and plantain chips) at 11:34:27 in 09/02.
- xFOOD1254 (Homemade guacamole with crispy corn tortilla and plantain chips) at 11:34:27 in 09/02.
- xFOOD1254 (Homemade guacamole with crispy corn tortilla and plantain chips) at 11:34:27 in 09/02.
- xFOOD1254 (Homemade guacamole with crispy corn tortilla and plantain chips) at 11:34:27 in 09/02.
+Items bought in ascending order by itemID:
 
-Chicken quesadilla has been bought  times.
-Chicken quesadilla has been bought  times.
-Aruba Blonde beer has been bought  times.
-Pinot Grigio has been bought  times.
-Jamaican Chicken Wings has been bought  times.
-Jamaican Chicken Wings has been bought  times.
-Red Velvet Cake has been bought  times.
-Red Velvet Cake has been bought  times.
-Guac 'n Chips has been bought  times.
-Guac 'n Chips has been bought  times.
-Guac 'n Chips has been bought  times.
-Guac 'n Chips has been bought  times.
-Grilled Top Sirloin Steak has been bought  times.
-Grilled Top Sirloin Steak has been bought  times.
-The Lon Hammond has been bought  times.
-The Lon Hammond has been bought  times.
-The Ultimate Coronarita has been bought  times.
-Black Bean BBQ Burger has been bought  times.
-Black Bean BBQ Burger has been bought  times.
-Black Bean BBQ Burger has been bought  times.
-Chicken quesadilla has been bought  times.
-Snickerdoodle has been bought  times.
-Snickerdoodle has been bought  times.
-Red Velvet Cake has been bought  times.
-Red Velvet Cake has been bought  times.
-Pinot Grigio has been bought  times.
-Pinot Grigio has been bought  times.
-Jamaican Chicken Wings has been bought  times.
-Jamaican Chicken Wings has been bought  times.
-Jamaican Chicken Wings has been bought  times.
+Black Bean BBQ Burger costs 11.29£. (Glazed with guava BBQ sauce and served with melted pepper jack cheese).
+Item FOOD5476 is ordered 3 times.
+Grilled Top Sirloin Steak costs 17.49£. (Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli).
+Item FOOD2435 is ordered 2 times.
+Guac 'n Chips costs 5.29£. (Homemade guacamole with crispy corn tortilla and plantain chips).
+Item FOOD1254 is ordered 4 times.
+Jamaican Chicken Wings costs 8.29£. (Marinated in authentic Jamaican jerk seasonings and served with crisp skin).
+Item FOOD1106 is ordered 5 times.
+Chicken quesadilla costs 10.99£. (Sliced chicken with onions sweet peppers and spinach).
+Item FOOD1005 is ordered 3 times.
+The Lon Hammond costs 8.89£. (Swiss Miss hot chocolate packet with mini marshmallows and vanilla bean ice cream).
+Item DESS8791 is ordered 2 times.
+Honey Bun costs 7.99£. (Honey bun and vanilla bean ice cream).
+Item DESS7763 is ordered 0 times.
+Snickerdoodle costs 6.49£. (Snickerdoodle cookies and vanilla bean ice cream).
+Item DESS7645 is ordered 2 times.
+Red Velvet Cake costs 7.19£. (Red Velvet Cake and vanilla bean ice cream).
+Item DESS4576 is ordered 4 times.
+Krispy Kreme Donut costs 7.29£. (Krispy Kreme donut and vanilla bean ice cream).
+Item DESS4325 is ordered 0 times.
+Pina Colada costs 7.79£. (Spiced Rum and Coco Lopez topped with Bacardi Black Rum and shaved coconut).
+Item BEVE8963 is ordered 0 times.
+Ultimate Pina Colada costs 8.49£. (Pina Colada made with Spiced Rum swirled with strawberry ice and topped with Bacardi Black Rum).
+Item BEVE7624 is ordered 0 times.
+Pinot Grigio costs 30.0£. (Crisp fresh aromas and flavors of green apples and golden pears).
+Item BEVE6590 is ordered 3 times.
+The Ultimate Coronarita costs 11.99£. (Fresh lime lemon and pressed sugarcane juice hand shaken with Herradura Silver Tequila and Cointreau).
+Item BEVE5465 is ordered 1 times.
+Aruba Blonde beer costs 5.99£. (A rich honey ale).
+Item BEVE2506 is ordered 1 times.
 
-Customer CUST1009ordered:
- xFOOD1005 () at 12:35:49 in 08/02.
-CUST1009ordered:
- xFOOD1005 () at 12:35:49 in 08/02.
-CUST1009ordered:
- xBEVE2506 () at 12:35:49 in 08/02.
-CUST1010ordered:
- xBEVE6590 () at 14:59:38 in 08/02.
-CUST1253ordered:
- xFOOD1106 () at 17:25:36 in 08/02.
-CUST1253ordered:
- xFOOD1106 () at 17:25:36 in 08/02.
-CUST1253ordered:
- xDESS4576 () at 18:35:36 in 08/02.
-CUST1253ordered:
- xDESS4576 () at 18:35:36 in 08/02.
-CUST1009ordered:
- xFOOD1254 () at 11:34:27 in 09/02.
-CUST1009ordered:
- xFOOD1254 () at 11:34:27 in 09/02.
-CUST1009ordered:
- xFOOD1254 () at 11:34:27 in 09/02.
-CUST1009ordered:
- xFOOD1254 () at 11:34:27 in 09/02.
-CUST1544ordered:
- xFOOD2435 () at 15:23:58 in 09/02.
-CUST1544ordered:
- xFOOD2435 () at 15:23:58 in 09/02.
-CUST1544ordered:
- xDESS8791 () at 15:23:58 in 09/02.
-CUST1544ordered:
- xDESS8791 () at 15:23:58 in 09/02.
-CUST1544ordered:
- xBEVE5465 () at 15:23:58 in 09/02.
-CUST1812ordered:
- xFOOD5476 () at 22:43:51 in 09/02.
-CUST1812ordered:
- xFOOD5476 () at 22:43:51 in 09/02.
-CUST1812ordered:
- xFOOD5476 () at 22:43:51 in 09/02.
-CUST1921ordered:
- xFOOD1005 () at 09:43:12 in 10/02.
-CUST1921ordered:
- xDESS7645 () at 09:43:12 in 10/02.
-CUST1921ordered:
- xDESS7645 () at 09:43:12 in 10/02.
-CUST2103ordered:
- xDESS4576 () at 21:32:33 in 10/02.
-CUST2103ordered:
- xDESS4576 () at 21:32:33 in 10/02.
-CUST2242ordered:
- xBEVE6590 () at 21:32:33 in 10/02.
-CUST2242ordered:
- xBEVE6590 () at 21:32:33 in 10/02.
-CUST1010ordered:
- xFOOD1106 () at 14:59:38 in 11/02.
-CUST1010ordered:
- xFOOD1106 () at 14:59:38 in 11/02.
-CUST1010ordered:
- xFOOD1106 () at 14:59:38 in 11/02.
+0
