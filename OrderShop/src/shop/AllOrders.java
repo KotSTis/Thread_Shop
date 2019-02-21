@@ -24,7 +24,6 @@ import ourExceptions.InvalidItemException;
 
 // This the AllOrders that handles all orders
 public class AllOrders {
-
 	Menu m = new Menu();
 	//ArrayList to hold All of the Orders placed
 	private ArrayList<Order> orderList;
@@ -41,7 +40,6 @@ public class AllOrders {
 
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
-		//populating the itemList by converting the treeset to a hashmap	
 		menu = reader.readMenuInfo("Menu.csv");
 		//iterate through the treeset menu
 		Iterator<Item> iterator;
