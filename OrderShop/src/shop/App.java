@@ -1,3 +1,7 @@
+/* author: Jiaxi Lyu
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
 import java.io.FileNotFoundException;
@@ -10,14 +14,17 @@ import ourExceptions.InvalidPriceException;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 
-//Our main program that starts reading the files and runs the app
+// Our main app
 public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
 			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
 
+		Menu menu = new Menu();
+		menu.displayMenu();
 		CsvReader reader = new CsvReader();
-
+		AllOrders allOrders = new AllOrders();
+		allOrders.FinalReport("Report.txt");
 		try {
 			// For running Exceptions tests: run these commands and switch to appropriate
 			// filenames for exceptions

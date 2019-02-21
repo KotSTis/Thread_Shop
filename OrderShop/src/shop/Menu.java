@@ -1,3 +1,7 @@
+/* author: Stergiou Konstantinos
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
 import java.io.FileNotFoundException;
@@ -22,14 +26,19 @@ public class Menu {
 		this.menu = reader.readMenuInfo("Menu.csv");
 	}
 
-	public void displayMenu() {
+	public String displayMenu() {
+		String m = "";
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
 		while (iterator.hasNext()) {
-			System.out.println(iterator.next().getItemID() + " ");
+			Item next = iterator.next();
+			m += next.getName() + "," + next.getDescription() + "," + next.getItemID() + ","
+					+ next.getPrice() + ".\n";
 		}
+		return m;
 	}
-
+	
+	// display item's details for Foods
 	public String displayFood() {
 		String menuDetails = "";
 		Iterator<Item> iterator;
@@ -46,6 +55,7 @@ public class Menu {
 		return menuDetails;
 	}
 
+	// display item's details for Desserts
 	public String displayDessert() {
 		String menuDetails = "";
 		Iterator<Item> iterator;
@@ -60,7 +70,8 @@ public class Menu {
 		}
 		return menuDetails;
 	}
-
+	
+	// display item's details for Beverages
 	public String displayBeverage() {
 		String menuDetails = "";
 		Iterator<Item> iterator;
