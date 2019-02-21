@@ -26,6 +26,14 @@ public class Order {
 	public String getTimeStamp() {
 		return TimeStamp;
 	}
+	
+	public double getPrice() {
+		return price;
+	}
+	
+	public void setPrice(double p) {
+		this.price = p;
+	}
 
 	public double getPrice() {
 		return price;

@@ -22,6 +22,7 @@ public class AllOrders {
 
 	private ArrayList<Order> orderList;
 	private HashMap<String, Item> itemList;
+
 	private HashMap<String, ArrayList<Order>> allOrders = new HashMap<String, ArrayList<Order>>();
 	private HashMap<String, Integer> summary = new HashMap<String, Integer>();
 
@@ -30,6 +31,7 @@ public class AllOrders {
 
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
+
 		TreeSet<Item> menu;
 		menu = reader.readMenuInfo("Menu.csv");
 		Iterator<Item> iterator;
@@ -47,6 +49,7 @@ public class AllOrders {
 				ord.add(newOrd);
 				allOrders.put(newOrd.getCustomerID(), ord);
 			}
+
 			for (Entry<String, Integer> entry : newOrd.getItems().entrySet()) {
 				String item = entry.getKey();
 				Integer quantity = entry.getValue();
@@ -113,6 +116,7 @@ public class AllOrders {
 			bill += itemList.get(ID).getPrice() * quantity;
 		}
 
+
 		if (80 >= bill && bill > 50) {
 			bill *= 0.95;
 		} else if (100 >= bill && bill > 80) {
@@ -120,6 +124,7 @@ public class AllOrders {
 		} else if (bill > 100) {
 			bill *= 0.85;
 		}
+
 		return bill;
 	}
 
@@ -151,7 +156,6 @@ public class AllOrders {
 					+ order.getTimeStamp().substring(8, 10) + ".\n";
 
 		}
-
 		return OrderDetails;
 
 	}
@@ -197,6 +201,7 @@ public class AllOrders {
 			OrderDetails += " at " + order.getTimeStamp().substring(0, 2) + ":" + order.getTimeStamp().substring(2, 4)
 					+ ":" + order.getTimeStamp().substring(4, 6) + " in " + order.getTimeStamp().substring(6, 8) + "/"
 					+ order.getTimeStamp().substring(8, 10) + ".\n" + "Total Price: " + (float) order.getPrice() + "\u00a3\n\n";
+
 
 		}
 		fw.write(OrderDetails);
