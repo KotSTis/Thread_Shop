@@ -4,10 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IllegalFormatConversionException;
-import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
@@ -33,16 +31,15 @@ public class GUI extends JFrame implements ActionListener {
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 	private AllOrders allOrders = new AllOrders();
 	private JTable table1, table2, table3;
-	private ArrayList <String> newOrderList = new ArrayList <String>();
 	private HashMap<Item, Integer> newOrders;
 	private JTextArea textBillArea;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JScrollPane scrollOrders;
 	private JList<String> list = new JList<>();
-	private HashMap <String, ArrayList<String>> orders = new HashMap <String, ArrayList<String>>();
 
 	public GUI() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID, InvalidItemIDLengthException, InvalidItemException {
 
+		
 		JFrame();
 
 	}
@@ -460,13 +457,13 @@ public class GUI extends JFrame implements ActionListener {
 		String discountBill = "";
 		double currentBill = (displayBill(item, quantity));
 		try {
-		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) =< 80.0){ 
+		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) <= 80.0){ 
 			discount = currentBill *0.95;
 			discountBill = String.format("Total price with 5%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
 
 		}
-		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) =< 100.0){ 
+		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) <= 100.0){ 
 			discount = currentBill *0.90;
 			discountBill = String.format("Total price with 10%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
@@ -522,23 +519,6 @@ public class GUI extends JFrame implements ActionListener {
 			System.err.print("Not correct format of the price.\n");
 			JOptionPane.showMessageDialog(null, "The price does not have the correct format.\nPlease, try again.");
 		}
-	}
-
-	public HashMap<String, ArrayList<String>> outcoming(){
-	 	 String custID = "CUST" + ThreadLocalRandom.current().nextInt(0, 5000 + 1);
-		 String arr="";
-		    for (int i = 0; i < list.getModel().getSize(); i++) {
-		             arr = list.getModel().getElementAt(i);
-		             newOrderList.add(arr);
-		    }  
-
-		    this.orders = new HashMap <String, ArrayList <String>>();
-		for (HashMap.Entry<String, ArrayList<String>> entry : orders.entrySet()) {
-			custID = entry.getKey();
-			newOrderList = entry.getValue();	
-		}
-		orders.put(custID, newOrderList);
-		return orders;
 	}
 	
 	int counter1 = 0;//counter for displaying 5% discount message
@@ -713,7 +693,6 @@ public class GUI extends JFrame implements ActionListener {
 			allOrders.getAllCustomerOrders();
 			clear();
 			}
-
 			}
 		} 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -733,7 +712,6 @@ public class GUI extends JFrame implements ActionListener {
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
 				JOptionPane.showMessageDialog(null, "A receipt will be sent to you now.");
-
 			    try {
 					allOrders.FinalReport("Report.csv");
 				} catch (IOException e1) {
