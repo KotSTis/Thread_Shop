@@ -7,20 +7,24 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import org.junit.Test;
 
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderCustomerID;
+import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidPriceException;
 import shop.CsvReader;
 import shop.Item;
-import shop.ItemComparator;
 import shop.Order;
 
 public class CsvReaderTest {
 
 	ArrayList<Order> orderFile = new ArrayList<Order>();
 	TreeSet<Item> menuFile = new TreeSet<Item>();
-	private TreeSet<Item> itemList = new TreeSet<Item>(new ItemComparator());
 
 
 	@Test
-	public void testReadOrdersInfo() throws FileNotFoundException {
+	public void testReadOrdersInfo() throws FileNotFoundException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
 		CsvReader reader = new CsvReader();
 		String filename = "Orders.csv";
 
@@ -29,7 +33,7 @@ public class CsvReaderTest {
 	}
 
 	@Test
-	public void testReadMenuInfo() throws FileNotFoundException {
+	public void testReadMenuInfo() throws FileNotFoundException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException {
 		CsvReader reader = new CsvReader();
 		String filename = "Menu.csv";
 		menuFile = reader.readMenuInfo(filename);
@@ -44,5 +48,4 @@ public class CsvReaderTest {
 			
 		assertEquals(item.getItemID(), itemID);
 	}
-
 }

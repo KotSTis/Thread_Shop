@@ -16,7 +16,7 @@ public class OrderTest {
 	private String TimeStamp = "1235490802";
 	private String CustomerID = "CUST1009";
 	
-	private HashMap<String,Integer> Items;
+	private HashMap<String,Integer> Items = new HashMap<String,Integer>();
 	
 	
 	@Before
@@ -32,7 +32,6 @@ public class OrderTest {
 
 	@Test
 	public void testGetItemDescription() {
-		i = new Item("Blue Mountain","Jamaican Blue Mountain Coffee",12.50,"BEVE2367","beverage");
 		assertEquals("Jamaican Blue Mountain Coffee",o1.getItemDescription(i));
 	}
 
@@ -54,22 +53,20 @@ public class OrderTest {
 	}
 
 	@Test
-	public void testAddItemStringItemIdAndQuantity() {
-		String itemID = "FOOD1254";
-		Order order = new Order("1134270902", "CUST1009");
-		int quantity = 4;
-
-		order.addItem(itemID, quantity);
+	public void testSetPrice() {
+		double price = 12.50;
+		o2.setPrice(12.50);
+		assertEquals(price, o2.getPrice(), 0.01);
 	}
-
+	
 	@Test
 	public void testGetItem() {
 		Item item = new Item("Chicken quesadilla", "Sliced chicken with onions sweet peppers and spinach", 10.99,
 				"FOOD1005", "Food");
 		Order order = new Order("1235490802", "CUST1009", item);
 
-		Item result = order.getItem();
-		assertEquals(result, item);
+		Items = order.getItems();
+		assertEquals(Items, item);
 	}
 
 	@Test
@@ -82,3 +79,4 @@ public class OrderTest {
 	}
 
 }
+
