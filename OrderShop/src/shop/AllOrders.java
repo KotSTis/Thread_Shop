@@ -21,9 +21,13 @@ import ourExceptions.InvalidItemException;
 // This the AllOrders that handles all orders
 public class AllOrders {
 
+	//ArrayList to hold All of the Orders placed
 	private ArrayList<Order> orderList;
+	//Holds a copy of the menu in Hashmap form for easy lookup and access of items using their ID
 	private HashMap<String, Item> itemList;
+	//String is the Customer ID and the ArrayList<Orders> holds all orders made by that customer
 	private HashMap<String, ArrayList<Order>> allOrders = new HashMap<String, ArrayList<Order>>();
+	//holds how many times each item was sold
 	private HashMap<String, Integer> summary = new HashMap<String, Integer>();
 
 	public AllOrders() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
@@ -31,6 +35,7 @@ public class AllOrders {
 
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
+		//populating the itemList by converting the treeset to a hashmap
 		TreeSet<Item> menu;
 		menu = reader.readMenuInfo("Menu.csv");
 		Iterator<Item> iterator;
@@ -39,15 +44,20 @@ public class AllOrders {
 			Item item = iterator.next();
 			itemList.put(item.getItemID(), item);
 		}
+		//processing all the orders read from the csv Orders file
 		this.orderList = reader.readOrdersInfo("Orders.csv");
 		for (Order newOrd : this.orderList) {
+			//check if there's an order with the same customerID in the orderList
 			if (allOrders.containsKey(newOrd.getCustomerID())) {
+				//if the customer exists, add this order to their arrayList
 				allOrders.get(newOrd.getCustomerID()).add(newOrd);
 			} else {
+				//otherwise create new entry in the HashMap
 				ArrayList<Order> ord = new ArrayList<Order>();
 				ord.add(newOrd);
 				allOrders.put(newOrd.getCustomerID(), ord);
 			}
+			//add all the items and their quantities that exist in each order to the summary Hashmap
 			for (Entry<String, Integer> entry : newOrd.getItems().entrySet()) {
 				String item = entry.getKey();
 				Integer quantity = entry.getValue();
@@ -59,6 +69,7 @@ public class AllOrders {
 
 			}
 		}
+		//calculate the total price of the order
 		for (Order ord : this.orderList) {
 			ord.setPrice(calculateBill(ord));
 		}
@@ -68,6 +79,7 @@ public class AllOrders {
 	public String makeOrder(HashMap<Item, Integer> incoming) {
 
 		ArrayList<Order> ord = null;
+		//create customer id and timestamp for the order
 		String custID = "CUST" + ThreadLocalRandom.current().nextInt(0, 5000 + 1);
 		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM");
 		Date date = new Date();
@@ -79,7 +91,9 @@ public class AllOrders {
 		Order newOrder = new Order(timestamp, custID);
 		Item item;
 		int quantity;
+
 		for (Entry<Item, Integer> entry : incoming.entrySet()) {
+			//get item and quantity
 			item = entry.getKey();
 			quantity = entry.getValue();
 			// adding items sold to summary for the end
@@ -108,12 +122,13 @@ public class AllOrders {
 
 	public double calculateBill(Order order) {
 		double bill = 0;
+		//iterate through all the items in order and add their prices
 		for (HashMap.Entry<String, Integer> entry : order.getItems().entrySet()) {
 			String ID = entry.getKey();
 			Integer quantity = entry.getValue();
 			bill += itemList.get(ID).getPrice() * quantity;
 		}
-
+		//calculating the discounts(if they apply and how much)
 		if (80 >= bill && bill > 50) {
 			bill *= 0.95;
 		} else if (100 >= bill && bill > 80) {
@@ -125,7 +140,7 @@ public class AllOrders {
 	}
 
 	public String calculateFrequency() {
-
+		//pretty print each item and how many times it was sold
 		String frequency = "";
 		for (HashMap.Entry<String, Integer> entry : summary.entrySet()) {
 			String item = entry.getKey();
@@ -158,6 +173,8 @@ public class AllOrders {
 	}
 
 	public String getDescription(String itemID) {
+		//get item description from the ItemList
+		//not really sure where this is used
 		String description = "";
 		for (Order order : orderList) {
 			if (order.getItems().containsKey(itemID)) {
@@ -173,6 +190,7 @@ public class AllOrders {
 	}
 
 	public void FinalReport(String filename) throws IOException {
+		//iterate through the summary Hashmap and print it out in the report file
 
 		FileWriter fw = new FileWriter(filename);
 		fw.write("Items sold:\n\n");
@@ -181,7 +199,7 @@ public class AllOrders {
 			fw.write(item.getMenu() + " (" + item.getDescription() + ").\nItem " + item.getItemID() + " is ordered "
 					+ entry.getValue() + " times.\n");
 		}
-		// fw.write("\n" + makeOrder(incoming));
+		//Iterate through all of the orders placed and pretty print them out in the report file
 		fw.write("\n\nAll of the Orders processed:\n");
 		String OrderDetails = "\nCustomer ";
 		double totalIncome = 0;
