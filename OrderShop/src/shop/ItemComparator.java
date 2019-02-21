@@ -2,7 +2,8 @@ package shop;
 
 import java.util.Comparator;
 
-// Comparing items by itemID ... Sorting them first by Food, then Beverage and last category is Dessert
+// We need comparator for the treemap in order to sort them by category
+// Comparing items by category ... Sorting them first by Food, then Beverage and last category is Dessert
 public class ItemComparator implements Comparator<Item> {
 
 	@Override

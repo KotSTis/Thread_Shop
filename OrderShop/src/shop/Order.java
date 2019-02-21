@@ -2,6 +2,7 @@ package shop;
 
 import java.util.HashMap;
 
+// This is the Order class that handles the features of each order
 public class Order {
 	private String TimeStamp;
 	private String CustomerID;
@@ -25,14 +26,6 @@ public class Order {
 	
 	public String getTimeStamp() {
 		return TimeStamp;
-	}
-	
-	public double getPrice() {
-		return price;
-	}
-	
-	public void setPrice(double p) {
-		this.price = p;
 	}
 
 	public double getPrice() {

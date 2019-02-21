@@ -13,6 +13,7 @@ import ourExceptions.InvalidPriceException;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 
+// Here we have the readers that read the .csv files
 public class CsvReader {
 	private ArrayList<Order> orderList = new ArrayList<Order>();
 	private TreeSet<Item> itemList = new TreeSet<Item>(new ItemComparator());
