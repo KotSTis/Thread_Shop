@@ -1,12 +1,15 @@
+/* authors: Kontogeorgos Georgios & Mitrousis Alexandros
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.IllegalFormatConversionException;
-import java.util.concurrent.ThreadLocalRandom;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
@@ -15,27 +18,34 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class GUI extends JFrame implements ActionListener {
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidPriceException;
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
+import ourExceptions.InvalidOrderCustomerID;
 
+// The GUI interface that displays 3 tables
+// Each table contains an item's category. Each category has its own button
+// By an item from the table and adding it to a Jlist, price is displayed on a Textarea
+// New price is displayed when the user reaches a certain amount
+public class GUI extends JFrame implements ActionListener {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7483455288689655101L;
 	private Menu menu = new Menu();
 	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton, finishButton;
-
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 	private AllOrders allOrders = new AllOrders();
 	private JTable table1, table2, table3;
-	private ArrayList <String> newOrderList = new ArrayList <String>();
 	private HashMap<Item, Integer> newOrders;
 	private JTextArea textBillArea;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JScrollPane scrollOrders;
 	private JList<String> list = new JList<>();
-	private HashMap <String, ArrayList<String>> orders = new HashMap <String, ArrayList<String>>();
 
-	public GUI() throws FileNotFoundException {
+	public GUI() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID, InvalidItemIDLengthException, InvalidItemException {
 
 		
 		JFrame();
@@ -61,7 +71,6 @@ public class GUI extends JFrame implements ActionListener {
 		panel2.setBorder(BorderFactory.createTitledBorder("BEVERAGES"));
 		panel3.setBorder(BorderFactory.createTitledBorder("DESSERTS"));
 
-
 		proceedButton = new JButton("CONFIRM ORDER");
 		proceedButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		proceedButton.setBackground(Color.GREEN);
@@ -76,10 +85,10 @@ public class GUI extends JFrame implements ActionListener {
 		resetButton.setEnabled(false);
 
 		finishButton = new JButton("EXIT");
-		finishButton.setForeground(Color.WHITE);
+		finishButton.setForeground(Color.BLACK);
 		finishButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		finishButton.setEnabled(true);
-		finishButton.setBackground(Color.RED);
+		finishButton.setBackground(SystemColor.inactiveCaption);
 		finishButton.addActionListener(this);
 
 		spinnerFood = new JSpinner(new SpinnerNumberModel(0, 0, 40, 1));
@@ -108,7 +117,6 @@ public class GUI extends JFrame implements ActionListener {
 
 		JLabel lblNewLabel = new JLabel("If you want to remove an item, click \"REMOVE\" button.");
 
-
 		textBillArea = new JTextArea();
 		textBillArea.setFont(new Font("Monospaced", Font.BOLD, 13));
 		textBillArea.setBackground(SystemColor.activeCaption);
@@ -120,6 +128,31 @@ public class GUI extends JFrame implements ActionListener {
 		scrollOrders = new JScrollPane();
 		scrollOrders.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollOrders.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		
+		txtMaxFoods = new JTextField();
+		txtMaxFoods.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMaxFoods.setBackground(SystemColor.inactiveCaptionBorder);
+		txtMaxFoods.setForeground(Color.RED);
+		txtMaxFoods.setText("max. quantity: 40");
+		txtMaxFoods.setColumns(10);
+		
+		txtMaxBeverages = new JTextField();
+		txtMaxBeverages.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMaxBeverages.setText("max. quantity: 50");
+		txtMaxBeverages.setForeground(Color.RED);
+		txtMaxBeverages.setColumns(10);
+		txtMaxBeverages.setBackground(SystemColor.inactiveCaptionBorder);
+		
+		txtMaxDesserts = new JTextField();
+		txtMaxDesserts.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMaxDesserts.setText("max.quantity: 60");
+		txtMaxDesserts.setForeground(Color.RED);
+		txtMaxDesserts.setColumns(10);
+		txtMaxDesserts.setBackground(SystemColor.inactiveCaptionBorder);
+		
+		JTextArea txtrOffDiscount = new JTextArea();
+		txtrOffDiscount.setForeground(Color.RED);
+		txtrOffDiscount.setText("5% off discount if price is between 50 and 80\n10% off discount if price is between 80 and 100\n15% off discount if price is over 100");
 
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -128,47 +161,57 @@ public class GUI extends JFrame implements ActionListener {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-						.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
-						.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 724, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+											.addComponent(spinnerDessert, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(addFoodButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+											.addComponent(addDessertButton, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+											.addComponent(spinnerBeverage, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(addBeverageButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+											.addComponent(addBeverageButton, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED))
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(addDessertButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
-									.addGap(79)
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addComponent(txtMaxFoods, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(spinnerFood, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(addFoodButton, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)))
+											.addPreferredGap(ComponentPlacement.RELATED))
+										.addComponent(txtMaxDesserts, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+										.addComponent(txtMaxBeverages, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+									.addGap(55)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addComponent(lblOrders, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(33)
-											.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblNewLabel)
-										.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+											.addGap(37)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+												.addComponent(scrollOrders, Alignment.TRAILING)
+												.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE))))
+									.addGap(4)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE))
 									.addGap(10))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(124)
 									.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
 									.addContainerGap())))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(342)
-							.addComponent(removeButton)
-							.addContainerGap())))
+							.addGap(338)
+							.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+							.addGap(366))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -177,62 +220,72 @@ public class GUI extends JFrame implements ActionListener {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(49)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addGap(47)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
 										.addComponent(spinnerFood, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 										.addComponent(addFoodButton))
-									.addGap(47))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(panel1, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtMaxFoods, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addGap(50)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
 										.addComponent(spinnerBeverage, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 										.addComponent(addBeverageButton))
-									.addGap(47)))
+									.addGap(13)
+									.addComponent(txtMaxBeverages, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(63)
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(spinnerDessert, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-										.addComponent(addDessertButton)))
-								.addGroup(groupLayout.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addComponent(panel3, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))))
+									.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(55)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(spinnerDessert, GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+										.addComponent(addDessertButton))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtMaxDesserts, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+									.addGap(8))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(30)
 							.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(scrollOrders, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-									.addGap(88)))))
+									.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
+									.addGap(12)
+									.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+									.addGap(0, 0, Short.MAX_VALUE))
+								.addComponent(scrollOrders, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+							.addGap(7)))
 					.addGap(75)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 						.addComponent(finishButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE))
 					.addGap(30))
 		);
-
-
+		
+		// initialize the list with strings
 		list = new JList<String>(model);
 		scrollOrders.setViewportView(list);
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		Object rowData[] = new Object[4];
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
 		table1 = new JTable() {
 			private static final long serialVersionUID = 1L;
-
+			//disable editing the table
 			public boolean isCellEditable(int row, int column) {
 
 				spinnerFood.setEnabled(true);
@@ -245,6 +298,8 @@ public class GUI extends JFrame implements ActionListener {
 		table1.setEnabled(true);
 
 		DefaultTableModel model1 = (DefaultTableModel) table1.getModel();
+		
+		// splitting needed to get each value and store them to each cell of the table
 		String[] fill1 = menu.displayFood().split(",");
 		model1.setColumnCount(4);
 
@@ -278,7 +333,7 @@ public class GUI extends JFrame implements ActionListener {
 
 
 			public boolean isCellEditable(int row, int column) {
-
+				//disable editing the table
 				spinnerBeverage.setEnabled(true);
 				addBeverageButton.setEnabled(true);
 
@@ -290,6 +345,8 @@ public class GUI extends JFrame implements ActionListener {
 		table2.setEnabled(true);
 		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
 		DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
+		
+		// splitting needed to get each value and store them to each cell of the table
 		String[] fill2 = menu.displayBeverage().split(",");
 		model2.setColumnCount(4);
 
@@ -331,6 +388,8 @@ public class GUI extends JFrame implements ActionListener {
 		table3.setEnabled(true);
 
 		DefaultTableModel model3 = (DefaultTableModel) table3.getModel();
+		
+		// splitting needed to get each value and store them to each cell of the table
 		String[] fill3 = menu.displayDessert().split(",");
 		model3.setColumnCount(4);
 
@@ -368,21 +427,24 @@ public class GUI extends JFrame implements ActionListener {
 
 	}
 	
+	// Get the quantity of foods inserted in the box
 	public int getQuantityFood() {
 
 		return (int) spinnerFood.getValue();
 	}
-
+	
+	// Get the quantity of beverages inserted in the box
 	public int getQuantityBeverage() {
 
 		return (int) spinnerBeverage.getValue();
 	}
-
+	
+	// Get the quantity of desserts inserted in the box
 	public int getQuantityDessert() {
 		return (int) spinnerDessert.getValue();
 	}
 
-	
+	// when the user selects an item from the table, these item's details are inserted to the list
 	public void addOrderstoList(Item item, int quantity) {
 
 		String order = item.getName() + " x " + quantity + " (" + item.getPrice() + "\u00a3)";
@@ -393,6 +455,7 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 
+	// display the bill in the textarea
 	public double displayBill(Item item, int quantity) {
 		double totalBill = 0;
 		double bill = 0;
@@ -406,7 +469,7 @@ public class GUI extends JFrame implements ActionListener {
 			orderBill = String.format("Total price is:\n" + "%.2f", totalBill);
 			textBillArea.setText(orderBill + "\u00a3");
 			resetButton.setEnabled(true);
-			//System.out.println(entry.getKey().getName() + " " + entry.getValue());
+			//.println(entry.getKey().getName() + " " + entry.getValue());
 		}
 		if  (model.size() == 0){
 			textBillArea.setText(" ");
@@ -415,6 +478,9 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 
+	// discount 5% if the price is between 50 and 80, 
+	//10% if the price is between 80 and 100, 
+	//and 15% if it's above 100
 	public void discount (Item item, int quantity) {
 		double discount = 0;
 		String discountBill = "";
@@ -442,6 +508,8 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 
+	// feature to remove an item from the list
+	// when it's selected, item is entirely removed... total price and discount will change too
 	public void removeOrdersFromList() {
 		Item item = null;
 		int quantity = 0;
@@ -483,38 +551,29 @@ public class GUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "The price does not have the correct format.\nPlease, try again.");
 		}
 	}
-
-	public HashMap<String, ArrayList<String>> outcoming(){
-	 	 String custID = "CUST" + ThreadLocalRandom.current().nextInt(0, 5000 + 1);
-		 String arr="";
-		    for (int i = 0; i < list.getModel().getSize(); i++) {
-		             arr = list.getModel().getElementAt(i);
-		             newOrderList.add(arr);
-		    }  
-
-		    this.orders = new HashMap <String, ArrayList <String>>();
-		for (HashMap.Entry<String, ArrayList<String>> entry : orders.entrySet()) {
-			custID = entry.getKey();
-			newOrderList = entry.getValue();	
-		}
-		orders.put(custID, newOrderList);
-
-		return orders;
-	}
 	
 	int counter1 = 0;//counter for displaying 5% discount message
 	int counter2 = 0;//counter for displaying 10% discount message
 	int counter3 = 0;//counter for displaying 15% discount message
+	private JTextField txtMaxFoods;
+	private JTextField txtMaxBeverages;
+	private JTextField txtMaxDesserts;
 
 	public void actionPerformed(ActionEvent e) {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////REMOVE BUTTON////////////////////
 		if (e.getSource() == removeButton) {
-			int back = JOptionPane.showConfirmDialog(null,
+			int remove = JOptionPane.showConfirmDialog(null,
 					"Are you sure you want to remove one of the items from your order?", null, JOptionPane.YES_NO_OPTION);
-			if (back == JOptionPane.YES_OPTION) {
+			if (remove == JOptionPane.YES_OPTION) {
 				removeOrdersFromList();
 			}
+			spinnerFood.setValue(0);
+			spinnerBeverage.setValue(0);
+			spinnerDessert.setValue(0);
+			addFoodButton.setEnabled(false);
+			addBeverageButton.setEnabled(false);
+			addDessertButton.setEnabled(false);
 		} 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////ADD BUTTONS////////////////////
@@ -524,13 +583,13 @@ public class GUI extends JFrame implements ActionListener {
 					table1.getValueAt(table1.getSelectedRow(), 1).toString(),
 					Double.parseDouble(table1.getValueAt(table1.getSelectedRow(), 3).toString()),
 					table1.getValueAt(table1.getSelectedRow(), 2).toString(), "Food");
+			// if box is not zero, then we put the food's items in the list
 			if (getQuantityFood() > 0) {
 				if (newOrders.containsKey(itemFood)){
 					String element = itemFood.getName();
 					int index = list.getNextMatch(element,0,Position.Bias.Forward);
 					model.setElementAt(itemFood.getName() + " x " + getQuantityFood() + " (" + itemFood.getPrice() + "\u00a3)", index);
-					newOrders.put(itemFood, getQuantityFood());
-					
+					newOrders.put(itemFood, getQuantityFood());			
 					displayBill(itemFood, (Integer) getQuantityFood());
 				}
 				else{
@@ -568,14 +627,13 @@ public class GUI extends JFrame implements ActionListener {
 					table2.getValueAt(table2.getSelectedRow(), 1).toString(),
 					Double.parseDouble(table2.getValueAt(table2.getSelectedRow(), 3).toString()),
 					table2.getValueAt(table2.getSelectedRow(), 2).toString(), "Beverage");
+			// if box is not zero, then we put the food's items in the list
 			if (getQuantityBeverage() > 0) {
 				if (newOrders.containsKey(itemBeverage)){
 					String element = itemBeverage.getName();
 					int index = list.getNextMatch(element,0,Position.Bias.Forward);
 					model.setElementAt(itemBeverage.getName() + " x " + getQuantityBeverage() + " (" + itemBeverage.getPrice() + "\u00a3)", index);
 					newOrders.put(itemBeverage, getQuantityBeverage());
-					if (list.isSelectedIndex(index) != false)
-					removeButton.setEnabled(true);
 					displayBill(itemBeverage, (Integer) getQuantityBeverage());
 				}
 				else{
@@ -617,8 +675,7 @@ public class GUI extends JFrame implements ActionListener {
 					String element = itemDessert.getName();
 					int index = list.getNextMatch(element,0,Position.Bias.Forward);
 					model.setElementAt(itemDessert.getName() + " x " + getQuantityDessert() + " (" + itemDessert.getPrice() + "\u00a3)", index);
-					newOrders.put(itemDessert, getQuantityDessert());
-					
+					newOrders.put(itemDessert, getQuantityDessert());	
 					displayBill(itemDessert, (Integer) getQuantityDessert());
 				}
 				else{
@@ -652,12 +709,19 @@ public class GUI extends JFrame implements ActionListener {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////PROCEED BUTTON////////////////////
 		else if (e.getSource() == proceedButton) {
-			int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to confirm your order?\nA receipt will be sent to you.", null,
+			if (model.isEmpty() ) {
+				JOptionPane.showMessageDialog(null, "There is nothing to confirm, since there are no orders.\nPlease make an order.");
+				
+			}
+			else {
+			int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to confirm your order?\nClick EXIT to get your receipt.", null,
 					JOptionPane.YES_NO_OPTION);
 			if (confirm == JOptionPane.YES_OPTION) {
 				
-				allOrders.makeOrder(outcoming());
-			resetButton.setEnabled(true);
+			allOrders.makeOrder(newOrders);
+			allOrders.getAllCustomerOrders();
+			clear();
+			}
 			}
 		} 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -676,6 +740,12 @@ public class GUI extends JFrame implements ActionListener {
 			int exit = JOptionPane.showConfirmDialog(null, "Are you sure you wish to exit the application?", null,
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
+				JOptionPane.showMessageDialog(null, "A receipt will be sent to you now.");
+			    try {
+					allOrders.FinalReport("Report.txt");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				System.exit(0);
 			}
 		}
@@ -689,7 +759,6 @@ public class GUI extends JFrame implements ActionListener {
 		addFoodButton.setEnabled(false);
 		addBeverageButton.setEnabled(false);
 		addDessertButton.setEnabled(false);
-		proceedButton.setEnabled(false);
 		removeButton.setEnabled(false);
 		list.removeAll();
 		model.removeAllElements();
@@ -699,5 +768,4 @@ public class GUI extends JFrame implements ActionListener {
 		counter2 = 0;//counter for displaying 10% discount message
 		counter3 = 0;//counter for displaying 15% discount message
 	}
-
 }
