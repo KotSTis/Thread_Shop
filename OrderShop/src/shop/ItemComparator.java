@@ -1,3 +1,7 @@
+/* author: Kontogeorgos Georgios
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
 import java.util.Comparator;

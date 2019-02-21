@@ -1,3 +1,7 @@
+/* author: Jiaxi Lyu
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
 import java.io.File;
@@ -20,14 +24,13 @@ public class CsvReader {
 
 	public CsvReader() {
 	}
-
+	// we don't need a Map since we don't have a key for the menu, 
+	// instead, we use a set to sort the items
 	public TreeSet<Item> readMenuInfo(String filename) throws InvalidItemIDLengthException, FileNotFoundException,
 			InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException {
 		File file1 = new File(filename);
 		@SuppressWarnings("resource")
 		Scanner sc1 = new Scanner(file1);
-		// we don't need a Map since we don't have a key for the menu, we don't need a
-		// set since we don't want to get rid of the duplicates
 
 		String line = sc1.nextLine();
 		try {
@@ -56,7 +59,9 @@ public class CsvReader {
 			System.err.print("Wrong format of price! Line '" + line + "' skipped.\n");
 			while (sc1.hasNext())
 				sc1.nextLine();
-		} catch (InvalidItemIDLengthException invalidItemIDLength) {
+		} 
+		//CUSTOM EXCEPTIONS
+		catch (InvalidItemIDLengthException invalidItemIDLength) {
 			System.err.print("Invalid item ID's length in line: '" + line + "' !\n");
 			while (sc1.hasNext())
 				sc1.nextLine();
@@ -73,7 +78,8 @@ public class CsvReader {
 
 		return itemList;
 	}
-
+	
+	// Reading orders and storing them in an ArrayList since we don't care about duplicates or order
 	public ArrayList<Order> readOrdersInfo(String filename)
 			throws FileNotFoundException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
 
@@ -106,7 +112,9 @@ public class CsvReader {
 					orderList.add(newOrder);
 
 			}
-		} catch (InvalidOrderTimeStamp invalidTimestamp) {
+		} 
+		//CUSTOM EXCEPTIONS
+		catch (InvalidOrderTimeStamp invalidTimestamp) {
 			System.err.print("Wrong format of timestamp!");
 			while (sc2.hasNext())
 				sc2.nextLine();
@@ -120,6 +128,7 @@ public class CsvReader {
 
 	}
 
+	// getting item for Order's constructor
 	public Item findItem(String itemID) {
 
 		for (Item item : itemList) {

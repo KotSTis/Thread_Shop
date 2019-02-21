@@ -1,3 +1,7 @@
+/* author: Jiaxi Lyu
+ * All copyrights reserved 2019-2020
+ */
+
 package test;
 
 import static org.junit.Assert.*;
@@ -28,8 +32,6 @@ public class CsvReaderTest {
 		CsvReader reader = new CsvReader();
 		String filename = "Orders.csv";
 
-		orderFile = reader.readOrdersInfo(filename);
-		assertEquals(orderFile, reader.readOrdersInfo(filename));
 	}
 
 	@Test

@@ -1,3 +1,7 @@
+/* author: Stergiou Konstantinos
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
 import java.io.FileNotFoundException;
@@ -20,9 +24,10 @@ import ourExceptions.InvalidItemException;
 
 // This the AllOrders that handles all orders
 public class AllOrders {
-
+	Menu m = new Menu();
 	//ArrayList to hold All of the Orders placed
 	private ArrayList<Order> orderList;
+	TreeSet<Item> menu;
 	//Holds a copy of the menu in Hashmap form for easy lookup and access of items using their ID
 	private HashMap<String, Item> itemList;
 	//String is the Customer ID and the ArrayList<Orders> holds all orders made by that customer
@@ -35,9 +40,8 @@ public class AllOrders {
 
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
-		//populating the itemList by converting the treeset to a hashmap
-		TreeSet<Item> menu;
 		menu = reader.readMenuInfo("Menu.csv");
+		//iterate through the treeset menu
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
 		while (iterator.hasNext()) {
@@ -76,6 +80,7 @@ public class AllOrders {
 
 	}
 
+	// This method process new orders
 	public String makeOrder(HashMap<Item, Integer> incoming) {
 
 		ArrayList<Order> ord = null;
@@ -120,6 +125,7 @@ public class AllOrders {
 
 	}
 
+	// Calculate the price for each order
 	public double calculateBill(Order order) {
 		double bill = 0;
 		//iterate through all the items in order and add their prices
@@ -139,6 +145,7 @@ public class AllOrders {
 		return bill;
 	}
 
+	// Calculate the quantity of each ordered item
 	public String calculateFrequency() {
 		//pretty print each item and how many times it was sold
 		String frequency = "";
@@ -151,6 +158,7 @@ public class AllOrders {
 		return frequency;
 	}
 
+	// Display all customer's orders
 	public String getAllCustomerOrders() {
 		String OrderDetails = "\nCustomer ";
 		for (Order order : orderList) {
@@ -172,6 +180,7 @@ public class AllOrders {
 
 	}
 
+	// Display description for each item
 	public String getDescription(String itemID) {
 		//get item description from the ItemList
 		//not really sure where this is used
@@ -189,10 +198,14 @@ public class AllOrders {
 		return null;
 	}
 
+	// Final report to display menu (before closing GUI), 
+	// current orders, new orders, and total income to a Report.txt
 	public void FinalReport(String filename) throws IOException {
 		//iterate through the summary Hashmap and print it out in the report file
 
 		FileWriter fw = new FileWriter(filename);
+		fw.write("Menu:\n\n");
+		fw.write(m.displayMenu() + "\n\n");
 		fw.write("Items sold:\n\n");
 		for (HashMap.Entry<String, Integer> entry : this.summary.entrySet()) {
 			Item item = this.itemList.get(entry.getKey());
