@@ -196,11 +196,12 @@ public class AllOrders {
 
 			OrderDetails += " at " + order.getTimeStamp().substring(0, 2) + ":" + order.getTimeStamp().substring(2, 4)
 					+ ":" + order.getTimeStamp().substring(4, 6) + " in " + order.getTimeStamp().substring(6, 8) + "/"
-					+ order.getTimeStamp().substring(8, 10) + ".\n" + "Total Price: " + (float) order.getPrice() + "\n";
+					+ order.getTimeStamp().substring(8, 10) + ".\n" + "Total Price: " + (float) order.getPrice() + "\u00a3\n\n";
 
 		}
 		fw.write(OrderDetails);
-		fw.write("\nTotal Income: " + totalIncome);
+		String income = String.format("%.2f", totalIncome);
+		fw.write("\nTotal Income: " + income);
 
 		fw.close();
 	}
