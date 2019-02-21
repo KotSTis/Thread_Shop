@@ -1,4 +1,3 @@
-
 package shop;
 
 import java.io.FileNotFoundException;
@@ -15,7 +14,8 @@ public class Menu {
 
 	private TreeSet<Item> menu = new TreeSet<Item>();
 
-	public Menu() throws FileNotFoundException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException {
+	public Menu() throws FileNotFoundException, InvalidItemIDLengthException, InvalidItemException,
+			InvalidPriceException, InvalidCategoryException {
 		CsvReader reader = new CsvReader();
 		this.menu = reader.readMenuInfo("Menu.csv");
 	}
