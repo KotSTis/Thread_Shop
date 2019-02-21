@@ -2,15 +2,10 @@ package testing;
 
 import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
 
-import shop.AllOrders;
-
-import shop.GUI;
 import shop.Item;
 import shop.Order;
 
@@ -92,20 +87,6 @@ public class AllOrdersTest {
 	}
 
 	@Test
-	public void testQuantity() {
-		Item item = new Item("Guac 'n Chips", "Homemade guacamole with crispy corn tortilla and plantain chips", 5.29,
-				"FOOD1254", "Food");
-		Order order = new Order("1523580902", "CUST1544", item);
-		int quantity = 1;
-		int timesOrdered = 0;
-		if (order.getItem() == item) {
-			timesOrdered++;
-		}
-
-		assertEquals(quantity, timesOrdered);
-	}
-
-	@Test
 	public void testGetDescription() throws FileNotFoundException {
 		Item item = new Item("Guac 'n Chips", "Homemade guacamole with crispy corn tortilla and plantain chips", 5.29,
 				"FOOD1254", "Food");
@@ -113,17 +94,4 @@ public class AllOrdersTest {
 		assertEquals(description, "Homemade guacamole with crispy corn tortilla and plantain chips");
 	}
 
-	@Test
-	public void testFinalReport() throws IOException {
-		Item item = new Item("Black Bean BBQ Burger",
-				"Glazed with guava BBQ sauce and served with melted pepper jack cheese", 11.29, "FOOD5476", "Food");
-
-		AllOrders allOrders = new AllOrders();
-		String details = item.getMenu() + " (" + item.getDescription() + ").\nItem " + item.getItemID() + " is ordered "
-				+ allOrders.quantity(item) + " times.\n";
-		String itemDetails = "Black Bean BBQ Burgercosts11.29�." + " ("
-				+ "Glazed with guava BBQ sauce and served with melted pepper jack cheese" + ").\nItem " + "FOOD5476"
-				+ " is ordered " + 3 + " times.\n";
-		assertEquals(details, itemDetails);
-	}
 }

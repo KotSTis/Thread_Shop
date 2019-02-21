@@ -9,6 +9,10 @@ import java.util.TreeSet;
 import org.junit.Before;
 import org.junit.Test;
 
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidPriceException;
 import shop.CsvReader;
 import shop.Item;
 
@@ -19,7 +23,7 @@ public class MenuTest {
 	String menuFileName;
 	
 	@Before
-	public void setUp() throws FileNotFoundException{
+	public void setUp() throws FileNotFoundException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException{
 		reader = new CsvReader();
 		menuFileName = "Menu.csv";
 		this.menu = reader.readMenuInfo(menuFileName);

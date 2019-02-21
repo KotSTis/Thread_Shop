@@ -22,7 +22,7 @@ public class Order {
 		this.Items.put(item.getItemID(), 1);
 
 	}
-
+	
 	public String getTimeStamp() {
 		return TimeStamp;
 	}
@@ -31,6 +31,14 @@ public class Order {
 		return price;
 	}
 	
+	public void setPrice(double p) {
+		this.price = p;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
 	public void setPrice(double p) {
 		this.price = p;
 	}
@@ -49,17 +57,6 @@ public class Order {
 		else
 			this.Items.put(item.getItemID(), quantity);
 	}
-
-	public void addItem(String itemID, int quantity) {
-		
-		if (this.Items.containsKey(itemID)) {
-			this.Items.put(itemID, this.Items.get(itemID) + quantity);
-		}else {
-			this.Items.put(itemID, quantity);
-		}
-			
-	}
-
 
 	public HashMap<String, Integer> getItems() {
 		return Items;
