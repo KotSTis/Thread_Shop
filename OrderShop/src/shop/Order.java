@@ -6,7 +6,7 @@ public class Order {
 	private String TimeStamp;
 	private String CustomerID;
 	private HashMap<String, Integer> Items;
-	private Item item;
+	private double price;
 
 	public Order(String TimeStamp, String CustomerID) {
 
@@ -18,12 +18,29 @@ public class Order {
 	public Order(String TimeStamp, String CustomerID, Item item) {
 		this.TimeStamp = TimeStamp;
 		this.CustomerID = CustomerID;
-		this.item = item;
+		this.Items = new HashMap<String, Integer>();
+		this.Items.put(item.getItemID(), 1);
 
 	}
-
+	
 	public String getTimeStamp() {
 		return TimeStamp;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+	
+	public void setPrice(double p) {
+		this.price = p;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double p) {
+		this.price = p;
 	}
 
 	public String getItemDescription(Item item) {
@@ -39,17 +56,6 @@ public class Order {
 			this.Items.put(item.getItemID(), this.Items.get(item.getItemID()) + quantity);
 		else
 			this.Items.put(item.getItemID(), quantity);
-	}
-
-	public void addItem(String itemID, int quantity) {
-		if (this.Items.containsKey(itemID))
-			this.Items.put(itemID, this.Items.get(itemID) + quantity);
-		else
-			this.Items.put(itemID, quantity);
-	}
-
-	public Item getItem() {
-		return item;
 	}
 
 	public HashMap<String, Integer> getItems() {

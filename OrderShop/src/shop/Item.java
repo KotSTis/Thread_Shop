@@ -7,7 +7,7 @@ public class Item {
 	private double price;
 	private String itemID;
 	private String categoryItem;
-
+	
 	public Item(String Name, String Description, double Price, String ItemID, String CategoryItem) {
 		this.name = Name;
 		this.description = Description;
@@ -31,7 +31,7 @@ public class Item {
 	public double getPrice() {
 		return price;
 	}
-
+	
 	public String getItemID() {
 		return itemID;
 	}
