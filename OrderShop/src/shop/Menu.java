@@ -10,6 +10,8 @@ import ourExceptions.InvalidItemException;
 
 import java.util.Iterator;
 
+
+// This is the menu that gets rid of the duplicates if there are any
 public class Menu {
 
 	private TreeSet<Item> menu = new TreeSet<Item>();

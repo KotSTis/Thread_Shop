@@ -18,6 +18,7 @@ import ourExceptions.InvalidPriceException;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 
+// This the AllOrders that handles all orders
 public class AllOrders {
 
 	private ArrayList<Order> orderList;

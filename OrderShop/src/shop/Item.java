@@ -1,5 +1,6 @@
 package shop;
 
+// In Item Class we set up all features for each item
 public class Item {
 
 	private String name;

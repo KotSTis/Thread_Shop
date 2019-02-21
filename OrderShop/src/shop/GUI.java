@@ -20,6 +20,8 @@ import ourExceptions.InvalidPriceException;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 import ourExceptions.InvalidOrderCustomerID;
+
+// The GUI which is the interface of our app
 public class GUI extends JFrame implements ActionListener {
 	/**
 	 * 
