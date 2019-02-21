@@ -43,7 +43,6 @@ public class GUI extends JFrame implements ActionListener {
 
 	public GUI() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID, InvalidItemIDLengthException, InvalidItemException {
 
-		
 		JFrame();
 
 	}
@@ -461,13 +460,13 @@ public class GUI extends JFrame implements ActionListener {
 		String discountBill = "";
 		double currentBill = (displayBill(item, quantity));
 		try {
-		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) <= 80.0){ 
+		if (displayBill(item, quantity) > 50.0 && displayBill(item, quantity) =< 80.0){ 
 			discount = currentBill *0.95;
 			discountBill = String.format("Total price with 5%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
 
 		}
-		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) <= 100.0){ 
+		else if (displayBill(item, quantity) > 80.0 && displayBill(item, quantity) =< 100.0){ 
 			discount = currentBill *0.90;
 			discountBill = String.format("Total price with 10%% off is:\n" + "%.2f", discount);
 			textBillArea.setText(discountBill + "\u00a3");
@@ -539,7 +538,6 @@ public class GUI extends JFrame implements ActionListener {
 			newOrderList = entry.getValue();	
 		}
 		orders.put(custID, newOrderList);
-	
 		return orders;
 	}
 	
@@ -715,6 +713,7 @@ public class GUI extends JFrame implements ActionListener {
 			allOrders.getAllCustomerOrders();
 			clear();
 			}
+
 			}
 		} 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -734,6 +733,7 @@ public class GUI extends JFrame implements ActionListener {
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
 				JOptionPane.showMessageDialog(null, "A receipt will be sent to you now.");
+
 			    try {
 					allOrders.FinalReport("Report.csv");
 				} catch (IOException e1) {
