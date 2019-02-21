@@ -25,10 +25,12 @@ import ourExceptions.InvalidItemException;
 // This the AllOrders that handles all orders
 public class AllOrders {
 
+
 	Menu m = new Menu();
 	//ArrayList to hold All of the Orders placed
 	private ArrayList<Order> orderList;
 	TreeSet<Item> menu;
+
 	//Holds a copy of the menu in Hashmap form for easy lookup and access of items using their ID
 	private HashMap<String, Item> itemList;
 	//String is the Customer ID and the ArrayList<Orders> holds all orders made by that customer
@@ -41,7 +43,6 @@ public class AllOrders {
 
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
-		//populating the itemList by converting the treeset to a hashmap	
 		menu = reader.readMenuInfo("Menu.csv");
 		//iterate through the treeset menu
 		Iterator<Item> iterator;
