@@ -1,3 +1,22 @@
+Menu:
+
+Black Bean BBQ Burger,Glazed with guava BBQ sauce and served with melted pepper jack cheese,FOOD5476,11.29.
+Grilled Top Sirloin Steak,Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli,FOOD2435,17.49.
+Guac 'n Chips,Homemade guacamole with crispy corn tortilla and plantain chips,FOOD1254,5.29.
+Jamaican Chicken Wings,Marinated in authentic Jamaican jerk seasonings and served with crisp skin,FOOD1106,8.29.
+Chicken quesadilla,Sliced chicken with onions sweet peppers and spinach,FOOD1005,10.99.
+The Lon Hammond,Swiss Miss hot chocolate packet with mini marshmallows and vanilla bean ice cream,DESS8791,8.89.
+Honey Bun,Honey bun and vanilla bean ice cream,DESS7763,7.99.
+Snickerdoodle,Snickerdoodle cookies and vanilla bean ice cream,DESS7645,6.49.
+Red Velvet Cake,Red Velvet Cake and vanilla bean ice cream,DESS4576,7.19.
+Krispy Kreme Donut,Krispy Kreme donut and vanilla bean ice cream,DESS4325,7.29.
+Pina Colada,Spiced Rum and Coco Lopez topped with Bacardi Black Rum and shaved coconut,BEVE8963,7.79.
+Ultimate Pina Colada,Pina Colada made with Spiced Rum swirled with strawberry ice and topped with Bacardi Black Rum,BEVE7624,8.49.
+Pinot Grigio,Crisp fresh aromas and flavors of green apples and golden pears,BEVE6590,30.0.
+The Ultimate Coronarita,Fresh lime lemon and pressed sugarcane juice hand shaken with Herradura Silver Tequila and Cointreau,BEVE5465,11.99.
+Aruba Blonde beer,A rich honey ale,BEVE2506,5.99.
+
+
 Items sold:
 
 Chicken quesadilla costs 10.99£. (Sliced chicken with onions sweet peppers and spinach).
@@ -86,4 +105,4 @@ CUST1010 ordered:
 Total Price: 24.87£
 
 
-Total Income: 325.6925
+Total Income: 325,69£
