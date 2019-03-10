@@ -16,8 +16,9 @@ import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 import ourExceptions.InvalidItemIDLengthException;
-import ourExceptions.InvalidOrderCustomerID;
-import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidOrderCustomerIDException;
+import ourExceptions.InvalidOrderCustomerNameException;
+import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
@@ -39,7 +40,7 @@ public class AllOrders {
 	private HashMap<String, Integer> summary = new HashMap<String, Integer>();
 
 	public AllOrders() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
-			InvalidOrderTimeStamp, InvalidOrderCustomerID, InvalidItemIDLengthException, InvalidItemException {
+			InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException, InvalidItemIDLengthException, InvalidItemException {
 
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
@@ -95,8 +96,8 @@ public class AllOrders {
 		timestamp = timestamp.replace(":", "");
 		timestamp = timestamp.replace("/", "");
 		timestamp = timestamp.replace(" ", "");
-
-		Order newOrder = new Order(timestamp, custID);
+		String customerName = "";
+		Order newOrder = new Order(timestamp, custID, customerName);
 		Item item;
 		int quantity;
 

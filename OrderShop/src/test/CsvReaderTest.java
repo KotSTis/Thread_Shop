@@ -14,8 +14,8 @@ import org.junit.Test;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 import ourExceptions.InvalidItemIDLengthException;
-import ourExceptions.InvalidOrderCustomerID;
-import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidOrderCustomerIDException;
+import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
 import shop.CsvReader;
 import shop.Item;
@@ -28,7 +28,7 @@ public class CsvReaderTest {
 
 
 	@Test
-	public void testReadOrdersInfo() throws FileNotFoundException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
+	public void testReadOrdersInfo() throws FileNotFoundException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException {
 		CsvReader reader = new CsvReader();
 		String filename = "Orders.csv";
 

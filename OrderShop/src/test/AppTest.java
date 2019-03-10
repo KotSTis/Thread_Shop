@@ -12,8 +12,9 @@ import org.junit.Test;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 import ourExceptions.InvalidItemIDLengthException;
-import ourExceptions.InvalidOrderCustomerID;
-import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidOrderCustomerIDException;
+import ourExceptions.InvalidOrderCustomerNameException;
+import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
 import shop.App;
 import shop.CsvReader;
@@ -22,7 +23,8 @@ import shop.CsvReader;
 public class AppTest {
 
 	@Test
-	public void testMain() throws IOException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
+	public void testMain() throws IOException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, 
+	InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
 		String[] args = new String[] { "" };
 		App.main(args);
 

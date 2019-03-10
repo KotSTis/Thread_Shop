@@ -19,14 +19,15 @@ public class OrderTest {
 	
 	private String TimeStamp = "1235490802";
 	private String CustomerID = "CUST1009";
+	private String CustomerName = "Barney Stinson";
 	
 	private HashMap<String,Integer> Items = new HashMap<String,Integer>();
 	
 	
 	@Before
 	public void setUp() throws Exception {
-		o1 = new Order(TimeStamp,CustomerID);
-		o2 = new Order(TimeStamp,CustomerID,i);
+		o1 = new Order(TimeStamp,CustomerID,CustomerName);
+		o2 = new Order(TimeStamp,CustomerID,i,CustomerName);
 	}
 
 	@Test
@@ -48,7 +49,7 @@ public class OrderTest {
 	public void testAddItemItemIdAndQuantity() {
 		Item item = new Item("Guac 'n Chips", "Homemade guacamole with crispy corn tortilla and plantain chips", 5.29,
 				"FOOD1254", "Food");
-		Order order = new Order("1134270902", "CUST1009");
+		Order order = new Order("1134270902", "CUST1009","Barney Stinson");
 		int quantity = 4;
 
 		order.addItem(item, quantity);
@@ -67,7 +68,7 @@ public class OrderTest {
 	public void testGetItem() {
 		Item item = new Item("Chicken quesadilla", "Sliced chicken with onions sweet peppers and spinach", 10.99,
 				"FOOD1005", "Food");
-		Order order = new Order("1235490802", "CUST1009", item);
+		Order order = new Order("1235490802", "CUST1009", item, "Barney Stinson");
 
 		Items = order.getItems();
 		assertEquals(Items, item);
@@ -77,7 +78,7 @@ public class OrderTest {
 	public void testGetItems() throws Exception {
 		Item item = new Item("Guac 'n Chips", "Homemade guacamole with crispy corn tortilla and plantain chips", 5.29,
 				"FOOD1254", "Food");
-		Order order = new Order("1134270902", "CUST1009", item);
+		Order order = new Order("1134270902", "CUST1009", item, "Barney Stinson");
 		HashMap<String, Integer> result = order.getItems();
 		assertEquals(result, order.getItems());
 	}
