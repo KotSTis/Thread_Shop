@@ -61,7 +61,7 @@ public class AllOrdersTest {
 		Item item = new Item("Grilled Top Sirloin Steak",
 				"Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli", 17.49,
 				"FOOD2435", "Food");
-		Order order = new Order("1523580902", "CUST1544", item);
+		Order order = new Order("1523580902", "CUST1544", item, "Lily Aldrin");
 		String customer = "CUST1544";
 
 		String OrderDetails = "Customer" + order.getCustomerID() + "ordered " + item.getItemID() + "at"
@@ -78,7 +78,7 @@ public class AllOrdersTest {
 		Item item = new Item("Grilled Top Sirloin Steak",
 				"Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli", 17.49,
 				"FOOD2435", "Food");
-		Order order = new Order("1523580902", "CUST1544", item);
+		Order order = new Order("1523580902", "CUST1544", item, "Lily Aldrin");
 		String customer = "CUST1544";
 
 		String OrderDetails = "Customer" + order.getCustomerID() + "ordered " + item.getItemID() + "at"
