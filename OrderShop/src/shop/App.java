@@ -19,7 +19,7 @@ import ourExceptions.InvalidItemException;
 public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
-			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
+	InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
 
 		Menu menu = new Menu();
 		menu.displayMenu();
@@ -39,7 +39,7 @@ public class App {
 		}
 
 		new GUI();
-
+		new StatusGUI();
 	}
 
 }

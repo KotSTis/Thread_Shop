@@ -105,4 +105,4 @@ CUST1010 ordered:
 Total Price: 24.87£
 
 
-Total Income: 325,69£
+Total Income: 325.69£
