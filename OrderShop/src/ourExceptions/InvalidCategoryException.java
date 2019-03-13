@@ -2,7 +2,12 @@ package ourExceptions;
 
 public class InvalidCategoryException extends Exception {
 	
-	public InvalidCategoryException() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
+	public InvalidCategoryException() {
+		
 	}
 }

@@ -10,24 +10,26 @@ import java.util.HashMap;
 public class Order {
 	private String timeStamp;
 	private String customerID;
+	private String customerName;
 	private HashMap<String, Integer> items;
 	private double price;
 
 	// Constructor for timestamp and customerID (needed for allOrders)
-	public Order(String TimeStamp, String CustomerID) {
+	public Order(String TimeStamp, String CustomerID, String CustomerName) {
 
 		this.timeStamp = TimeStamp;
 		this.customerID = CustomerID;
+		this.customerName = CustomerName;
 		this.items = new HashMap<String, Integer>();
 	}
 
 	// Constructor for timestamp, customerID and item (needed to read orders from Orders.csv)
-	public Order(String TimeStamp, String CustomerID, Item item) {
+	public Order(String TimeStamp, String CustomerID, Item item, String CustomerName) {
 		this.timeStamp = TimeStamp;
 		this.customerID = CustomerID;
 		this.items = new HashMap<String, Integer>();
 		this.items.put(item.getItemID(), 1);
-
+		this.customerName = CustomerName;
 	}
 	
 	// Getter for order's timestamp
@@ -53,6 +55,10 @@ public class Order {
 	// Getter for customer ID
 	public String getCustomerID() {
 		return this.customerID;
+	}
+	
+	public String getCustomerName() {
+		return this.customerName;
 	}
 
 	// This method is needed for AllOrders class where we add order's items and quantity for each order

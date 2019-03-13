@@ -8,8 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import ourExceptions.InvalidItemIDLengthException;
-import ourExceptions.InvalidOrderCustomerID;
-import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidOrderCustomerIDException;
+import ourExceptions.InvalidOrderCustomerNameException;
+import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
@@ -18,7 +19,7 @@ import ourExceptions.InvalidItemException;
 public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
-			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
+			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
 
 		Menu menu = new Menu();
 		menu.displayMenu();
