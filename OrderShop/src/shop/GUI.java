@@ -67,7 +67,7 @@ public class GUI extends JFrame implements ActionListener {
 		JFrame frame = new JFrame("Best Shoperino");
 		frame.getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		frame.setBackground(SystemColor.text);
-		frame.setLocation(150, 120);
+		frame.setLocation(0, 0);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Define the panel to hold the buttons
@@ -443,7 +443,7 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 
-	// display the bill in the textarea
+	// display the bill in the text area
 	public double displayBill(Item item, int quantity) {
 		double totalBill = 0;
 		double bill = 0;
