@@ -1,5 +1,10 @@
+/* author: Kontogeorgos Georgios
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
+// In Item Class we set up all features for each item
 public class Item {
 
 	private String name;
@@ -7,76 +12,56 @@ public class Item {
 	private double price;
 	private String itemID;
 	private String categoryItem;
-
-	public enum Category { 
-		food,
-		beverage,
-		dessert
-	}
-
-	public Item (String Name, String Description, double Price, String ItemID, String CategoryItem) {
+	
+	// Constructor
+	public Item(String Name, String Description, double Price, String ItemID, String CategoryItem) {
 		this.name = Name;
 		this.description = Description;
 		this.price = Price;
 		this.itemID = ItemID;
-		this.setCategoryItem(CategoryItem);
+		this.categoryItem = CategoryItem;
 	}
 
+	// Getter for item's name
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String Name) {
-		this.name = Name;
-	}
-
+	// Getter for item's description
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String Description) {
-		this.description = Description;
-	}
-
+	// Getter for item's category
 	public String getCategoryItem() {
 		return categoryItem;
 	}
-
-	public void setCategoryItem(String categoryItem) {
-		this.categoryItem = categoryItem;
-	}
-
-	public double getPrice () {
+	
+	// Getter for item's price
+	public double getPrice() {
 		return price;
 	}
-
+	
+	// Getter for itemID
 	public String getItemID() {
 		return itemID;
 	}
 
-	public void setItemID(String ItemID) {
-		this.itemID = ItemID;
+	// Getter to display menu
+	public String getMenu() {
+		return name + " costs " + price + "\u00a3.";
 	}
 
-
-	//	public String getCategory() {
-	//		return getCategoryItem();
-	//	}
-	//	
-	//	public void setCategory(String CategoryItem) {
-	//		this.setCategoryItem(CategoryItem);
-	//	}
-
+	// hashcode is needed for the hash map to get rid of same keys with different values
 	@Override
-	public int hashCode(){
+	public int hashCode() {
 		return this.getItemID().hashCode();
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) return false;
+		if (obj == null)
+			return false;
 		if (!(obj instanceof Item))
 			return false;
 		if (obj == this)

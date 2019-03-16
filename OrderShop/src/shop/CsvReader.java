@@ -1,3 +1,7 @@
+/* author: Jiaxi Lyu
+ * All copyrights reserved 2019-2020
+ */
+
 package shop;
 
 import java.io.File;
@@ -9,6 +13,9 @@ import java.util.TreeSet;
 import ourExceptions.InvalidItemIDLengthException;
 import ourExceptions.InvalidOrderCustomerID;
 import ourExceptions.InvalidOrderTimeStamp;
+import ourExceptions.InvalidOrderCustomerIDException;
+import ourExceptions.InvalidOrderCustomerNameException;
+import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
@@ -26,8 +33,6 @@ public class CsvReader {
 		File file1 = new File(filename);
 		@SuppressWarnings("resource")
 		Scanner sc1 = new Scanner(file1);
-		// we don't need a Map since we don't have a key for the menu, we don't need a
-		// set since we don't want to get rid of the duplicates
 
 		String line = sc1.nextLine();
 		try {
@@ -44,6 +49,10 @@ public class CsvReader {
 				if (itemID.length() != 8) {
 					throw new InvalidItemIDLengthException();
 				}
+
+				if (!(itemID.startsWith("FOOD")) && (!(itemID.startsWith("BEVE"))) && (!(itemID.startsWith("DESS")))) {
+					throw new InvalidItemException();
+				}
 				String category = values[4];
 				if (!(category.equals("Food")) && !(category.equals("Beverage")) && !(category.equals("Dessert"))) {
 					throw new InvalidCategoryException();
@@ -53,19 +62,26 @@ public class CsvReader {
 
 			}
 		} catch (NumberFormatException nfe) {
-			System.err.print("Wrong format of price! Line '" + line + "' skipped.\n");
+			System.err.print(filename + ": Wrong format of price! Line '" + line + "' skipped.\n\n");
 			while (sc1.hasNext())
 				sc1.nextLine();
-		} catch (InvalidItemIDLengthException invalidItemIDLength) {
-			System.err.print("Invalid item ID's length in line: '" + line + "' !\n");
+		}
+		// CUSTOM EXCEPTIONS
+		catch (InvalidItemIDLengthException invalidItemIDLength) {
+			System.err.print(filename + ": Invalid item ID's length in line: '" + line + "'!\n\n");
 			while (sc1.hasNext())
 				sc1.nextLine();
 		} catch (InvalidPriceException invalidPrice) {
-			System.err.print("Price should be between 0 and 100! Error found in line: '" + line + "' .\n");
+			System.err
+					.print(filename + ": Price should be between 0 and 100!\nError found in line: '" + line + "'.\n\n");
 			while (sc1.hasNext())
 				sc1.nextLine();
 		} catch (InvalidCategoryException invalidCategory) {
-			System.err.print("Category is invalid!\n");
+			System.err.print(filename + ": Category is invalid!\nError found in line: '" + line + "'.\n\n");
+			while (sc1.hasNext())
+				sc1.nextLine();
+		} catch (InvalidItemException invalidItem) {
+			System.err.print(filename + ": ItemID is invalid!\nError found in line: '" + line + "'.\n\n");
 			while (sc1.hasNext())
 				sc1.nextLine();
 		}
@@ -74,8 +90,10 @@ public class CsvReader {
 		return itemList;
 	}
 
+	// Reading orders and storing them in an ArrayList since we don't care about
+	// duplicates or order
 	public ArrayList<Order> readOrdersInfo(String filename)
-			throws FileNotFoundException, InvalidOrderTimeStamp, InvalidOrderCustomerID {
+			throws FileNotFoundException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
 
 		File file2 = new File(filename);
 		@SuppressWarnings("resource")
@@ -86,16 +104,30 @@ public class CsvReader {
 				line = sc2.nextLine();
 				String[] values = line.split(",");
 				String timestamp = values[0];
-				if (timestamp.length() != 10) {
-					throw new InvalidOrderTimeStamp();
+				if ((timestamp.length() != 10)
+						|| ((!(Integer.parseInt(timestamp.substring(0, 2)) >= 0)
+								|| (!(Integer.parseInt(timestamp.substring(0, 2)) < 24))))
+						|| ((!(Integer.parseInt(timestamp.substring(2, 4)) >= 0)
+								|| (!(Integer.parseInt(timestamp.substring(2, 4)) < 60))))
+						|| ((!(Integer.parseInt(timestamp.substring(4, 6)) >= 0)
+								|| (!(Integer.parseInt(timestamp.substring(4, 6)) < 60))))
+						|| ((!(Integer.parseInt(timestamp.substring(6, 8)) > 0)
+								|| (!(Integer.parseInt(timestamp.substring(6, 8)) <= 31))))
+						|| ((!(Integer.parseInt(timestamp.substring(8, 10)) > 0)
+								|| (!(Integer.parseInt(timestamp.substring(8, 10)) <= 12))))) {
+					throw new InvalidOrderTimeStampException();
 				}
 				String customerID = values[1];
-				if (!(customerID.startsWith("CUST"))) {
-					throw new InvalidOrderCustomerID();
+
+				if (!((customerID.startsWith("CUST"))) || (!(customerID.substring(4, 8).matches("[0-9]+")))) {
+					throw new InvalidOrderCustomerIDException();
 				}
-				String customerName = values[2];
-				Item itemOrdered = findItem(values[3]);
-				Order newOrder = new Order(timestamp, customerID,customerName,itemOrdered);
+				Item itemOrdered = findItem(values[2]);
+				String customerName = values[3];
+				if (customerName.split(" ").length != 2){
+					throw new InvalidOrderCustomerNameException();
+				}
+				Order newOrder = new Order(timestamp, customerID, itemOrdered, customerName);
 				boolean foundOrd = false;
 				for (Order ord : orderList) {
 					if (ord.getCustomerID().equals(customerID) && ord.getTimeStamp().equals(timestamp)) {
@@ -107,12 +139,25 @@ public class CsvReader {
 					orderList.add(newOrder);
 
 			}
-		} catch (InvalidOrderTimeStamp invalidTimestamp) {
-			System.err.print("Wrong format of timestamp!");
+		} catch (NullPointerException nullPointer) {
+			System.err.print(filename + ": Nothing to point at!\nError found in line: '" + line + "'.\n");
 			while (sc2.hasNext())
 				sc2.nextLine();
-		} catch (InvalidOrderCustomerID invalidCustomer) {
-			System.err.print("Wrong format of customer!");
+		}
+		// CUSTOM EXCEPTIONS
+		catch (InvalidOrderTimeStampException invalidTimestamp) {
+			System.err.print(filename + ": Wrong format of timestamp!\n"
+					+ "Timestamp must have this format (0-24)(0-59)(0-59)(1-31)(1-12) (hhmmssddMM) !\n"
+					+ "Error found in line: '" + line + "'\n");
+			while (sc2.hasNext())
+				sc2.nextLine();
+		} catch (InvalidOrderCustomerIDException invalidCustomer) {
+			System.err.print(filename + ": Wrong format of customer's ID!\nError found in line: '" + line + "'\n");
+			while (sc2.hasNext())
+				sc2.nextLine();
+		} catch (InvalidOrderCustomerNameException invalidCustomer) {
+			System.err.print(filename + ": Wrong format of customer's name!\nError found in line: '" + line + "'\n");
+
 			while (sc2.hasNext())
 				sc2.nextLine();
 		}
@@ -121,6 +166,7 @@ public class CsvReader {
 
 	}
 
+	// getting item for Order's constructor
 	public Item findItem(String itemID) {
 
 		for (Item item : itemList) {
