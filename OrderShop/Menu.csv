@@ -1,0 +1,16 @@
+Name,Description,Price,ItemID,Category
+Chicken quesadilla,Sliced chicken with onions sweet peppers and spinach,10.99,FOOD1005,Food
+Jamaican Chicken Wings,Marinated in authentic Jamaican jerk seasonings and served with crisp skin,8.29,FOOD1106,Food
+Guac 'n Chips,Homemade guacamole with crispy corn tortilla and plantain chips,5.29,FOOD1254,Food
+Grilled Top Sirloin Steak,Juicy 8-oz. center-cut sirloin served with mashed potatoes and fresh steamed broccoli,17.49,FOOD2435,Food
+Black Bean BBQ Burger,Glazed with guava BBQ sauce and served with melted pepper jack cheese,11.29,FOOD5476,Food
+Aruba Blonde beer,A rich honey ale,5.99,BEVE2506,Beverage
+The Ultimate Coronarita,Fresh lime lemon and pressed sugarcane juice hand shaken with Herradura Silver Tequila and Cointreau,11.99,BEVE5465,Beverage
+Pinot Grigio,Crisp fresh aromas and flavors of green apples and golden pears,30.00,BEVE6590,Beverage
+Ultimate Pina Colada,Pina Colada made with Spiced Rum swirled with strawberry ice and topped with Bacardi Black Rum,8.49,BEVE7624,Beverage
+Pina Colada,Spiced Rum and Coco Lopez topped with Bacardi Black Rum and shaved coconut,7.79,BEVE8963,Beverage
+Krispy Kreme Donut,Krispy Kreme donut and vanilla bean ice cream,7.29,DESS4325,Dessert
+Red Velvet Cake,Red Velvet Cake and vanilla bean ice cream,7.19,DESS4576,Dessert
+Snickerdoodle,Snickerdoodle cookies and vanilla bean ice cream,6.49,DESS7645,Dessert
+Honey Bun,Honey bun and vanilla bean ice cream,7.99,DESS7763,Dessert
+The Lon Hammond,Swiss Miss hot chocolate packet with mini marshmallows and vanilla bean ice cream,8.89,DESS8791,Dessert
