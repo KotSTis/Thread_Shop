@@ -29,4 +29,5 @@ public class QueueCustomer extends Observable{
 
 // OBSERVER: NEW GUI
 // CONTROLLER : OLD GUI
+
 // 
