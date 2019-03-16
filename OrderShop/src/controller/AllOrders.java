@@ -2,7 +2,7 @@
  * All copyrights reserved 2019-2020
  */
 
-package shop;
+package controller;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -20,6 +20,10 @@ import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
 import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
+import shop.CsvReader;
+import shop.Item;
+import shop.Menu;
+import shop.Order;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 

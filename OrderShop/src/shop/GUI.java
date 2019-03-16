@@ -18,6 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
+
+import controller.AllOrders;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import ourExceptions.InvalidItemIDLengthException;
