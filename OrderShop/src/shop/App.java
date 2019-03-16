@@ -13,7 +13,6 @@ import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
 import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
-import viewer.StatusGUI;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 
@@ -21,7 +20,7 @@ import ourExceptions.InvalidItemException;
 public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
-	InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
+			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
 
 		Menu menu = new Menu();
 		menu.displayMenu();
@@ -41,7 +40,6 @@ public class App {
 		}
 
 		new GUI();
-		new StatusGUI();
-	}
 
+	}
 }

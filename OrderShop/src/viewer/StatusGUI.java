@@ -43,7 +43,7 @@ public class StatusGUI extends JFrame// implements ActionListener {
 	private JScrollPane scrollOrders;
 	private JTextField textField;
 	private JTextField textField_1;
-	private QueueCustomer queueCustomer;
+	private QueueCustomer queue;
 	
 	public StatusGUI() {
 

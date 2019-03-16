@@ -70,7 +70,7 @@ public class GUI extends JFrame implements ActionListener {
 		JFrame frame = new JFrame("Best Shoperino");
 		frame.getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		frame.setBackground(SystemColor.text);
-		frame.setLocation(0, 0);
+		frame.setLocation(150, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Define the panel to hold the buttons
@@ -284,7 +284,8 @@ public class GUI extends JFrame implements ActionListener {
 				return false;
 			}
 		};
-
+		panel1.add(table1);
+		table1.setEnabled(true);
 
 		DefaultTableModel model1 = (DefaultTableModel) table1.getModel();
 
@@ -329,7 +330,8 @@ public class GUI extends JFrame implements ActionListener {
 				return false;
 			}
 		};
-		
+		panel2.add(table2);
+		table2.setEnabled(true);
 		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
 		DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
 
@@ -372,6 +374,8 @@ public class GUI extends JFrame implements ActionListener {
 				return false;
 			}
 		};
+		panel3.add(table3);
+		table3.setEnabled(true);
 
 		DefaultTableModel model3 = (DefaultTableModel) table3.getModel();
 
@@ -442,7 +446,7 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 
-	// display the bill in the text area
+	// display the bill in the textarea
 	public double displayBill(Item item, int quantity) {
 		double totalBill = 0;
 		double bill = 0;
