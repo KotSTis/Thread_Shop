@@ -1,13 +1,13 @@
 /* author: Mitrousis Alexandros
  * All copyrights reserved 2019-2020
  */
-
 package shop;
 
 import java.util.HashMap;
 
 // This is the Order class that handles the features of each order
 public class Order {
+
 	private String timeStamp;
 	private String customerID;
 	private String customerName;
@@ -42,10 +42,13 @@ public class Order {
 		return price;
 	}
 
+
 	// Setter for order's price
+
 	public void setPrice(double p) {
 		this.price = p;
 	}
+
 
 	// Getter to get item's description
 	public String getItemDescription(Item item) {
@@ -72,5 +75,6 @@ public class Order {
 	// Getter for items stored in a hashmap
 	public HashMap<String, Integer> getItems() {
 		return items;
+
 	}
 }

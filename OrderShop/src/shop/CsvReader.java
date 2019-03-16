@@ -11,6 +11,8 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderCustomerID;
+import ourExceptions.InvalidOrderTimeStamp;
 import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
 import ourExceptions.InvalidOrderTimeStampException;
@@ -26,8 +28,6 @@ public class CsvReader {
 	public CsvReader() {
 	}
 
-	// we don't need a Map since we don't have a key for the menu,
-	// instead, we use a set to sort the items
 	public TreeSet<Item> readMenuInfo(String filename) throws InvalidItemIDLengthException, FileNotFoundException,
 			InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, InvalidCategoryException {
 		File file1 = new File(filename);
@@ -49,6 +49,7 @@ public class CsvReader {
 				if (itemID.length() != 8) {
 					throw new InvalidItemIDLengthException();
 				}
+
 				if (!(itemID.startsWith("FOOD")) && (!(itemID.startsWith("BEVE"))) && (!(itemID.startsWith("DESS")))) {
 					throw new InvalidItemException();
 				}
@@ -156,6 +157,7 @@ public class CsvReader {
 				sc2.nextLine();
 		} catch (InvalidOrderCustomerNameException invalidCustomer) {
 			System.err.print(filename + ": Wrong format of customer's name!\nError found in line: '" + line + "'\n");
+
 			while (sc2.hasNext())
 				sc2.nextLine();
 		}
