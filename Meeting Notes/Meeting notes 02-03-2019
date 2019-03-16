@@ -1,0 +1,7 @@
+In this meeting, we made use of agile techniques.
+We started pair programming, since it's more useful by interacting with each other live.
+Then, we tried to start stand-up, since this would help us bring more attention to the one talking.
+After we did this, Jiaxi created the new csv files and applied new changes that were needed for CsvReader and Order class.
+Then, we decided which threads we should use for all classes, and which classes whould be for MVC and Singleton.
+We decided that the log class should be used as Singleton, and then, the Queue and the Staff class would be used as Model,
+new GUI as Viewer and AllOrders class as Controller that would handle all the orders.
