@@ -1,27 +1,54 @@
 package model;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Observable;
+import java.util.Queue;
 
 import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
 import ourExceptions.InvalidOrderTimeStampException;
-import shop.CsvReader;
+import shop.Log;
 import shop.Order;
 
-public class QueueCustomer extends Observable{
+public class QueueCustomer {
 	
-	
-	public ArrayList <Order> orders;
-	private QueueCustomer() throws FileNotFoundException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException{
+	Log logger;
+	private static Queue <Order> orders;
+	private static final Object lock = new Object();
+	public QueueCustomer(Log lg) 
+			throws FileNotFoundException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException{
+		logger = lg;
 		
-		CsvReader reader = new CsvReader();
-		this.orders = reader.readOrdersInfo("Orders.csv");
 	}
 	
-	public ArrayList <Order> custQueue(){
-		return orders;
+	public void addQueue(Order ord) {
+		synchronized(lock) {
+			orders.add(ord);
+			logger.log(" added " + ord.getCustomerName() + "'s order to the queue");
+		}
+		
+		
+	}
+	
+	public boolean check_empty() {
+		if(orders.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Order get_top() {
+		synchronized(lock) {
+			Order ord = orders.poll();
+			if(ord != null) {
+				return ord;
+			}
+			return null;
+		}
+	}
+	public Queue<Order> get_queue() {
+		synchronized(lock) {
+			return orders;
+		}
 	}
 	
 	
@@ -29,5 +56,3 @@ public class QueueCustomer extends Observable{
 
 // OBSERVER: NEW GUI
 // CONTROLLER : OLD GUI
-
-// 

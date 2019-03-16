@@ -13,6 +13,7 @@ import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
 import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
+import viewer.StatusGUI;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 
@@ -38,7 +39,7 @@ public class App {
 		} catch (FileNotFoundException fileNotFound) {
 			System.err.print("File not found! Please, import a correct file.");
 		}
-
+		new StatusGUI();
 		new GUI();
 
 	}
