@@ -18,6 +18,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.Position;
+
+import controller.AllOrders;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import ourExceptions.InvalidItemIDLengthException;
@@ -281,8 +284,7 @@ public class GUI extends JFrame implements ActionListener {
 				return false;
 			}
 		};
-		panel1.add(table1);
-		table1.setEnabled(true);
+
 
 		DefaultTableModel model1 = (DefaultTableModel) table1.getModel();
 
@@ -327,8 +329,7 @@ public class GUI extends JFrame implements ActionListener {
 				return false;
 			}
 		};
-		panel2.add(table2);
-		table2.setEnabled(true);
+		
 		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
 		DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
 
@@ -371,8 +372,6 @@ public class GUI extends JFrame implements ActionListener {
 				return false;
 			}
 		};
-		panel3.add(table3);
-		table3.setEnabled(true);
 
 		DefaultTableModel model3 = (DefaultTableModel) table3.getModel();
 
