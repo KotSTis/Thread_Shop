@@ -64,13 +64,16 @@ public class StatusGUI extends JFrame implements Observer {
 	private JTextField textField;
 	private JTextField textField_1;
 	private Staff server;
-	private JLabel simulationSpeedLabel, threadsLabel;
-	private JSlider simulationSpeedSlider;
+	private JLabel simulationSpeedLabel;
+	public JLabel threadsLabel;
+	public JSlider simulationSpeedSlider;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JScrollPane scrollPane_1;
 	private JList onlineList;
+	private JButton btnRemoveServer, btnAddServer ;
+	
 	
 	
 	public StatusGUI(QueueCustomer model, ArrayList<Staff> staffs) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
@@ -252,16 +255,17 @@ public class StatusGUI extends JFrame implements Observer {
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-
+			
 		if (arg0 == queue){
 			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());
+			String name = q.getLast().getCustomerName();
+			int items = q.getLast().getItems().size();	
 			if( model.size() > q.size()){
 				model.remove(0);
 				
 			}else if(model.size() < q.size()){
 				
-				String name = q.getLast().getCustomerName();
-				int items = q.getLast().getItems().size();				
+				
 				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
 				
 				if(q.element().getPriority() == 0){
@@ -283,10 +287,40 @@ public class StatusGUI extends JFrame implements Observer {
 			
 		}
 		else if (arg1 instanceof Staff){
+			
 			int server_no = ((Staff) arg1).getNumber();
 			System.out.println(server_no);
+			String temp = ((Staff) arg1).getGUIDisplay();
+			switch (server_no){
+			case 1: 
+				textField.setText(temp);
+				break;
+			case 2: 
+				textField_1.setText(temp);
+				break;
+			case 3:textField_2.setText(temp);
+		    	break;
+			case 4:textField_3.setText(temp);
+				break;
+			case 5:textField_4.setText(temp);
+	    		break;
+			}
 
 			
 		}
+	}
+	
+	
+	public void addServer(ActionListener e) {
+		btnAddServer.addActionListener(e);
+	}
+	
+	public void removeServer(ActionListener e) {
+		btnRemoveServer.addActionListener(e);
+	}
+
+	//@ Andy - adding change listener to slider - Functionality handled in controller
+	public void addSpeedListener(ChangeListener e){
+		simulationSpeedSlider.addChangeListener(e);	
 	}
 }
