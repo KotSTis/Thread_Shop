@@ -5,22 +5,21 @@ import java.util.Observable;
 
 import shop.Order;
 
-public class Staff implements Runnable {
+public class Staff extends Observable implements Runnable {
 	
-	private int threadSleepTime = 1500;
+	private static int threadSleepTime = 1500;
 	
 	QueueCustomer qC;
 	int thread;
-	
+
 	public Staff (int thread){
 		this.thread = thread;
 		
 	}
+	
 	public void process(Order ord) {
 		
 	}
-	
-
 	
 	@Override
 	public void run() {
@@ -28,6 +27,9 @@ public class Staff implements Runnable {
 			if(!qC.check_empty()) {
 				Order ord = qC.get_top();
 				process(ord);
+				setChanged();
+				notifyObservers(this);
+		        clearChanged();
                 try {
                 	Thread.sleep(threadSleepTime*ord.getItems().size());
                 } catch (Exception e) {

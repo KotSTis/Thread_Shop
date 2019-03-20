@@ -134,11 +134,6 @@ public class GUI extends JFrame implements ActionListener {
 		textBillArea.setBackground(SystemColor.activeCaption);
 		textBillArea.setEditable(false);
 
-		textQueueArea = new JTextArea("Adding to queue...");
-		textQueueArea.setFont(new Font("Microsoft YaHei", Font.BOLD, 13));
-		textQueueArea.setBackground(SystemColor.inactiveCaptionBorder);
-		textQueueArea.setEditable(false);
-
 		JLabel lblOrders = new JLabel("Orders", SwingConstants.CENTER);
 		lblOrders.setFont(new Font("Tahoma", Font.BOLD, 16));
 
@@ -156,55 +151,55 @@ public class GUI extends JFrame implements ActionListener {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
-							.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
-							.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 261, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(0)
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(spinnerDessert, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(addDessertButton, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGap(4)
-										.addComponent(spinnerBeverage, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(addBeverageButton, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(spinnerFood, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(addFoodButton, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)))
-								.addGap(92)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblOrders, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
-									.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-									.addComponent(scrollOrders, Alignment.TRAILING)
-									.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE))
-								.addGap(4)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(textQueueArea, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtrOffDiscount, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)))
-								.addGap(10))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(338)
-								.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-								.addGap(366)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(186)
-							.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(0)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(spinnerDessert, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(addDessertButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(4)
+											.addComponent(spinnerBeverage, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(addBeverageButton, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(spinnerFood, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(addFoodButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED)))
+									.addGap(92)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(1)
+											.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(75)
+									.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)))
+							.addGap(4)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE))
+							.addGap(10))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(338)
+							.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+							.addGap(366))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -214,7 +209,7 @@ public class GUI extends JFrame implements ActionListener {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(49)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+								.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(47)
 									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
@@ -222,7 +217,7 @@ public class GUI extends JFrame implements ActionListener {
 										.addComponent(addFoodButton))))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+								.addComponent(panel2, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 										.addComponent(addBeverageButton)
@@ -231,7 +226,7 @@ public class GUI extends JFrame implements ActionListener {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+									.addComponent(panel3, GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(55)
 									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -253,16 +248,14 @@ public class GUI extends JFrame implements ActionListener {
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textQueueArea, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-							.addGap(7)))
-					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+							.addGap(6)))
+					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(finishButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-						.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-					.addGap(38))
+						.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+						.addComponent(finishButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+					.addGap(30))
 		);
 
 		// initialize the list with strings
@@ -545,6 +538,7 @@ public class GUI extends JFrame implements ActionListener {
 	int counter2 = 0;// counter for displaying 10% discount message
 	int counter3 = 0;// counter for displaying 15% discount message
 
+
 	public void actionPerformed(ActionEvent e) {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// REMOVE BUTTON////////////////////
@@ -709,21 +703,18 @@ public class GUI extends JFrame implements ActionListener {
 				int confirm = JOptionPane.showConfirmDialog(null,
 						"Are you sure you want to confirm your order?\nClick EXIT to get your receipt.", null,
 						JOptionPane.YES_NO_OPTION);
+				int onlineOption = JOptionPane.showConfirmDialog(null,
+						"Is this an online order?", null,
+						JOptionPane.YES_NO_OPTION);
 
 				if (confirm == JOptionPane.YES_OPTION) {
 					// allOrders.putOrder(newOrders);
 					allOrders.makeOrder(newOrders);
 					allOrders.getAllCustomerOrders();
-					if (counter == 1) {
-						textQueueArea.setText(counter + " order added to queue...");
-						counter++;
+					
+					if (onlineOption == JOptionPane.YES_OPTION) {
+						clear();
 					}
-
-					else if (counter > 1) {
-						textQueueArea.setText(counter + " orders added to queue...");
-						counter++;
-					}
-
 					clear();
 				} // Restore the text to your label, or write whatever you want.
 					// return;
