@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.IllegalFormatConversionException;
 //import java.util.concurrent.TimeUnit;
@@ -51,6 +52,7 @@ public class GUI extends JFrame implements ActionListener {
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JScrollPane scrollOrders;
 	private JList<String> list = new JList<>();
+	private ArrayList<Order> orderList;
 	int counter = 1;
 	// private static final int SLEEP_MINUTES = 1;
 	// private long endTime;
@@ -539,6 +541,33 @@ public class GUI extends JFrame implements ActionListener {
 	int counter3 = 0;// counter for displaying 15% discount message
 
 
+	public String getNewOrders(Item item, int quantity) {
+
+		String CustomerOrders = "";
+
+		for (HashMap.Entry<Item, Integer> entry : newOrders.entrySet()) {
+			item = entry.getKey();
+			quantity = entry.getValue();
+			CustomerOrders += item + "" + quantity;
+		}
+			
+		return CustomerOrders;
+	}
+	
+	public String newOrders(){
+		String displayCustItems = "";
+		for (Order order : orderList) {
+			displayCustItems += order.getCustomerID() + " ordered:\n";
+			for (HashMap.Entry<String, Integer> entry : order.getItems().entrySet()) {
+				String ID = entry.getKey();
+				Integer quantity = entry.getValue();
+				displayCustItems += ID + " " + quantity;
+
+			}
+		}
+		return displayCustItems;
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// REMOVE BUTTON////////////////////
@@ -690,16 +719,7 @@ public class GUI extends JFrame implements ActionListener {
 						"There is nothing to confirm, since there are no orders.\nPlease make an order.");
 
 			} else {
-				// JOptionPane.showMessageDialog(null, "Please wait 1 minute.
-				// Processing previous orders...");
-				// endTime =
-				// System.currentTimeMillis()+TimeUnit.MINUTES.toMillis(SLEEP_MINUTES);
-				// //define the end time
-				// timer = new Timer(500, removeButton->{ //Loop every 1000ms
-				// a.k.a 1second
-				// long millisBeforeEnd = endTime - System.currentTimeMillis();
-				// if (millisBeforeEnd < 0) {
-				// timer.stop();
+
 				int confirm = JOptionPane.showConfirmDialog(null,
 						"Are you sure you want to confirm your order?\nClick EXIT to get your receipt.", null,
 						JOptionPane.YES_NO_OPTION);
@@ -716,33 +736,7 @@ public class GUI extends JFrame implements ActionListener {
 						clear();
 					}
 					clear();
-				} // Restore the text to your label, or write whatever you want.
-					// return;
-					// }
-					// long secsBeforeEnd =
-					// TimeUnit.MILLISECONDS.toSeconds(millisBeforeEnd);
-					// //Convert
-					// the millis to seconds.
-					// textBillArea.setText(secsBeforeEnd+"");
-					// /*
-					// int hours = (int)
-					// TimeUnit.MILLISECONDS.toHours(millisBeforeEnd);
-					// int mins = (int)
-					// (TimeUnit.MILLISECONDS.toMinutes(millisBeforeEnd) - hours
-					// *
-					// 60);
-					// int secs = (int)
-					// (TimeUnit.MILLISECONDS.toSeconds(millisBeforeEnd) - mins
-					// * 60
-					// - hours * 60 * 60);
-					// lab1.setText(String.format("%02d:%02d:%02d", hours, mins,
-					// secs));
-					// */
-					// });
-					// timer.setInitialDelay(0); //Don't loose the first second.
-					// timer.start(); //Start the timer (in stop button, just
-					// add
-					// timer.stop())
+				} 
 
 			}
 		}
