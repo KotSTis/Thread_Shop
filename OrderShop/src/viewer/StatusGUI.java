@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Queue;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -61,26 +62,20 @@ public class StatusGUI extends JFrame implements Observer {
 	private JTextField textField;
 	private JTextField textField_1;
 	private Staff server;
-	//private AllOrders allProcessedOrders = new AllOrders();
-	private JButton simulateButton;
-
 	private JLabel simulationSpeedLabel, threadsLabel;
 	private JSlider simulationSpeedSlider;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	
-
 	
-	public StatusGUI() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
-
 	public StatusGUI(QueueCustomer model) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
 
 		this.queue = model;
+		queue.addObserver(this);
 		JFrame();
-
 	}
 	
 	private void JFrame() {
@@ -88,7 +83,7 @@ public class StatusGUI extends JFrame implements Observer {
 		JFrame frame = new JFrame("Shop Simulation");
 		frame.getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		frame.setBackground(SystemColor.text);
-		frame.setLocation(150, 120);
+		frame.setLocation(1050, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 		JPanel panel = new JPanel();
@@ -221,6 +216,7 @@ public class StatusGUI extends JFrame implements Observer {
 		});
 		
 		listCustomerQueue = new JList<String>(model);
+		
 		scrollPane.setViewportView(listCustomerQueue);
 		panel.setLayout(gl_panel);
 		
@@ -229,20 +225,22 @@ public class StatusGUI extends JFrame implements Observer {
 		//frame.setContentPane(panel);
 	    frame.pack();
 		frame.setVisible(true);
+	
+		
 
 	}
 	
-	
+
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		String customerList = queue.get_top().toString();
-		if (arg1 instanceof QueueCustomer){
-			((QueueCustomer) arg1).get_queue();
+		
+		if (arg0 == queue){
 			
-
+			model.addElement("test");
+			
 		}
-		else if (arg1 instanceof Staff){
+		else if (arg0 == server){
 			
 		}
 	}

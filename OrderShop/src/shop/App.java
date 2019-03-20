@@ -23,15 +23,27 @@ public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
 			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
+		Log logger = new Log();
+		Menu menu = new Menu();
+		menu.displayMenu();
+		CsvReader reader = new CsvReader();
+//		AllOrders allOrders = new AllOrders();
+//		allOrders.FinalReport("Report.txt");
+		try {
+			// For running Exceptions tests: run these commands and switch to appropriate
+			// filenames for exceptions
+			// example: reader.readMenuInfo("MenuExceptionItemIDLength.csv");
+			reader.readMenuInfo("Menu.csv");
 
-		
-		new GUI();
-
+			// Example: reader.readOrdersInfo("OrdersExceptionCustomerID.csv");
+			reader.readOrdersInfo("Orders.csv");
+		} catch (FileNotFoundException fileNotFound) {
+			System.err.print("File not found! Please, import a correct file.");
+		}
 		QueueCustomer model = new QueueCustomer(logger);
 		StatusGUI viewGUI = new StatusGUI(model);
 		GUI controlGUI = new GUI();
 		AllOrders controlla = new AllOrders(controlGUI, model, logger);
-
 
 	}
 }

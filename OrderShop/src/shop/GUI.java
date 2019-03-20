@@ -45,7 +45,6 @@ public class GUI extends JFrame implements ActionListener {
 	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton,
 			finishButton, btnOrderOnline;
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
-	private AllOrders allOrders = new AllOrders();
 	private JTable table1, table2, table3;
 	private HashMap<Item, Integer> newOrders;
 	private JTextArea textBillArea, textQueueArea;
@@ -734,33 +733,33 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// PROCEED BUTTON////////////////////
-		else if (e.getSource() == proceedButton) {
-			if (model.isEmpty()) {
-				JOptionPane.showMessageDialog(null,
-						"There is nothing to confirm, since there are no orders.\nPlease make an order.");
-
-			} else {
-
-				int confirm = JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to confirm your order?\nClick EXIT to get your receipt.", null,
-						JOptionPane.YES_NO_OPTION);
-				int onlineOption = JOptionPane.showConfirmDialog(null,
-						"Is this an online order?", null,
-						JOptionPane.YES_NO_OPTION);
-
-				if (confirm == JOptionPane.YES_OPTION) {
-					// allOrders.putOrder(newOrders);
-					allOrders.makeOrder(newOrders);
-					allOrders.getAllCustomerOrders();
-					
-					if (onlineOption == JOptionPane.YES_OPTION) {
-						clear();
-					}
-					clear();
-				} 
-
-			}
-		}
+//		else if (e.getSource() == proceedButton) {
+//			if (model.isEmpty()) {
+//				JOptionPane.showMessageDialog(null,
+//						"There is nothing to confirm, since there are no orders.\nPlease make an order.");
+//
+//			} else {
+//
+//				int confirm = JOptionPane.showConfirmDialog(null,
+//						"Are you sure you want to confirm your order?\nClick EXIT to get your receipt.", null,
+//						JOptionPane.YES_NO_OPTION);
+//				int onlineOption = JOptionPane.showConfirmDialog(null,
+//						"Is this an online order?", null,
+//						JOptionPane.YES_NO_OPTION);
+//
+//				if (confirm == JOptionPane.YES_OPTION) {
+//					// allOrders.putOrder(newOrders);
+//					allOrders.makeOrder(newOrders);
+//					allOrders.getAllCustomerOrders();
+//					
+//					if (onlineOption == JOptionPane.YES_OPTION) {
+//						clear();
+//					}
+//					clear();
+//				} 
+//
+//			}
+//		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// RESET BUTTON////////////////////
 		else if (e.getSource() == resetButton) {
@@ -778,11 +777,11 @@ public class GUI extends JFrame implements ActionListener {
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
 				JOptionPane.showMessageDialog(null, "A receipt will be sent to you now.");
-				try {
-					allOrders.FinalReport("Report.txt");
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+//				try {
+//					allOrders.FinalReport("Report.txt");
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
 				System.exit(0);
 			}
 		}

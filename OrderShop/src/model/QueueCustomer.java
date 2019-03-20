@@ -1,6 +1,7 @@
 package model;
 
 import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Queue;
 
@@ -13,7 +14,7 @@ import shop.Order;
 public class QueueCustomer extends Observable {
 	
 	Log logger;
-	private static Queue <Order> orders;
+	private Queue <Order> orders = new LinkedList <Order> ();
 	private static final Object lock = new Object();
 	
 	public QueueCustomer(Log lg) 
