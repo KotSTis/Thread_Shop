@@ -61,19 +61,24 @@ public class StatusGUI extends JFrame implements Observer {
 	private JTextField textField;
 	private JTextField textField_1;
 	private Staff server;
-	private AllOrders allProcessedOrders = new AllOrders();
+	//private AllOrders allProcessedOrders = new AllOrders();
+	private JButton simulateButton;
+
 	private JLabel simulationSpeedLabel, threadsLabel;
 	private JSlider simulationSpeedSlider;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	
+
 	
 	public StatusGUI() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+
+	public StatusGUI(QueueCustomer model) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
 
-		this.queue = queue;
+		this.queue = model;
 		JFrame();
 
 	}
@@ -83,7 +88,7 @@ public class StatusGUI extends JFrame implements Observer {
 		JFrame frame = new JFrame("Shop Simulation");
 		frame.getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		frame.setBackground(SystemColor.text);
-		frame.setLocation(1050, 120);
+		frame.setLocation(150, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 		JPanel panel = new JPanel();
@@ -231,11 +236,13 @@ public class StatusGUI extends JFrame implements Observer {
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
-		if (arg0 == queue){
-			QueueCustomer q = (QueueCustomer) arg0;
+		String customerList = queue.get_top().toString();
+		if (arg1 instanceof QueueCustomer){
+			((QueueCustomer) arg1).get_queue();
+			
+
 		}
-		else if (arg0 == server){
+		else if (arg1 instanceof Staff){
 			
 		}
 	}

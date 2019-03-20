@@ -4,6 +4,8 @@
 
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,13 +17,18 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
+
+import model.QueueCustomer;
 import ourExceptions.InvalidItemIDLengthException;
 import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
 import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
 import shop.CsvReader;
+import shop.GUI;
 import shop.Item;
+import shop.Log;
 import shop.Menu;
 import shop.Order;
 import ourExceptions.InvalidCategoryException;
@@ -30,7 +37,10 @@ import ourExceptions.InvalidItemException;
 // This the AllOrders that handles all orders
 public class AllOrders {
 
-
+	private GUI view;
+	private QueueCustomer model;
+	private Log logger;
+	
 	Menu m = new Menu();
 	//ArrayList to hold All of the Orders placed
 	private ArrayList<Order> orderList;
@@ -43,9 +53,15 @@ public class AllOrders {
 	//holds how many times each item was sold
 	private HashMap<String, Integer> summary = new HashMap<String, Integer>();
 
-	public AllOrders() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+	public AllOrders(GUI v, QueueCustomer q, Log lg) 
+			throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 			InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException, InvalidItemIDLengthException, InvalidItemException {
-
+		
+		this.view = v;
+		this.model = q;
+		this.logger = lg;
+		view.addOrderListender(new addListener());
+		
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
 		menu = reader.readMenuInfo("Menu.csv");
@@ -84,12 +100,16 @@ public class AllOrders {
 		//calculate the total price of the order
 		for (Order ord : this.orderList) {
 			ord.setPrice(calculateBill(ord));
+			model.addQueue(ord);
+			try {TimeUnit.SECONDS.sleep(2);} 
+			catch (InterruptedException e) {e.printStackTrace();}
 		}
+		
 
 	}
 
 	// This method process new orders
-	public String makeOrder(HashMap<Item, Integer> incoming) {
+	public void makeOrder(HashMap<Item, Integer> incoming) {
 
 		ArrayList<Order> ord = null;
 		//create customer id and timestamp for the order
@@ -129,10 +149,17 @@ public class AllOrders {
 
 		}
 
-		return null;
-
 	}
 
+	public class addListener implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			HashMap<Item, Integer> inc_ord = view.getOrd();
+			
+		}
+	}
+	
 	// Calculate the price for each order
 	public double calculateBill(Order order) {
 		double bill = 0;
