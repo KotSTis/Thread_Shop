@@ -34,7 +34,6 @@ public class Log {
 		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		logl = df.format(new Date());
 		
-		System.out.println(logl);
 		logContent += logl;
 	}
 	

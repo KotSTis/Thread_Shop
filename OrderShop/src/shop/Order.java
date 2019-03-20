@@ -13,6 +13,7 @@ public class Order {
 	private String customerName;
 	private HashMap<String, Integer> items;
 	private double price;
+	private int priority;
 
 	// Constructor for timestamp and customerID (needed for allOrders)
 	public Order(String TimeStamp, String CustomerID, String CustomerName) {
@@ -21,6 +22,7 @@ public class Order {
 		this.customerID = CustomerID;
 		this.customerName = CustomerName;
 		this.items = new HashMap<String, Integer>();
+		this.priority = 0;
 	}
 
 	// Constructor for timestamp, customerID and item (needed to read orders from Orders.csv)
@@ -30,13 +32,28 @@ public class Order {
 		this.items = new HashMap<String, Integer>();
 		this.items.put(item.getItemID(), 1);
 		this.customerName = CustomerName;
+		this.priority = 0;
+	}
+	
+	// Constructor for timestamp, customerID and item (needed to read orders from Orders.csv)
+	public Order(String TimeStamp, String CustomerID, Item item, String CustomerName, int prior) {
+		this.timeStamp = TimeStamp;
+		this.customerID = CustomerID;
+		this.items = new HashMap<String, Integer>();
+		this.items.put(item.getItemID(), 1);
+		this.customerName = CustomerName;
+		this.priority = prior;
 	}
 	
 	// Getter for order's timestamp
 	public String getTimeStamp() {
 		return timeStamp;
 	}
-
+	
+	public int getPriority(){
+		return priority;
+	}
+	
 	// Getter for order's price
 	public double getPrice() {
 		return price;
