@@ -48,6 +48,7 @@ public class QueueCustomer extends Observable {
 			return null;
 		}
 	}
+	
 	public Queue<Order> get_queue() {
 		synchronized(lock) {
 			return orders;

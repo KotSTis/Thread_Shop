@@ -17,7 +17,6 @@ public class GUIController {
 	GUIController() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
-
 		
 	}
 	

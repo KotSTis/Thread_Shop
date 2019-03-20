@@ -43,7 +43,7 @@ public class GUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -7483455288689655101L;
 	private Menu menu = new Menu();
 	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton,
-			finishButton;
+			finishButton, btnOrderOnline;
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 	private AllOrders allOrders = new AllOrders();
 	private JTable table1, table2, table3;
@@ -147,6 +147,11 @@ public class GUI extends JFrame implements ActionListener {
 		txtrOffDiscount.setForeground(Color.RED);
 		txtrOffDiscount.setText(
 				"5% off discount if price is between 50 and 80\n10% off discount if price is between 80 and 100\n15% off discount if price is over 100");
+		
+		btnOrderOnline = new JButton("ORDER ONLINE");
+		btnOrderOnline.setForeground(Color.BLACK);
+		btnOrderOnline.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnOrderOnline.setBackground(SystemColor.info);
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -181,22 +186,32 @@ public class GUI extends JFrame implements ActionListener {
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(addFoodButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)))
-									.addGap(92)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(1)
-											.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)))
+											.addGap(92)
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addGap(1)
+													.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(proceedButton)
+											.addGap(47))))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(75)
 									.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGap(4)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(4)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(21)
+									.addComponent(btnOrderOnline, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)))
 							.addGap(10))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(338)
@@ -244,15 +259,17 @@ public class GUI extends JFrame implements ActionListener {
 									.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
 									.addGap(12)
 									.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-									.addGap(0, 6, Short.MAX_VALUE))
-								.addComponent(scrollOrders, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+									.addGap(0, 33, Short.MAX_VALUE))
+								.addComponent(scrollOrders, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnOrderOnline, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+							.addGap(16)))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
@@ -764,6 +781,9 @@ public class GUI extends JFrame implements ActionListener {
 				}
 				System.exit(0);
 			}
+		}
+		else if (e.getSource() == btnOrderOnline){
+			
 		}
 	}
 

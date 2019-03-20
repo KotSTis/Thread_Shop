@@ -22,7 +22,8 @@ public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
 			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
-
+		
+		new StatusGUI();
 		Menu menu = new Menu();
 		menu.displayMenu();
 		CsvReader reader = new CsvReader();
@@ -39,7 +40,7 @@ public class App {
 		} catch (FileNotFoundException fileNotFound) {
 			System.err.print("File not found! Please, import a correct file.");
 		}
-		new StatusGUI();
+		
 		new GUI();
 
 	}
