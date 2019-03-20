@@ -1,3 +1,4 @@
+
 package viewer;
 
 import model.QueueCustomer;
@@ -35,7 +36,6 @@ import ourExceptions.InvalidOrderTimeStamp;
 import ourExceptions.InvalidOrderTimeStampException;
 import ourExceptions.InvalidPriceException;
 import shop.CsvReader;
-import shop.GUI;
 import shop.Order;
 
 import javax.swing.GroupLayout;
@@ -68,7 +68,6 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private GUI gui = new GUI();
 	
 	public StatusGUI() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
@@ -86,7 +85,7 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 		frame.setBackground(SystemColor.text);
 		frame.setLocation(1050, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
+        frame.setResizable(false);
 		JPanel panel = new JPanel();
 		JPanel panel_1 = new JPanel();
 		
@@ -115,57 +114,52 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(10)
+					.addComponent(btnAddServer, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnRemoveServer, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(26)
-								.addComponent(btnAddServer, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnRemoveServer, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGap(72)
-										.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGap(118)
-										.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
-								.addGap(120))
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 1049, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(498)
-							.addComponent(simulateButton, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(308, Short.MAX_VALUE))
+							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
+						.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(328, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(431)
+					.addComponent(simulateButton, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+					.addGap(486))
+				.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(0)
 					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 262, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(35)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(34)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnAddServer, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnRemoveServer, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(11)
-									.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(simulateButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnAddServer, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnRemoveServer, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(49)
+							.addGap(10)
+							.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(50)
 							.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
-					.addGap(230))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(simulateButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addGap(10))
 		);
 		
 		textField = new JTextField();
@@ -184,29 +178,29 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 		textField_4.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 191, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(329, Short.MAX_VALUE))
+					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+					.addGap(0))
 		);
 		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
 						.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
 						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE))
-					.addGap(239))
+						.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+					.addGap(5))
 		);
 		panel_1.setLayout(gl_panel_1);
 		
@@ -243,7 +237,7 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 	
 	public void actionPerformed(ActionEvent e){
 		if (e.getSource() == simulateButton){
-			model.addElement(gui.newOrders());
+			
 		}
 	}
 	
