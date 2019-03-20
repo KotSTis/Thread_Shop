@@ -252,30 +252,29 @@ public class StatusGUI extends JFrame implements Observer {
 			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());
 			if( model.size() > q.size()){
 				model.remove(0);
-				
 			}else if(model.size() < q.size()){
-				
 				String name = q.getLast().getCustomerName();
 				int items = q.getLast().getItems().size();				
 				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
-				
-				if(q.element().getPriority() == 0){
 					if(model.size() < 2){
 						model.addElement(combo);
 					}else{
 						model.add(model.size(), combo);
 					}
-					
-				}else{
+			}
+			LinkedList<Order> online_q = new LinkedList<Order>(((QueueCustomer) arg1).get_online());
+			if( modelOnline.size() > online_q.size()){
+				modelOnline.remove(0);
+			}else if(modelOnline.size() < online_q.size()){
+				String name = online_q.getLast().getCustomerName();
+				int items = online_q.getLast().getItems().size();				
+				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(online_q.getLast().getPrice());
 					if(modelOnline.size() < 2){
 						modelOnline.addElement(combo);
 					}else{
-						modelOnline.add(modelOnline.size(), combo);
+						modelOnline.add(model.size(), combo);
 					}
-				}
-			}
-			
-			
+				}			
 		}
 		else if (arg1 instanceof Staff){
 			int server_no = ((Staff) arg1).getNumber();

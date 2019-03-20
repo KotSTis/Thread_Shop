@@ -65,7 +65,7 @@ public class AllOrders {
 		this.model = q;
 		this.logger = lg;
 		view.addOrderListender(new addListener());
-		
+		view.AddOnlineListener(new addOnlineListener());
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
 		menu = reader.readMenuInfo("Menu.csv");
@@ -105,7 +105,7 @@ public class AllOrders {
 		for (Order ord : this.orderList) {
 			ord.setPrice(calculateBill(ord));
 			model.addQueue(ord);
-			try {TimeUnit.SECONDS.sleep(0);} 
+			try {TimeUnit.SECONDS.sleep(2);} 
 			catch (InterruptedException e) {e.printStackTrace();}
 		}
 		Frame frame= GUI.getFrames()[1];
@@ -167,6 +167,19 @@ public class AllOrders {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
 			view.clear();
 			model.addQueue(makeOrder(inc_ord));
+			
+		}
+	}
+	
+	public class addOnlineListener implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			HashMap<Item, Integer> inc_ord = view.getOrd();
+			view.clear();
+			Order ord = makeOrder(inc_ord);
+			ord.makeOnline();
+			model.addQueue(ord);
 			
 		}
 	}

@@ -587,6 +587,10 @@ public class GUI extends JFrame implements ActionListener {
 		proceedButton.addActionListener(listenAc);
 	}
 	
+	public void AddOnlineListener(ActionListener listenAc) {
+		btnOrderOnline.addActionListener(listenAc);
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// REMOVE BUTTON////////////////////
