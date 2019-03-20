@@ -1,6 +1,7 @@
 package model;
 
 import java.io.FileNotFoundException;
+import java.util.Observable;
 import java.util.Queue;
 
 import ourExceptions.InvalidOrderCustomerIDException;
@@ -9,11 +10,12 @@ import ourExceptions.InvalidOrderTimeStampException;
 import shop.Log;
 import shop.Order;
 
-public class QueueCustomer {
+public class QueueCustomer extends Observable {
 	
 	Log logger;
 	private static Queue <Order> orders;
 	private static final Object lock = new Object();
+	
 	public QueueCustomer(Log lg) 
 			throws FileNotFoundException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException{
 		logger = lg;
@@ -24,9 +26,7 @@ public class QueueCustomer {
 		synchronized(lock) {
 			orders.add(ord);
 			logger.log(" added " + ord.getCustomerName() + "'s order to the queue");
-		}
-		
-		
+		}	
 	}
 	
 	public boolean check_empty() {
@@ -42,6 +42,9 @@ public class QueueCustomer {
 			if(ord != null) {
 				return ord;
 			}
+			setChanged();
+			notifyObservers(this);
+	        clearChanged();
 			return null;
 		}
 	}
@@ -51,8 +54,4 @@ public class QueueCustomer {
 		}
 	}
 	
-	
 }
-
-// OBSERVER: NEW GUI
-// CONTROLLER : OLD GUI

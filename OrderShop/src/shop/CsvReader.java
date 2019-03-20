@@ -26,6 +26,7 @@ public class CsvReader {
 	private TreeSet<Item> itemList = new TreeSet<Item>(new ItemComparator());
 
 	public CsvReader() {
+		Log log = new Log();
 	}
 
 	public TreeSet<Item> readMenuInfo(String filename) throws InvalidItemIDLengthException, FileNotFoundException,
@@ -165,7 +166,8 @@ public class CsvReader {
 		return orderList;
 
 	}
-
+	
+	
 	// getting item for Order's constructor
 	public Item findItem(String itemID) {
 

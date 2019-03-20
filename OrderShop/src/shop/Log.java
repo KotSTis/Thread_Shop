@@ -13,7 +13,7 @@ import java.util.Date;
 public class Log {
 	private static Log logInstance;
 	private static String logContent;
-	private Log() {
+	public Log() {
 		
 	}
 	
@@ -42,7 +42,7 @@ public class Log {
 		
 		try {
 			
-			File fileName = new File("log.txt");
+			File fileName = new File("Log.txt");
 			
 			if(!fileName.exists()) {
 				fileName.createNewFile(); // check file exists
