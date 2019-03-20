@@ -83,7 +83,7 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 		JFrame frame = new JFrame("Shop Simulation");
 		frame.getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		frame.setBackground(SystemColor.text);
-		frame.setLocation(1050, 120);
+		frame.setLocation(150, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 		JPanel panel = new JPanel();
