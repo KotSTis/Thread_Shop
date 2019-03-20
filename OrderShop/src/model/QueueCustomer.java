@@ -14,6 +14,7 @@ import shop.Order;
 public class QueueCustomer extends Observable {
 	
 	Log logger;
+
 	private static Queue <Order> orders = new LinkedList <Order> ();
 	private static Queue <Order> online_ords = new LinkedList <Order> ();
 	private static final Object lock = new Object();
@@ -62,6 +63,7 @@ public class QueueCustomer extends Observable {
         clearChanged();
 		return ord;
 	}
+	
 	public Queue<Order> get_queue() {
 		synchronized(lock) {
 			return orders;
