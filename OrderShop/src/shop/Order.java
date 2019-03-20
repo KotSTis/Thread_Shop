@@ -35,14 +35,9 @@ public class Order {
 		this.priority = 0;
 	}
 	
-	// Constructor for timestamp, customerID and item (needed to read orders from Orders.csv)
-	public Order(String TimeStamp, String CustomerID, Item item, String CustomerName, int prior) {
-		this.timeStamp = TimeStamp;
-		this.customerID = CustomerID;
-		this.items = new HashMap<String, Integer>();
-		this.items.put(item.getItemID(), 1);
-		this.customerName = CustomerName;
-		this.priority = prior;
+	
+	public void makeOnline() {
+		this.priority = 1;
 	}
 	
 	// Getter for order's timestamp

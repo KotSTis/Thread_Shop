@@ -51,9 +51,10 @@ public class App {
 		ArrayList<Staff> staffs = new ArrayList<Staff>();
 		staffs.add(numero_uno);
 		StatusGUI viewGUI = new StatusGUI(model, staffs);
-		AllOrders controlla = new AllOrders(controlGUI, model, logger);
 		Thread uno = new Thread(numero_uno);
 		uno.start();
+		AllOrders controlla = new AllOrders(controlGUI, model, logger);
+
 		
 
 	}

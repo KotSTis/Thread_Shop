@@ -58,6 +58,11 @@ public class Staff extends Observable implements Runnable {
 	
 	@Override
 	public void run() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		while(true) {
 			if(!qC.check_empty()) {
 				Order ord = qC.get_top();

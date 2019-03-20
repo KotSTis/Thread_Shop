@@ -17,6 +17,8 @@ public class QueueCustomer extends Observable {
 
 	private static Queue <Order> orders = new LinkedList <Order> ();
 
+	private static Queue <Order> online_ords = new LinkedList <Order> ();
+
 	private static final Object lock = new Object();
 	
 	public QueueCustomer(Log lg) 
@@ -27,7 +29,12 @@ public class QueueCustomer extends Observable {
 	
 	public void addQueue(Order ord) {
 		synchronized(lock) {
-			orders.add(ord);
+			if(ord.getPriority() == 1) {
+				online_ords.add(ord);
+			}else {
+				orders.add(ord);
+			}
+			
 			logger.log(" added " + ord.getCustomerName() + "'s order to the queue");
 		}	
 		setChanged();
@@ -36,7 +43,7 @@ public class QueueCustomer extends Observable {
 	}
 	
 	public boolean check_empty() {
-		if(orders.isEmpty()) {
+		if(orders.isEmpty() && online_ords.isEmpty()) {
 			return true;
 		}
 		return false;
@@ -45,7 +52,12 @@ public class QueueCustomer extends Observable {
 	public Order get_top() {
 		Order ord;
 		synchronized(lock) {
-			ord = orders.poll();
+			if(!online_ords.isEmpty()) {
+				ord = online_ords.poll();
+			}else{
+				ord = orders.poll();
+			}
+			
 		}
 
 		setChanged();
@@ -57,6 +69,12 @@ public class QueueCustomer extends Observable {
 	public Queue<Order> get_queue() {
 		synchronized(lock) {
 			return orders;
+		}
+	}
+	
+	public Queue<Order> get_online() {
+		synchronized(lock) {
+			return online_ords;
 		}
 	}
 	
