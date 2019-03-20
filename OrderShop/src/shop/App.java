@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import controller.AllOrders;
+import model.QueueCustomer;
 import ourExceptions.InvalidItemIDLengthException;
 import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
@@ -22,12 +23,12 @@ public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
 			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
-
+		Log logger = new Log();
 		Menu menu = new Menu();
 		menu.displayMenu();
 		CsvReader reader = new CsvReader();
-		AllOrders allOrders = new AllOrders();
-		allOrders.FinalReport("Report.txt");
+//		AllOrders allOrders = new AllOrders();
+//		allOrders.FinalReport("Report.txt");
 		try {
 			// For running Exceptions tests: run these commands and switch to appropriate
 			// filenames for exceptions
@@ -39,8 +40,10 @@ public class App {
 		} catch (FileNotFoundException fileNotFound) {
 			System.err.print("File not found! Please, import a correct file.");
 		}
-		new StatusGUI();
-		new GUI();
+		QueueCustomer model = new QueueCustomer(logger);
+		StatusGUI viewGUI = new StatusGUI(model);
+		GUI controlGUI = new GUI();
+		AllOrders controlla = new AllOrders(controlGUI, model, logger);
 
 	}
 }

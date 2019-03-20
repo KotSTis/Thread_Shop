@@ -568,6 +568,10 @@ public class GUI extends JFrame implements ActionListener {
 		return displayCustItems;
 	}
 	
+	public void addOrderListender(ActionListener listenAc) {
+		proceedButton.addActionListener(listenAc);
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// REMOVE BUTTON////////////////////
@@ -785,5 +789,9 @@ public class GUI extends JFrame implements ActionListener {
 		counter1 = 0;// counter for displaying 5% discount message
 		counter2 = 0;// counter for displaying 10% discount message
 		counter3 = 0;// counter for displaying 15% discount message
+	}
+
+	public HashMap<Item, Integer> getOrd() {
+		return newOrders;
 	}
 }
