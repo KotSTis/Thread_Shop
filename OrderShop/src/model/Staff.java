@@ -19,6 +19,9 @@ public class Staff implements Runnable {
 	public void process(Order ord) {
 		
 	}
+	
+
+	
 	@Override
 	public void run() {
 		while(true) {
@@ -35,4 +38,5 @@ public class Staff implements Runnable {
 		}
 		
 	}
+
 }
