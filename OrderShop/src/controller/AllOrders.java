@@ -105,7 +105,7 @@ public class AllOrders {
 		for (Order ord : this.orderList) {
 			ord.setPrice(calculateBill(ord));
 			model.addQueue(ord);
-			try {TimeUnit.SECONDS.sleep(0);} 
+			try {TimeUnit.SECONDS.sleep(1);} 
 			catch (InterruptedException e) {e.printStackTrace();}
 		}
 		Frame frame= GUI.getFrames()[1];
