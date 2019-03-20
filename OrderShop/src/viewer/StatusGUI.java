@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Queue;
@@ -54,6 +55,7 @@ public class StatusGUI extends JFrame implements Observer {
 
 	private static final long serialVersionUID = -7483455288689655101L;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
+	private DefaultListModel<String> modelOnline = new DefaultListModel<String>();
 	private JList<String> listCustomerQueue = new JList<>();
 	private ArrayList <Staff> staff;
 	private QueueCustomer queue;
@@ -67,14 +69,21 @@ public class StatusGUI extends JFrame implements Observer {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JScrollPane scrollPane_1;
+	private JList onlineList;
 	
 	
-	public StatusGUI(QueueCustomer model) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+	public StatusGUI(QueueCustomer model, ArrayList<Staff> staffs) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
 
 		this.queue = model;
 		queue.addObserver(this);
+
+		for(Staff st : staffs){
+			st.addObserver(this);
+		}
+
 		JFrame();
 	}
 	
@@ -197,17 +206,27 @@ public class StatusGUI extends JFrame implements Observer {
 		panel_1.setLayout(gl_panel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		scrollPane_1 = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 582, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-					.addGap(0))
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+					.addContainerGap())
 		);
+		
+		onlineList = new JList<String>(modelOnline);
+		scrollPane_1.setViewportView(onlineList);
 		
 		simulationSpeedSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -225,22 +244,48 @@ public class StatusGUI extends JFrame implements Observer {
 		//frame.setContentPane(panel);
 	    frame.pack();
 		frame.setVisible(true);
-	
-		
 
 	}
-	
+
+
 
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
+
 		if (arg0 == queue){
+			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());
+			if( model.size() > q.size()){
+				model.remove(0);
+				
+			}else if(model.size() < q.size()){
+				
+				String name = q.getLast().getCustomerName();
+				int items = q.getLast().getItems().size();				
+				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
+				
+				if(q.element().getPriority() == 0){
+					if(model.size() < 2){
+						model.addElement(combo);
+					}else{
+						model.add(model.size(), combo);
+					}
+					
+				}else{
+					if(modelOnline.size() < 2){
+						modelOnline.addElement(combo);
+					}else{
+						modelOnline.add(modelOnline.size(), combo);
+					}
+				}
+			}
 			
-			model.addElement("test");
 			
 		}
-		else if (arg0 == server){
+		else if (arg1 instanceof Staff){
+			int server_no = ((Staff) arg1).getNumber();
+			System.out.println(server_no);
+
 			
 		}
 	}

@@ -4,6 +4,7 @@
 
 package controller;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -18,6 +19,8 @@ import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.JFrame;
 
 import model.QueueCustomer;
 import ourExceptions.InvalidItemIDLengthException;
@@ -45,7 +48,8 @@ public class AllOrders {
 	//ArrayList to hold All of the Orders placed
 	private ArrayList<Order> orderList;
 	TreeSet<Item> menu;
-
+	private String[] firstNames = new String[20];
+	private String[] lastNames = new String[20];
 	//Holds a copy of the menu in Hashmap form for easy lookup and access of items using their ID
 	private HashMap<String, Item> itemList;
 	//String is the Customer ID and the ArrayList<Orders> holds all orders made by that customer
@@ -101,15 +105,19 @@ public class AllOrders {
 		for (Order ord : this.orderList) {
 			ord.setPrice(calculateBill(ord));
 			model.addQueue(ord);
-			try {TimeUnit.SECONDS.sleep(2);} 
+			try {TimeUnit.SECONDS.sleep(0);} 
 			catch (InterruptedException e) {e.printStackTrace();}
 		}
+		Frame frame= GUI.getFrames()[1];
+		frame.setVisible(true);
+		((JFrame) frame).getContentPane().setVisible(true);
+		
 		
 
 	}
 
 	// This method process new orders
-	public void makeOrder(HashMap<Item, Integer> incoming) {
+	public Order makeOrder(HashMap<Item, Integer> incoming) {
 
 		ArrayList<Order> ord = null;
 		//create customer id and timestamp for the order
@@ -120,7 +128,8 @@ public class AllOrders {
 		timestamp = timestamp.replace(":", "");
 		timestamp = timestamp.replace("/", "");
 		timestamp = timestamp.replace(" ", "");
-		String customerName = "";
+		String customerName = firstNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)] + " " 
+							+ lastNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)];
 		Order newOrder = new Order(timestamp, custID, customerName);
 		Item item;
 		int quantity;
@@ -148,7 +157,7 @@ public class AllOrders {
 			allOrders.put(custID, ord);
 
 		}
-
+		return newOrder;
 	}
 
 	public class addListener implements ActionListener{
@@ -156,6 +165,8 @@ public class AllOrders {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
+			view.clear();
+			model.addQueue(makeOrder(inc_ord));
 			
 		}
 	}

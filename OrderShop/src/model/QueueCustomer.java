@@ -14,7 +14,9 @@ import shop.Order;
 public class QueueCustomer extends Observable {
 	
 	Log logger;
-	private Queue <Order> orders = new LinkedList <Order> ();
+
+	private static Queue <Order> orders = new LinkedList <Order> ();
+
 	private static final Object lock = new Object();
 	
 	public QueueCustomer(Log lg) 
@@ -28,6 +30,9 @@ public class QueueCustomer extends Observable {
 			orders.add(ord);
 			logger.log(" added " + ord.getCustomerName() + "'s order to the queue");
 		}	
+		setChanged();
+		notifyObservers(this);
+        clearChanged();
 	}
 	
 	public boolean check_empty() {
@@ -38,16 +43,15 @@ public class QueueCustomer extends Observable {
 	}
 	
 	public Order get_top() {
+		Order ord;
 		synchronized(lock) {
-			Order ord = orders.poll();
-			if(ord != null) {
-				return ord;
-			}
-			setChanged();
-			notifyObservers(this);
-	        clearChanged();
-			return null;
+			ord = orders.poll();
 		}
+
+		setChanged();
+		notifyObservers(this);
+        clearChanged();
+		return ord;
 	}
 	
 	public Queue<Order> get_queue() {

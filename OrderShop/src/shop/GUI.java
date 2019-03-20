@@ -46,7 +46,7 @@ public class GUI extends JFrame implements ActionListener {
 			finishButton, btnOrderOnline;
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
 	private JTable table1, table2, table3;
-	private HashMap<Item, Integer> newOrders;
+	private HashMap<Item, Integer> newOrders = new HashMap<Item, Integer>();
 	private JTextArea textBillArea, textQueueArea;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JScrollPane scrollOrders;
@@ -88,7 +88,6 @@ public class GUI extends JFrame implements ActionListener {
 		proceedButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		proceedButton.setBackground(Color.GREEN);
 		proceedButton.setForeground(Color.BLACK);
-		proceedButton.addActionListener(this);
 
 		resetButton = new JButton("RESET");
 		resetButton.setForeground(Color.BLACK);
@@ -190,10 +189,10 @@ public class GUI extends JFrame implements ActionListener {
 											.addGap(92)
 											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 												.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+												.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addGroup(groupLayout.createSequentialGroup()
-													.addGap(1)
-													.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+													.addGap(33)
+													.addComponent(scrollOrders))))
 										.addGroup(groupLayout.createSequentialGroup()
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(proceedButton)
@@ -225,7 +224,7 @@ public class GUI extends JFrame implements ActionListener {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(49)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+								.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(47)
 									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
@@ -424,7 +423,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		// Set the window to be visible as the default to be false
 		frame.pack();
-		frame.setVisible(true);
+		frame.setVisible(false);
 
 	}
 
@@ -811,6 +810,17 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	public HashMap<Item, Integer> getOrd() {
-		return newOrders;
+		HashMap<Item, Integer> ret = new HashMap<Item, Integer>();
+		for (HashMap.Entry<Item, Integer> entry : newOrders.entrySet()) {
+			Item it = entry.getKey();
+			Integer is = entry.getValue();
+			ret.put(it, is);
+		}
+		return ret;
+	}
+
+	public void hideThis(boolean b) {
+		
+		
 	}
 }
