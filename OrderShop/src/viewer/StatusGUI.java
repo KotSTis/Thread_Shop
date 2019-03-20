@@ -10,8 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Queue;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -49,33 +51,38 @@ import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
 
-public class StatusGUI extends JFrame implements ActionListener, Observer {
+public class StatusGUI extends JFrame implements Observer {
 
 	private static final long serialVersionUID = -7483455288689655101L;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
+	private DefaultListModel<String> modelOnline = new DefaultListModel<String>();
 	private JList<String> listCustomerQueue = new JList<>();
 	private ArrayList <Staff> staff;
+	private QueueCustomer queue;
 	private ArrayList <Order> orders = new ArrayList <Order>();
 	private JScrollPane scrollOrders;
 	private JTextField textField;
 	private JTextField textField_1;
-	private QueueCustomer queue;
 	private Staff server;
-	//private AllOrders allProcessedOrders = new AllOrders();
-	private JButton simulateButton;
 	private JLabel simulationSpeedLabel, threadsLabel;
 	private JSlider simulationSpeedSlider;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JScrollPane scrollPane_1;
+	private JList onlineList;
 	
-	public StatusGUI(QueueCustomer model) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+	
+	public StatusGUI(QueueCustomer model, ArrayList<Staff> staffs) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
 
 		this.queue = model;
+		queue.addObserver(this);
+		for(Staff st : staffs){
+			st.addObserver(this);
+		}
 		JFrame();
-
 	}
 	
 	private void JFrame() {
@@ -102,9 +109,6 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 		simulationSpeedLabel = new JLabel("Simulation Speed:");
 		simulationSpeedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		simulateButton = new JButton("SIMULATE");
-		simulateButton.setEnabled(true);
-		
 		JButton btnRemoveServer = new JButton("REMOVE SERVER");
 		
 		JButton btnAddServer = new JButton("ADD SERVER");
@@ -120,20 +124,18 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 					.addComponent(btnAddServer, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnRemoveServer, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(94)
 							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(53)
 							.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
-						.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(328, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(431)
-					.addComponent(simulateButton, GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-					.addGap(486))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(142)
+							.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(197, Short.MAX_VALUE))
 				.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1061, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -153,13 +155,10 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 							.addGap(10)
 							.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(50)
-							.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(simulateButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addGap(10))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))))
+					.addGap(93))
 		);
 		
 		textField = new JTextField();
@@ -205,17 +204,27 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 		panel_1.setLayout(gl_panel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		scrollPane_1 = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 582, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-					.addGap(0))
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+					.addContainerGap())
 		);
+		
+		onlineList = new JList<String>(modelOnline);
+		scrollPane_1.setViewportView(onlineList);
 		
 		simulationSpeedSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -234,22 +243,43 @@ public class StatusGUI extends JFrame implements ActionListener, Observer {
 		frame.setVisible(true);
 
 	}
-	
-	public void actionPerformed(ActionEvent e){
-		if (e.getSource() == simulateButton){
-			
-		}
-	}
+
 	
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		String customerList = queue.get_top().toString();
-		if (arg1 instanceof QueueCustomer){
-			((QueueCustomer) arg1).get_queue();
+		if (arg0 == queue){
+			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());
+			if( model.size() > q.size()){
+				model.remove(0);
+				
+			}else if(model.size() < q.size()){
+				
+				String name = q.getLast().getCustomerName();
+				int items = q.getLast().getItems().size();				
+				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
+				
+				if(q.element().getPriority() == 0){
+					if(model.size() < 2){
+						model.addElement(combo);
+					}else{
+						model.add(model.size(), combo);
+					}
+					
+				}else{
+					if(modelOnline.size() < 2){
+						modelOnline.addElement(combo);
+					}else{
+						modelOnline.add(modelOnline.size(), combo);
+					}
+				}
+			}
+			
 			
 		}
 		else if (arg1 instanceof Staff){
+			int server_no = ((Staff) arg1).getNumber();
+			System.out.println(server_no);
 			
 		}
 	}

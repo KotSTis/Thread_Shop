@@ -43,11 +43,10 @@ public class GUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -7483455288689655101L;
 	private Menu menu = new Menu();
 	private JButton addFoodButton, addBeverageButton, addDessertButton, removeButton, proceedButton, resetButton,
-			finishButton;
+			finishButton, btnOrderOnline;
 	private JSpinner spinnerFood, spinnerBeverage, spinnerDessert;
-	private AllOrders allOrders = new AllOrders();
 	private JTable table1, table2, table3;
-	private HashMap<Item, Integer> newOrders;
+	private HashMap<Item, Integer> newOrders = new HashMap<Item, Integer>();
 	private JTextArea textBillArea, textQueueArea;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JScrollPane scrollOrders;
@@ -89,7 +88,6 @@ public class GUI extends JFrame implements ActionListener {
 		proceedButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 		proceedButton.setBackground(Color.GREEN);
 		proceedButton.setForeground(Color.BLACK);
-		proceedButton.addActionListener(this);
 
 		resetButton = new JButton("RESET");
 		resetButton.setForeground(Color.BLACK);
@@ -147,6 +145,11 @@ public class GUI extends JFrame implements ActionListener {
 		txtrOffDiscount.setForeground(Color.RED);
 		txtrOffDiscount.setText(
 				"5% off discount if price is between 50 and 80\n10% off discount if price is between 80 and 100\n15% off discount if price is over 100");
+		
+		btnOrderOnline = new JButton("ORDER ONLINE");
+		btnOrderOnline.setForeground(Color.BLACK);
+		btnOrderOnline.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnOrderOnline.setBackground(SystemColor.info);
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -181,22 +184,32 @@ public class GUI extends JFrame implements ActionListener {
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(addFoodButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)))
-									.addGap(92)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(1)
-											.addComponent(scrollOrders, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)))
+											.addGap(92)
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblOrders, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addGap(33)
+													.addComponent(scrollOrders))))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(proceedButton)
+											.addGap(47))))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(75)
 									.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGap(4)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(4)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(21)
+									.addComponent(btnOrderOnline, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)))
 							.addGap(10))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(338)
@@ -211,7 +224,7 @@ public class GUI extends JFrame implements ActionListener {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(49)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+								.addComponent(panel1, GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(47)
 									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
@@ -244,15 +257,17 @@ public class GUI extends JFrame implements ActionListener {
 									.addComponent(textBillArea, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
 									.addGap(12)
 									.addComponent(txtrOffDiscount, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-									.addGap(0, 6, Short.MAX_VALUE))
-								.addComponent(scrollOrders, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+									.addGap(0, 33, Short.MAX_VALUE))
+								.addComponent(scrollOrders, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(removeButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(proceedButton, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnOrderOnline, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+							.addGap(16)))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(resetButton, GroupLayout.DEFAULT_SIZE, 80, GroupLayout.PREFERRED_SIZE)
@@ -408,7 +423,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		// Set the window to be visible as the default to be false
 		frame.pack();
-		frame.setVisible(true);
+		frame.setVisible(false);
 
 	}
 
@@ -717,33 +732,33 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// PROCEED BUTTON////////////////////
-		else if (e.getSource() == proceedButton) {
-			if (model.isEmpty()) {
-				JOptionPane.showMessageDialog(null,
-						"There is nothing to confirm, since there are no orders.\nPlease make an order.");
-
-			} else {
-
-				int confirm = JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to confirm your order?\nClick EXIT to get your receipt.", null,
-						JOptionPane.YES_NO_OPTION);
-				int onlineOption = JOptionPane.showConfirmDialog(null,
-						"Is this an online order?", null,
-						JOptionPane.YES_NO_OPTION);
-
-				if (confirm == JOptionPane.YES_OPTION) {
-					// allOrders.putOrder(newOrders);
-					allOrders.makeOrder(newOrders);
-					allOrders.getAllCustomerOrders();
-					
-					if (onlineOption == JOptionPane.YES_OPTION) {
-						clear();
-					}
-					clear();
-				} 
-
-			}
-		}
+//		else if (e.getSource() == proceedButton) {
+//			if (model.isEmpty()) {
+//				JOptionPane.showMessageDialog(null,
+//						"There is nothing to confirm, since there are no orders.\nPlease make an order.");
+//
+//			} else {
+//
+//				int confirm = JOptionPane.showConfirmDialog(null,
+//						"Are you sure you want to confirm your order?\nClick EXIT to get your receipt.", null,
+//						JOptionPane.YES_NO_OPTION);
+//				int onlineOption = JOptionPane.showConfirmDialog(null,
+//						"Is this an online order?", null,
+//						JOptionPane.YES_NO_OPTION);
+//
+//				if (confirm == JOptionPane.YES_OPTION) {
+//					// allOrders.putOrder(newOrders);
+//					allOrders.makeOrder(newOrders);
+//					allOrders.getAllCustomerOrders();
+//					
+//					if (onlineOption == JOptionPane.YES_OPTION) {
+//						clear();
+//					}
+//					clear();
+//				} 
+//
+//			}
+//		}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////// RESET BUTTON////////////////////
 		else if (e.getSource() == resetButton) {
@@ -761,13 +776,16 @@ public class GUI extends JFrame implements ActionListener {
 					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
 				JOptionPane.showMessageDialog(null, "A receipt will be sent to you now.");
-				try {
-					allOrders.FinalReport("Report.txt");
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+//				try {
+//					allOrders.FinalReport("Report.txt");
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
 				System.exit(0);
 			}
+		}
+		else if (e.getSource() == btnOrderOnline){
+			
 		}
 	}
 
@@ -792,6 +810,17 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	public HashMap<Item, Integer> getOrd() {
-		return newOrders;
+		HashMap<Item, Integer> ret = new HashMap<Item, Integer>();
+		for (HashMap.Entry<Item, Integer> entry : newOrders.entrySet()) {
+			Item it = entry.getKey();
+			Integer is = entry.getValue();
+			ret.put(it, is);
+		}
+		return ret;
+	}
+
+	public void hideThis(boolean b) {
+		
+		
 	}
 }

@@ -6,9 +6,11 @@ package shop;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import controller.AllOrders;
 import model.QueueCustomer;
+import model.Staff;
 import ourExceptions.InvalidItemIDLengthException;
 import ourExceptions.InvalidOrderCustomerIDException;
 import ourExceptions.InvalidOrderCustomerNameException;
@@ -40,10 +42,19 @@ public class App {
 		} catch (FileNotFoundException fileNotFound) {
 			System.err.print("File not found! Please, import a correct file.");
 		}
+				
 		QueueCustomer model = new QueueCustomer(logger);
-		StatusGUI viewGUI = new StatusGUI(model);
 		GUI controlGUI = new GUI();
+		Staff numero_uno = new Staff(1, logger, model);
+
+		
+		ArrayList<Staff> staffs = new ArrayList<Staff>();
+		staffs.add(numero_uno);
+		StatusGUI viewGUI = new StatusGUI(model, staffs);
 		AllOrders controlla = new AllOrders(controlGUI, model, logger);
+		Thread uno = new Thread(numero_uno);
+		uno.start();
+		
 
 	}
 }
