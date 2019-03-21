@@ -1,3 +1,8 @@
+/* author: Stergiou Konstantinos
+ * All copyrights reserved 2019-2020
+ */
+
+
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -69,7 +74,6 @@ public class GUIController{
 		}
 	}
 
-	// inner class SpeedListener responds when user sets the Speed via the slider
 	public class SpeedListener implements ChangeListener {
 		@Override
 		public void stateChanged(ChangeEvent e) {

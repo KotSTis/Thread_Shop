@@ -39,7 +39,7 @@ import shop.Order;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 
-// This the AllOrders that handles all orders
+// This the AllOrders Controller for MVC that handles all orders
 public class AllOrders {
 
 	private GUI view;
@@ -50,6 +50,7 @@ public class AllOrders {
 	//ArrayList to hold All of the Orders placed
 	private static ArrayList<Order> orderList;
 	TreeSet<Item> menu;
+	// store the names in a String ArrayList
 	private String[] firstNames = new String[20];
 	private String[] lastNames = new String[20];
 	//Holds a copy of the menu in Hashmap form for easy lookup and access of items using their ID
@@ -107,6 +108,7 @@ public class AllOrders {
 			}
 		}
 		//calculate the total price of the order
+		// add order to queue and put a sleep time
 		for (Order ord : this.orderList) {
 			ord.setPrice(calculateBill(ord));
 			model.addQueue(ord);
@@ -124,7 +126,7 @@ public class AllOrders {
 		FinalReport();
 		 }
 
-	// This method process new orders
+	// This method processes the new orders
 	public Order makeOrder(HashMap<Item, Integer> incoming) {
 		
 		ArrayList<Order> ord = null;
@@ -168,6 +170,7 @@ public class AllOrders {
 		return newOrder;
 	}
 
+	// implementation for offline order in order to put them in queue and clear them after
 	public class addListener implements ActionListener{
 
 		@Override
@@ -180,6 +183,7 @@ public class AllOrders {
 		}
 	}
 
+	// implementation for online button to process the online orders and clear them after
 	public class addOnlineListener implements ActionListener{
 
 		@Override

@@ -28,6 +28,8 @@ public class App {
 
 	public static void main(String[] args) throws IOException, InvalidItemIDLengthException, InvalidItemException,
 			InvalidPriceException, InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException, InterruptedException {
+		
+		// initialize the log to keep the records for each instance for each class
 		Log logger = new Log();
 		Menu menu = new Menu();
 		menu.displayMenu();
@@ -47,6 +49,8 @@ public class App {
 			// filenames for exceptions
 			// example: reader.readMenuInfo("MenuExceptionItemIDLength.csv");
 			reader.readMenuInfo("Menu.csv");
+			
+			// create and read generated random names for the new orders
 			reader.readFirstNames("Random-Names.csv");
 			reader.readLastNames("Random-Names.csv");
 
@@ -55,25 +59,27 @@ public class App {
 		} catch (FileNotFoundException fileNotFound) {
 			System.err.print("File not found! Please, import a correct file.");
 		}
-				
+		
+		// initialize the model and get the 2 servers
 		QueueCustomer model = new QueueCustomer(logger);
 		GUI controlGUI = new GUI();
 		Staff numero_uno = new Staff(1, logger, model);
      	Staff numero_duo = new Staff(2, logger, model);
-		Staff numero_tre = new Staff(3, logger, model);
-		Staff numero_quatro = new Staff(4, logger, model);
-		Staff numero_cinqo = new Staff(5, logger, model);
+		//Staff numero_tre = new Staff(3, logger, model);
+		//Staff numero_quatro = new Staff(4, logger, model);
+		//Staff numero_cinqo = new Staff(5, logger, model);
 		
+     	// initialize the 2 first threads
 		Thread uno = new Thread(numero_uno);
 		Thread duo = new Thread(numero_duo);
 		//Thread tre = new Thread(numero_tre);
-	//	Thread quatro = new Thread(numero_quatro);
+		//Thread quatro = new Thread(numero_quatro);
 		//Thread cinqo = new Thread(numero_cinqo);
 		
 	    ArrayList<Staff> staffs = new ArrayList<Staff>();
 		staffs.add(numero_uno);
 		staffs.add(numero_duo);
-//		staffs.add(numero_tre);
+	//	staffs.add(numero_tre);
 	//	staffs.add(numero_quatro);
 	//	staffs.add(numero_cinqo);
 		
@@ -84,9 +90,9 @@ public class App {
 		GUIController yaman = new GUIController(logger, viewGUI, manager_rugby, model);
 		uno.start();
 		duo.start();
-//		tre.start();
+		//tre.start();
 		//quatro.start();
-	//	cinqo.start();
+	    //cinqo.start();
 
 		
 

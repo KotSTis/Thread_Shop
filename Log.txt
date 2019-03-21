@@ -1,0 +1,116 @@
+null added Russell Peters's order to the queue  ----- 21-03-2019 21:51:19
+ added Brandon Stark's order to the queue  ----- 21-03-2019 21:51:21
+ added Robb Stark's order to the queue  ----- 21-03-2019 21:51:23
+ added Robb Stark's order to the queue  ----- 21-03-2019 21:51:25
+ added Barney Stinson's order to the queue  ----- 21-03-2019 21:51:27
+ added Lily Aldrin's order to the queue  ----- 21-03-2019 21:51:29
+ added Steve Aoki's order to the queue  ----- 21-03-2019 21:51:31
+ added James Gordon's order to the queue  ----- 21-03-2019 21:51:33
+ added Bruce Wayne's order to the queue  ----- 21-03-2019 21:51:35
+ added Oswald Cobblepot's order to the queue  ----- 21-03-2019 21:51:37
+ added Edward Nygma's order to the queue  ----- 21-03-2019 21:51:39
+Server No.1 processed Order CUST1009227.97at 21:51:44 21/03  ----- 21-03-2019 21:51:44
+Server No.2 processed Order CUST1010130.0at 21:51:44 21/03  ----- 21-03-2019 21:51:44
+ added Annika Richardson's order to the queue  ----- 21-03-2019 21:51:46
+Server No.2 processed Order CUST4757181.0at 21:51:49 21/03  ----- 21-03-2019 21:51:49
+Server No.1 processed Order CUST1253116.58at 21:51:54 21/03  ----- 21-03-2019 21:51:54
+Server No.2 processed Order CUST1253114.38at 21:51:54 21/03  ----- 21-03-2019 21:51:54
+Server No.3 processed Order CUST1009121.16at 21:51:55 21/03  ----- 21-03-2019 21:51:55
+Server No.1 processed Order CUST1544361.512499999999996at 21:51:59 21/03  ----- 21-03-2019 21:51:59
+Server No.2 processed Order CUST1812133.87at 21:51:59 21/03  ----- 21-03-2019 21:51:59
+Server No.3 processed Order CUST1921223.97at 21:52:00 21/03  ----- 21-03-2019 21:52:00
+Server No.2 processed Order CUST2103114.38at 21:52:04 21/03  ----- 21-03-2019 21:52:04
+Server No.2 processed Order CUST2242157.0at 21:52:09 21/03  ----- 21-03-2019 21:52:09
+Server No.3 processed Order CUST1010124.869999999999997at 21:52:10 21/03  ----- 21-03-2019 21:52:10
+null added Russell Peters's order to the queue  ----- 21-03-2019 21:55:00
+ added Brandon Stark's order to the queue  ----- 21-03-2019 21:55:02
+ added Robb Stark's order to the queue  ----- 21-03-2019 21:55:04
+ added Robb Stark's order to the queue  ----- 21-03-2019 21:55:06
+ added Barney Stinson's order to the queue  ----- 21-03-2019 21:55:08
+ added Lily Aldrin's order to the queue  ----- 21-03-2019 21:55:10
+ added Steve Aoki's order to the queue  ----- 21-03-2019 21:55:12
+ added James Gordon's order to the queue  ----- 21-03-2019 21:55:14
+ added Bruce Wayne's order to the queue  ----- 21-03-2019 21:55:16
+ added Oswald Cobblepot's order to the queue  ----- 21-03-2019 21:55:18
+ added Edward Nygma's order to the queue  ----- 21-03-2019 21:55:20
+Server No.2 processed Order CUST1009227.97at 21:55:25 21/03  ----- 21-03-2019 21:55:25
+Server No.1 processed Order CUST1253116.58at 21:55:30 21/03  ----- 21-03-2019 21:55:30
+Server No.2 processed Order CUST1253114.38at 21:55:35 21/03  ----- 21-03-2019 21:55:35
+Server No.1 processed Order CUST1009121.16at 21:55:35 21/03  ----- 21-03-2019 21:55:35
+Server No.1 processed Order CUST1544361.512499999999996at 21:55:40 21/03  ----- 21-03-2019 21:55:40
+Server No.2 processed Order CUST1812133.87at 21:55:40 21/03  ----- 21-03-2019 21:55:40
+Server No.2 processed Order CUST1921223.97at 21:55:45 21/03  ----- 21-03-2019 21:55:45
+Server No.1 processed Order CUST2103114.38at 21:55:55 21/03  ----- 21-03-2019 21:55:55
+Server No.2 processed Order CUST2242157.0at 21:55:55 21/03  ----- 21-03-2019 21:55:55
+Server No.1 processed Order CUST1010124.869999999999997at 21:56:00 21/03  ----- 21-03-2019 21:56:00
+null added Russell Peters's order to the queue  ----- 21-03-2019 21:59:52
+ added Brandon Stark's order to the queue  ----- 21-03-2019 21:59:54
+ added Robb Stark's order to the queue  ----- 21-03-2019 21:59:56
+ added Robb Stark's order to the queue  ----- 21-03-2019 21:59:58
+ added Barney Stinson's order to the queue  ----- 21-03-2019 22:00:00
+ added Lily Aldrin's order to the queue  ----- 21-03-2019 22:00:02
+ added Steve Aoki's order to the queue  ----- 21-03-2019 22:00:04
+ added James Gordon's order to the queue  ----- 21-03-2019 22:00:06
+ added Bruce Wayne's order to the queue  ----- 21-03-2019 22:00:08
+ added Oswald Cobblepot's order to the queue  ----- 21-03-2019 22:00:10
+ added Edward Nygma's order to the queue  ----- 21-03-2019 22:00:12
+Server No.1 processed Order CUST1009227.97at 22:00:17 21/03  ----- 21-03-2019 22:00:17
+Server No.2 processed Order CUST1253116.58at 22:00:22 21/03  ----- 21-03-2019 22:00:22
+ added Naima Braun's order to the queue  ----- 21-03-2019 22:00:24
+Server No.1 processed Order CUST1253114.38at 22:00:27 21/03  ----- 21-03-2019 22:00:27
+Server No.2 processed Order CUST1009121.16at 22:00:27 21/03  ----- 21-03-2019 22:00:27
+Server No.1 processed Order CUST1544361.512499999999996at 22:00:32 21/03  ----- 21-03-2019 22:00:32
+Server No.2 processed Order CUST1812133.87at 22:00:32 21/03  ----- 21-03-2019 22:00:32
+ added Alvin  Jackson's order to the queue  ----- 21-03-2019 22:00:34
+Server No.2 processed Order CUST1921223.97at 22:00:37 21/03  ----- 21-03-2019 22:00:37
+ added Arielle  Mcclure's order to the queue  ----- 21-03-2019 22:00:44
+Server No.1 processed Order CUST4641125.47at 22:00:47 21/03  ----- 21-03-2019 22:00:47
+Server No.2 processed Order CUST2103114.38at 22:00:47 21/03  ----- 21-03-2019 22:00:47
+Server No.1 processed Order CUST2242157.0at 22:00:52 21/03  ----- 21-03-2019 22:00:52
+Server No.2 processed Order CUST1010124.869999999999997at 22:00:52 21/03  ----- 21-03-2019 22:00:52
+ added Arielle  Jackson's order to the queue  ----- 21-03-2019 22:00:56
+Server No.1 processed Order CUST3893157.0at 22:00:57 21/03  ----- 21-03-2019 22:00:57
+Server No.2 processed Order CUST4284129.950000000000003at 22:00:57 21/03  ----- 21-03-2019 22:00:57
+Server No.1 processed Order CUST3845123.97at 22:01:02 21/03  ----- 21-03-2019 22:01:02
+null added Russell Peters's order to the queue  ----- 21-03-2019 22:01:57
+ added Brandon Stark's order to the queue  ----- 21-03-2019 22:01:59
+ added Robb Stark's order to the queue  ----- 21-03-2019 22:02:01
+ added Robb Stark's order to the queue  ----- 21-03-2019 22:02:03
+ added Barney Stinson's order to the queue  ----- 21-03-2019 22:02:05
+ added Lily Aldrin's order to the queue  ----- 21-03-2019 22:02:07
+ added Steve Aoki's order to the queue  ----- 21-03-2019 22:02:09
+ added James Gordon's order to the queue  ----- 21-03-2019 22:02:11
+ added Bruce Wayne's order to the queue  ----- 21-03-2019 22:02:13
+ added Oswald Cobblepot's order to the queue  ----- 21-03-2019 22:02:15
+ added Edward Nygma's order to the queue  ----- 21-03-2019 22:02:17
+Server No.1 processed Order CUST1010130.0at 22:02:22 21/03  ----- 21-03-2019 22:02:22
+Server No.1 processed Order CUST1253116.58at 22:02:27 21/03  ----- 21-03-2019 22:02:27
+Server No.2 processed Order CUST1253114.38at 22:02:32 21/03  ----- 21-03-2019 22:02:32
+Server No.1 processed Order CUST1009121.16at 22:02:32 21/03  ----- 21-03-2019 22:02:32
+Server No.2 processed Order CUST1544361.512499999999996at 22:02:37 21/03  ----- 21-03-2019 22:02:37
+Server No.1 processed Order CUST1812133.87at 22:02:37 21/03  ----- 21-03-2019 22:02:37
+Server No.1 processed Order CUST1921223.97at 22:02:42 21/03  ----- 21-03-2019 22:02:42
+Server No.2 processed Order CUST2103114.38at 22:02:52 21/03  ----- 21-03-2019 22:02:52
+Server No.1 processed Order CUST2242157.0at 22:02:52 21/03  ----- 21-03-2019 22:02:52
+Server No.2 processed Order CUST1010124.869999999999997at 22:02:57 21/03  ----- 21-03-2019 22:02:57
+null added Russell Peters's order to the queue  ----- 21-03-2019 22:17:28
+ added Brandon Stark's order to the queue  ----- 21-03-2019 22:17:30
+ added Robb Stark's order to the queue  ----- 21-03-2019 22:17:32
+ added Robb Stark's order to the queue  ----- 21-03-2019 22:17:34
+ added Barney Stinson's order to the queue  ----- 21-03-2019 22:17:36
+ added Lily Aldrin's order to the queue  ----- 21-03-2019 22:17:38
+ added Steve Aoki's order to the queue  ----- 21-03-2019 22:17:40
+ added James Gordon's order to the queue  ----- 21-03-2019 22:17:42
+ added Bruce Wayne's order to the queue  ----- 21-03-2019 22:17:44
+ added Oswald Cobblepot's order to the queue  ----- 21-03-2019 22:17:46
+ added Edward Nygma's order to the queue  ----- 21-03-2019 22:17:48
+Server No.2 processed Order CUST1009227.97at 22:17:53 21/03  ----- 21-03-2019 22:17:53
+Server No.1 processed Order CUST1253116.58at 22:17:58 21/03  ----- 21-03-2019 22:17:58
+Server No.1 processed Order CUST1253114.38at 22:18:03 21/03  ----- 21-03-2019 22:18:03
+Server No.2 processed Order CUST1009121.16at 22:18:03 21/03  ----- 21-03-2019 22:18:03
+Server No.2 processed Order CUST1544361.512499999999996at 22:18:08 21/03  ----- 21-03-2019 22:18:08
+Server No.1 processed Order CUST1812133.87at 22:18:08 21/03  ----- 21-03-2019 22:18:08
+Server No.1 processed Order CUST1921223.97at 22:18:13 21/03  ----- 21-03-2019 22:18:13
+Server No.1 processed Order CUST2242157.0at 22:18:23 21/03  ----- 21-03-2019 22:18:23
+Server No.2 processed Order CUST2103114.38at 22:18:23 21/03  ----- 21-03-2019 22:18:24
+Server No.1 processed Order CUST1010124.869999999999997at 22:18:28 21/03  ----- 21-03-2019 22:18:28

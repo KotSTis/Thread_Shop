@@ -1,3 +1,6 @@
+/* authors: Kontogeorgos Georgios & Mitrousis Alexandros
+ * All copyrights reserved 2019-2020
+ */
 
 package viewer;
 
@@ -255,6 +258,7 @@ public class StatusGUI extends JFrame implements Observer {
 		onlineList = new JList<String>(modelOnline);
 		scrollPane_1.setViewportView(onlineList);
 		
+		// slider for the threads
 		simulationSpeedSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				threadsLabel.setText("Thread's Simulation Time: " + Integer.toString(((JSlider) e.getSource()).getValue()) + " seconds");
@@ -273,6 +277,8 @@ public class StatusGUI extends JFrame implements Observer {
 		frame.setVisible(true);
 
 	}
+	
+	
 	public void clear(int number) {
 		switch (number){
 		case 1: 
@@ -297,10 +303,13 @@ public class StatusGUI extends JFrame implements Observer {
 		
 	}
 
+	// synchronize update for queue and staff
 	@Override
 	public synchronized void update(Observable arg0, Object arg1) {
-			
+		
+		// checks if the observable is the queue
 		if (arg0 == queue){
+			// assigns the que to linkedlist in order to get the last element of the queue
 			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());	
 			if( model.size() > q.size()){
 				model.remove(0);
@@ -316,13 +325,16 @@ public class StatusGUI extends JFrame implements Observer {
 			LinkedList<Order> online_q = new LinkedList<Order>(((QueueCustomer) arg1).get_online());
 			if( modelOnline.size() > online_q.size()){
 				modelOnline.remove(0);
-			}else if(modelOnline.size() < online_q.size()){
+			} // checks and gets the online order from the queue
+			else if(modelOnline.size() < online_q.size()){
 				String name = online_q.getLast().getCustomerName();
 				int items = online_q.getLast().getItems().size();				
 				String combo = name + " " + String.valueOf(items) + " item(s)";
 				modelOnline.addElement(combo);
 				}			
 		}
+		
+		// if the observable is staff, then it displays the order's information of the customer from the queue
 		else if (arg1 instanceof Staff){
 			
 			int server_no = ((Staff) arg1).getNumber();
@@ -355,14 +367,17 @@ public class StatusGUI extends JFrame implements Observer {
 		
 	}
 	
+	// this is to add server
 	public void addServer(ActionListener e) {
 		btnAddServer.addActionListener(e);
 	}
 	
+	// this is to remove server
 	public void removeServer(ActionListener e) {
 		btnRemoveServer.addActionListener(e);
 	}
 
+	// this is to add simulation speed
 	public void addSpeedListener(ChangeListener e){
 		simulationSpeedSlider.addChangeListener(e);	
 	}

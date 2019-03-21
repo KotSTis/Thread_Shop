@@ -19,9 +19,11 @@ import ourExceptions.InvalidPriceException;
  *
  */
 
+// This class is the Singleton which keeps track of each instance of each event
 public class Log {
 	private static Log logInstance;
 	private static String logContent;
+	
 	public Log() {
 		
 	}
@@ -38,14 +40,16 @@ public class Log {
 		return logInstance;
 	}
 	
+	// display timestamp
 	public void log(String logl) {
 		
-		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat(" dd-MM-yyyy HH:mm:ss");
 		logl += "  ----- " + df.format(new Date()) + "\n";
 		
 		logContent += logl;
 	}
 	
+	// write the events to a file
 	public static void writeFile() {
 		
 		try {
@@ -73,7 +77,6 @@ public class Log {
 		} catch (InvalidPriceException | InvalidCategoryException | InvalidOrderTimeStampException
 				| InvalidOrderCustomerIDException | InvalidOrderCustomerNameException | InvalidItemIDLengthException
 				| InvalidItemException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.exit(0);

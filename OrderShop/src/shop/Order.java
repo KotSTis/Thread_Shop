@@ -16,6 +16,7 @@ public class Order {
 	private int priority;
 
 	// Constructor for timestamp and customerID (needed for allOrders)
+	// Adding priority for existing orders
 	public Order(String TimeStamp, String CustomerID, String CustomerName) {
 
 		this.timeStamp = TimeStamp;
@@ -26,6 +27,7 @@ public class Order {
 	}
 
 	// Constructor for timestamp, customerID and item (needed to read orders from Orders.csv)
+	// Adding priority for existing orders
 	public Order(String TimeStamp, String CustomerID, Item item, String CustomerName) {
 		this.timeStamp = TimeStamp;
 		this.customerID = CustomerID;
@@ -35,7 +37,7 @@ public class Order {
 		this.priority = 0;
 	}
 	
-	
+	// set priority for online order
 	public void makeOnline() {
 		this.priority = 1;
 	}
