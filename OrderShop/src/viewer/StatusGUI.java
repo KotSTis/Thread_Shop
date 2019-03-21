@@ -70,6 +70,7 @@ public class StatusGUI extends JFrame implements Observer {
 	private JScrollPane scrollPane_1;
 	private JList onlineList;
 	private JButton btnRemoveServer, btnAddServer ;
+	private JLabel lblOfflineOrders;
 	
 	
 	
@@ -107,7 +108,7 @@ public class StatusGUI extends JFrame implements Observer {
 		simulationSpeedSlider.setMajorTickSpacing(5);
 		simulationSpeedSlider.setBackground(SystemColor.inactiveCaptionBorder);
 		
-		simulationSpeedLabel = new JLabel("Simulation Speed:");
+		simulationSpeedLabel = new JLabel("Simulation Speed");
 		simulationSpeedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		btnRemoveServer = new JButton("REMOVE SERVER");
@@ -220,20 +221,34 @@ public class StatusGUI extends JFrame implements Observer {
 		JScrollPane scrollPane = new JScrollPane();
 		
 		scrollPane_1 = new JScrollPane();
+		
+		JLabel lblNewLabel = new JLabel("Online Orders");
+		
+		lblOfflineOrders = new JLabel("Offline Orders");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 582, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 582, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblOfflineOrders))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblOfflineOrders))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+						.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		
