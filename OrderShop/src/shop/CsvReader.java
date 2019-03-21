@@ -210,55 +210,7 @@ public class CsvReader {
 		sc2.close();
 		return orderList;
 
-	}
-	
-	public String[] readFirstNames(String filename){
-		File file = new File(filename);
-
-		Scanner sc = null;
-		try {
-			sc = new Scanner(file);
-		} 
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		String line = sc.nextLine();
-		String[] firstNames = new String[20];
-		int counter = 0;
-		while (sc.hasNextLine()) {
-			line = sc.nextLine();
-			counter ++;
-			String[] values = line.split(",");
-			firstNames[counter] = values[0];
-			}
-		return firstNames;
-		}
-	
-	public String[] readLastNames(String filename){
-		File file = new File(filename);
-
-		Scanner sc = null;
-		try {
-			sc = new Scanner(file);
-		} 
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		String line = sc.nextLine();
-		String[] lastNames = new String[20];
-        int counter = 0;
-		while (sc.hasNextLine()) {
-			line = sc.nextLine();
-			counter ++;
-			String[] values = line.split(",");
-			lastNames[counter] = values[1];
-			}
-		return lastNames;
-		}
-
-	
+	}	
 	
 	// getting item for Order's constructor
 	public Item findItem(String itemID) {
