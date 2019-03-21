@@ -30,11 +30,11 @@ public class Staff extends Observable implements Runnable {
 	}
 	
 	public String getGUIDisplay(){
-		String ret = "Processing " + ord.getCustomerName() + "'s order.\n It includes";
+		String ret = "Processing " + ord.getCustomerName() + "'s order.\n";
 		for (HashMap.Entry<String, Integer> entry : ord.getItems().entrySet()) {
-			ret += String.valueOf(entry.getValue());
-			ret += " ";
-			ret += entry.getKey();
+			ret += String.valueOf(entry.getValue()) ;
+			ret += " " ;
+			ret += entry.getKey() + "\n";
 		}
 		ret += "\nTotal is " + ord.getPrice() + " $";
 		return  ret;
