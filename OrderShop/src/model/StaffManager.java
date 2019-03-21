@@ -10,7 +10,7 @@ public class StaffManager {
 		staffEmployees = new ArrayList<Staff>();
 	}
 	
-	public ArrayList<Staff> getServers() {
+	public ArrayList <Staff> getServers() {
 		return staffEmployees;
 	}
 
@@ -20,8 +20,7 @@ public class StaffManager {
 	}
 	
 	public void removeServer() {
-		Staff s = staffEmployees.get(staffEmployees.size()-1);
-		s.setActive(false);
+		Staff s = staffEmployees.get(staffEmployees.size());
 		staffEmployees.remove(s);
 	}
 }
