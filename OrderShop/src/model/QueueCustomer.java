@@ -16,7 +16,9 @@ public class QueueCustomer extends Observable {
 	Log logger;
 
 	private static Queue <Order> orders = new LinkedList <Order> ();
+
 	private static Queue <Order> online_ords = new LinkedList <Order> ();
+
 	private static final Object lock = new Object();
 	
 	public QueueCustomer(Log lg) 

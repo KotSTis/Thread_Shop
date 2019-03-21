@@ -263,8 +263,10 @@ public class StatusGUI extends JFrame implements Observer {
 			if( model.size() > q.size()){
 				model.remove(0);
 			}else if(model.size() < q.size()){
+
 				String name = q.getLast().getCustomerName();
 				int items = q.getLast().getItems().size();				
+
 				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
 					if(model.size() < 2){
 						model.addElement(combo);
