@@ -26,7 +26,7 @@ public class AppTest {
 	public void testMain() throws IOException, InvalidItemIDLengthException, InvalidItemException, InvalidPriceException, 
 	InvalidCategoryException, InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException {
 		String[] args = new String[] { "" };
-		App.main(args);
+		
 
 
 	}

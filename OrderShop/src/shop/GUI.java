@@ -424,7 +424,7 @@ public class GUI extends JFrame implements ActionListener {
 
 		// Set the window to be visible as the default to be false
 		frame.pack();
-		frame.setVisible(true);
+		frame.setVisible(false);
 
 	}
 

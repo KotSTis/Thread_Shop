@@ -69,6 +69,8 @@ public class AllOrders {
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
 		menu = reader.readMenuInfo("Menu.csv");
+		this.firstNames = reader.readFirstNames("Random-Names.csv");
+		this.lastNames = reader.readLastNames("Random-Names.csv");
 		//iterate through the treeset menu
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
@@ -165,8 +167,11 @@ public class AllOrders {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
+			
+			Order ord = makeOrder(inc_ord);
+			ord.makeOnline();
+			model.addQueue(ord);
 			view.clear();
-			model.addQueue(makeOrder(inc_ord));
 			
 		}
 	}
@@ -176,10 +181,11 @@ public class AllOrders {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
-			view.clear();
+			
 			Order ord = makeOrder(inc_ord);
 			ord.makeOnline();
 			model.addQueue(ord);
+			view.clear();
 			
 		}
 	}
