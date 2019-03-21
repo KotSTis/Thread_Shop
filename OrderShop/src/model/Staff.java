@@ -16,6 +16,7 @@ public class Staff extends Observable implements Runnable {
 	private Log logger;
 	QueueCustomer qC;
 	int thread;
+	private boolean running = true;
 
 
 	public Staff (int thread, Log lg, QueueCustomer qCust){
@@ -24,7 +25,9 @@ public class Staff extends Observable implements Runnable {
 		this.qC = qCust;
 		
 	}
-	
+	public void turnOff() {
+		this.running =false;
+	}
 	public int getNumber(){
 		return thread;
 	}
@@ -63,7 +66,7 @@ public class Staff extends Observable implements Runnable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		while(true) {
+		while(running) {
 			if(!qC.check_empty()) {
 				Order ord = qC.get_top();
 				if(ord == null){

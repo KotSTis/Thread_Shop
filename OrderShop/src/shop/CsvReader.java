@@ -102,7 +102,7 @@ public class CsvReader {
 			e.printStackTrace();
 		}
 
-		String line = sc.nextLine();
+		String line;// = sc.nextLine();
 		String[] firstNames = new String[20];
 		int counter = 0;
 		while (sc.hasNextLine()) {
@@ -125,7 +125,7 @@ public class CsvReader {
 			e.printStackTrace();
 		}
 
-		String line = sc.nextLine();
+		String line;// = sc.nextLine();
 		String[] lastNames = new String[20];
         int counter = 0;
 		while (sc.hasNextLine()) {

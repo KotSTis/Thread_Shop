@@ -30,7 +30,7 @@ public class GUIController{
 	private QueueCustomer queue;
 
 
-	public GUIController(StatusGUI view,StaffManager staffList ) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+	public GUIController(Log log, StatusGUI view,StaffManager staffList, QueueCustomer queue ) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
 		this.log = log;
@@ -48,7 +48,9 @@ public class GUIController{
 
 			int numberOfServers = staffList.getServers().size();
 			if (numberOfServers < 5) {
-				Staff s = new Staff(staffList.getServers().size(),log,queue);
+				Log lg = log;
+				QueueCustomer q = queue;
+				Staff s = new Staff(staffList.getServers().size()+1,lg,q);
 				staffList.addServer(s);
 				s.addObserver(viewer);
 				Thread serverThread = new Thread(s);
@@ -60,7 +62,9 @@ public class GUIController{
 	public class RemoveServerListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			staffList.removeServer();
+			
+			int number = staffList.removeServer();
+			viewer.clear(number);
 			
 		}
 	}

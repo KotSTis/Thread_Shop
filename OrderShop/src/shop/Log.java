@@ -2,6 +2,15 @@ package shop;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import controller.AllOrders;
+import ourExceptions.InvalidCategoryException;
+import ourExceptions.InvalidItemException;
+import ourExceptions.InvalidItemIDLengthException;
+import ourExceptions.InvalidOrderCustomerIDException;
+import ourExceptions.InvalidOrderCustomerNameException;
+import ourExceptions.InvalidOrderTimeStampException;
+import ourExceptions.InvalidPriceException;
 /**
  * Use singleton pattern
  * Store log strings
@@ -32,7 +41,7 @@ public class Log {
 	public void log(String logl) {
 		
 		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		logl = df.format(new Date());
+		logl += "  ----- " + df.format(new Date()) + "\n";
 		
 		logContent += logl;
 	}
@@ -59,7 +68,15 @@ public class Log {
 			
 			e.printStackTrace();
 		}
-		
+		try {
+			AllOrders final_one = new AllOrders();
+		} catch (InvalidPriceException | InvalidCategoryException | InvalidOrderTimeStampException
+				| InvalidOrderCustomerIDException | InvalidOrderCustomerNameException | InvalidItemIDLengthException
+				| InvalidItemException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.exit(0);
 	}
 	
 	

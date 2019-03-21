@@ -65,27 +65,27 @@ public class App {
 		
 		Thread uno = new Thread(numero_uno);
 		Thread duo = new Thread(numero_duo);
-		Thread tre = new Thread(numero_tre);
-		Thread quatro = new Thread(numero_quatro);
-		Thread cinqo = new Thread(numero_cinqo);
+		//Thread tre = new Thread(numero_tre);
+	//	Thread quatro = new Thread(numero_quatro);
+		//Thread cinqo = new Thread(numero_cinqo);
 		
 	    ArrayList<Staff> staffs = new ArrayList<Staff>();
 		staffs.add(numero_uno);
 		staffs.add(numero_duo);
-		staffs.add(numero_tre);
-		staffs.add(numero_quatro);
-		staffs.add(numero_cinqo);
+//		staffs.add(numero_tre);
+	//	staffs.add(numero_quatro);
+	//	staffs.add(numero_cinqo);
 		
 		StaffManager manager_rugby = new StaffManager(staffs);
 		
 		StatusGUI viewGUI = new StatusGUI(model, staffs);
 		AllOrders controlla = new AllOrders(controlGUI, model, logger);
-		GUIController yaman = new GUIController(viewGUI, manager_rugby);
+		GUIController yaman = new GUIController(logger, viewGUI, manager_rugby, model);
 		uno.start();
 		duo.start();
-		tre.start();
-		quatro.start();
-		cinqo.start();
+//		tre.start();
+		//quatro.start();
+	//	cinqo.start();
 
 		
 
