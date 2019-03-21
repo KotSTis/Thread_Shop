@@ -273,14 +273,35 @@ public class StatusGUI extends JFrame implements Observer {
 		frame.setVisible(true);
 
 	}
+	public void clear(int number) {
+		switch (number){
+		case 1: 
+			textArea_1.setText(" ");
+			break;
+		case 2: 
+			textArea_2.setText(" ");
+	    	break;
+		case 3:
+			textArea_3.setText(" ");
+			break;
+		case 4:
+			textArea_4.setText(" ");
+			break;
+		case 5:
+			textArea_5.setText(" ");
+			break;
+		default:
+			break;
 
+		}
+		
+	}
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public synchronized void update(Observable arg0, Object arg1) {
 			
 		if (arg0 == queue){
-			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());
-				
+			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());	
 			if( model.size() > q.size()){
 				model.remove(0);
 			} else if(model.size() < q.size()){
@@ -288,26 +309,18 @@ public class StatusGUI extends JFrame implements Observer {
 				String name = q.getLast().getCustomerName();
 				int items = q.getLast().getItems().size();			
 
-
-				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
-					if(model.size() < 2){
-						model.addElement(combo);
-					}else{
-						model.add(model.size(), combo);
-					}
+				String combo = name + " " + String.valueOf(items) + " item(s)";
+				
+				model.addElement(combo);
 			}
 			LinkedList<Order> online_q = new LinkedList<Order>(((QueueCustomer) arg1).get_online());
 			if( modelOnline.size() > online_q.size()){
 				modelOnline.remove(0);
 			}else if(modelOnline.size() < online_q.size()){
-				name = online_q.getLast().getCustomerName();
-				items = online_q.getLast().getItems().size();				
-				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(online_q.getLast().getPrice());
-					if(modelOnline.size() < 2){
-						modelOnline.addElement(combo);
-					}else{
-						modelOnline.add(model.size(), combo);
-					}
+				String name = online_q.getLast().getCustomerName();
+				int items = online_q.getLast().getItems().size();				
+				String combo = name + " " + String.valueOf(items) + " item(s)";
+				modelOnline.addElement(combo);
 				}			
 		}
 		else if (arg1 instanceof Staff){
@@ -331,6 +344,8 @@ public class StatusGUI extends JFrame implements Observer {
 				break;
 			case 5:
 				textArea_5.setText(displayOrder);
+				break;
+			default:
 				break;
 
 			}

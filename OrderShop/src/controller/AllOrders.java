@@ -48,16 +48,16 @@ public class AllOrders {
 
 	Menu m = new Menu();
 	//ArrayList to hold All of the Orders placed
-	private ArrayList<Order> orderList;
+	private static ArrayList<Order> orderList;
 	TreeSet<Item> menu;
 	private String[] firstNames = new String[20];
 	private String[] lastNames = new String[20];
 	//Holds a copy of the menu in Hashmap form for easy lookup and access of items using their ID
-	private HashMap<String, Item> itemList;
+	private static HashMap<String, Item> itemList;
 	//String is the Customer ID and the ArrayList<Orders> holds all orders made by that customer
 	private HashMap<String, ArrayList<Order>> allOrders = new HashMap<String, ArrayList<Order>>();
 	//holds how many times each item was sold
-	private HashMap<String, Integer> summary = new HashMap<String, Integer>();
+	private static HashMap<String, Integer> summary = new HashMap<String, Integer>();
 
 	public AllOrders(GUI v, QueueCustomer q, Log lg) 
 			throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
@@ -117,7 +117,13 @@ public class AllOrders {
 		frame.setVisible(true);
 		((JFrame) frame).getContentPane().setVisible(true);
 	}
-	
+
+	public AllOrders()throws InvalidPriceException, InvalidCategoryException,
+	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException, InvalidItemIDLengthException, InvalidItemException, IOException
+	{
+		FinalReport();
+		 }
+
 	// This method process new orders
 	public Order makeOrder(HashMap<Item, Integer> incoming) {
 		
@@ -169,7 +175,6 @@ public class AllOrders {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
 			
 			Order ord = makeOrder(inc_ord);
-			ord.makeOnline();
 			model.addQueue(ord);
 			view.clear();
 		}
@@ -263,10 +268,10 @@ public class AllOrders {
 
 	// Final report to display menu (before closing GUI), 
 	// current orders, new orders, and total income to a Report.txt
-	public void FinalReport(String filename) throws IOException {
+	public void FinalReport() throws IOException {
 		//iterate through the summary Hashmap and print it out in the report file
 
-		FileWriter fw = new FileWriter(filename);
+		FileWriter fw = new FileWriter("FinalReport.txt");
 		fw.write("Menu:\n\n");
 		fw.write(m.displayMenu() + "\n\n");
 		fw.write("Items sold:\n\n");

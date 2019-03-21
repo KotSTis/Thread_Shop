@@ -44,6 +44,7 @@ public class QueueCustomer extends Observable {
 	
 	public boolean check_empty() {
 		if(orders.isEmpty() && online_ords.isEmpty()) {
+			Log.writeFile();
 			return true;
 		}
 		return false;

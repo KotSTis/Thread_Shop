@@ -28,8 +28,10 @@ public class StaffManager {
 		staffEmployees.add(s);
 	}
 	
-	public void removeServer() {
+	public int removeServer() {
 		Staff staff = staffEmployees.get(staffEmployees.size()-1);
 		staffEmployees.remove(staff);
+		staff.turnOff();
+		return staff.getNumber();
 	}
 }
