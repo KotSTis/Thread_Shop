@@ -10,17 +10,25 @@ public class StaffManager {
 		staffEmployees = new ArrayList<Staff>();
 	}
 	
+	public StaffManager( ArrayList<Staff> staff) {
+		staffEmployees = staff;
+	}
+	
 	public ArrayList <Staff> getServers() {
 		return staffEmployees;
 	}
 
+	public void changeTimer(int speed){
+		for(Staff mastoras : staffEmployees){
+			mastoras.setThreadSleepTime(speed);
+		}
+	}
 	
 	public void addServer(Staff s) {
 		staffEmployees.add(s);
 	}
 	
 	public void removeServer() {
-		Staff s = staffEmployees.get(staffEmployees.size());
-		staffEmployees.remove(s);
+		staffEmployees.remove(staffEmployees.size());
 	}
 }

@@ -58,7 +58,7 @@ public class StatusGUI extends JFrame implements Observer {
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private DefaultListModel<String> modelOnline = new DefaultListModel<String>();
 	private JList<String> listCustomerQueue = new JList<>();
-	private ArrayList <Staff> staff;
+	private ArrayList<JTextArea> staff = new ArrayList<JTextArea>();
 	private QueueCustomer queue;
 	private ArrayList <Order> orders = new ArrayList <Order>();
 	private JScrollPane scrollOrders;
@@ -73,10 +73,9 @@ public class StatusGUI extends JFrame implements Observer {
 	
 	
 	
-	public StatusGUI(QueueCustomer model, ArrayList<Staff> staffs) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+	public StatusGUI(QueueCustomer model, ArrayList<Staff> staffs)  throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
-
 		this.queue = model;
 		queue.addObserver(this);
 
@@ -102,7 +101,7 @@ public class StatusGUI extends JFrame implements Observer {
 		panel.setBorder(BorderFactory.createTitledBorder("Waiting Queue"));
 		panel_1.setBorder(BorderFactory.createTitledBorder("Servers"));
 		
-		simulationSpeedSlider = new JSlider(0, 10);
+		simulationSpeedSlider = new JSlider(1, 5);
 		simulationSpeedSlider.setPaintTicks(true);
 		simulationSpeedSlider.setPaintLabels(true);
 		simulationSpeedSlider.setMajorTickSpacing(5);
@@ -111,9 +110,9 @@ public class StatusGUI extends JFrame implements Observer {
 		simulationSpeedLabel = new JLabel("Simulation Speed:");
 		simulationSpeedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JButton btnRemoveServer = new JButton("REMOVE SERVER");
+		btnRemoveServer = new JButton("REMOVE SERVER");
 		
-		JButton btnAddServer = new JButton("ADD SERVER");
+		btnAddServer = new JButton("ADD SERVER");
 		
 		threadsLabel = new JLabel("Thread's Simulation Time: 5 seconds" );
 		threadsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -184,6 +183,12 @@ public class StatusGUI extends JFrame implements Observer {
 		textArea_5.setColumns(10);
 		textArea_5.setEditable(false);
 
+		staff.add(0,textArea_1);
+		staff.add(1,textArea_2);
+		staff.add(2,textArea_3);
+		staff.add(3,textArea_4);
+		staff.add(4,textArea_5);
+		
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -260,14 +265,13 @@ public class StatusGUI extends JFrame implements Observer {
 			
 		if (arg0 == queue){
 			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());
-			String name = q.getLast().getCustomerName();
-			int items = q.getLast().getItems().size();	
+				
 			if( model.size() > q.size()){
 				model.remove(0);
 			} else if(model.size() < q.size()){
 
-				name = q.getLast().getCustomerName();
-				items = q.getLast().getItems().size();				
+				String name = q.getLast().getCustomerName();
+				int items = q.getLast().getItems().size();			
 
 				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
 					if(model.size() < 2){
@@ -280,8 +284,8 @@ public class StatusGUI extends JFrame implements Observer {
 			if( modelOnline.size() > online_q.size()){
 				modelOnline.remove(0);
 			}else if(modelOnline.size() < online_q.size()){
-				name = online_q.getLast().getCustomerName();
-				items = online_q.getLast().getItems().size();				
+				String name = online_q.getLast().getCustomerName();
+				int items = online_q.getLast().getItems().size();				
 				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(online_q.getLast().getPrice());
 					if(modelOnline.size() < 2){
 						modelOnline.addElement(combo);
@@ -295,6 +299,7 @@ public class StatusGUI extends JFrame implements Observer {
 			int server_no = ((Staff) arg1).getNumber();
 			System.out.println(server_no);
 			String displayOrder = ((Staff) arg1).getGUIDisplay();
+			
 			switch (server_no){
 			case 1: 
 				textArea_1.setText(displayOrder);
@@ -311,10 +316,12 @@ public class StatusGUI extends JFrame implements Observer {
 			case 5:
 				textArea_5.setText(displayOrder);
 				break;
+
 			}
 
-			
 		}
+			
+		
 	}
 	
 	public void addServer(ActionListener e) {

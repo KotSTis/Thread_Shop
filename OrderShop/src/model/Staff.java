@@ -11,12 +11,12 @@ import shop.Order;
 
 public class Staff extends Observable implements Runnable {
 	
-	private static int threadSleepTime = 1500;
+	private static int threadSleepTime = 5000;
 	private Order ord;
 	private Log logger;
 	QueueCustomer qC;
 	int thread;
-	private boolean active;
+
 
 	public Staff (int thread, Log lg, QueueCustomer qCust){
 		this.thread = thread;
@@ -41,7 +41,7 @@ public class Staff extends Observable implements Runnable {
 	}
 	
 	public void setThreadSleepTime(int threadSleepTime){
-		threadSleepTime = threadSleepTime*1500;
+		threadSleepTime = threadSleepTime*1000;
 	}
 	
 	public static int getThreadSleepTime(){
@@ -66,6 +66,9 @@ public class Staff extends Observable implements Runnable {
 		while(true) {
 			if(!qC.check_empty()) {
 				Order ord = qC.get_top();
+				if(ord == null){
+					return;
+				}
 				this.ord = ord;
 				process(ord);
 				setChanged();
@@ -81,8 +84,4 @@ public class Staff extends Observable implements Runnable {
 		}
 		
 	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
 }

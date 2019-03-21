@@ -23,56 +23,58 @@ import viewer.StatusGUI;
 
 public class GUIController{
 	private GUI gui = new GUI ();
-	
+
 	private StatusGUI viewer;
 	private StaffManager staffList;
-	private Staff staff;
 	private Log log;
 	private QueueCustomer queue;
-	
-	
-	GUIController() throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+
+
+	public GUIController(StatusGUI view,StaffManager staffList ) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
-		this.staff = staff;
 		this.log = log;
 		this.queue = queue;
-			this.viewer = viewer;
-			this.staffList = staffList;
-			this.viewer.addSpeedListener(new SpeedListener());
-			this.viewer.addServer(new AddServerListener());
-			this.viewer.removeServer(new RemoveServerListener());
-		}
-		
-		public class AddServerListener implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				Staff s = new Staff(staff.getNumber(),log,queue);
-				int numberOfServers = staffList.getServers().size();
-				if (numberOfServers < 5) {
-					staffList.addServer(s);
-					s.addObserver(viewer);
-					Thread serverThread = new Thread(s);
-					serverThread.start();
-				}
-			}
-		}
-		
-		public class RemoveServerListener implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				if (staff.getNumber() > 2){
-				staffList.removeServer();
-				}
-			}
-		}
-		
-		// inner class SpeedListener responds when user sets the Speed via the slider
-		public class SpeedListener implements ChangeListener {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				int speed = viewer.simulationSpeedSlider.getValue();
-				staff.setThreadSleepTime(speed);
-				viewer.threadsLabel.setText("Thread Processing Speed: " + Integer.toString(Staff.getThreadSleepTime()/1000)+ " Seconds"); 
-			}	
-		}
-
+		this.viewer = view;
+		this.staffList = staffList;
+		viewer.addSpeedListener(new SpeedListener());
+		viewer.addServer(new AddServerListener());
+		viewer.removeServer(new RemoveServerListener());
 	}
+
+
+	public class AddServerListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+
+			int numberOfServers = staffList.getServers().size();
+			if (numberOfServers < 5) {
+				Staff s = new Staff(staffList.getServers().size(),log,queue);
+				staffList.addServer(s);
+				s.addObserver(viewer);
+				Thread serverThread = new Thread(s);
+				serverThread.start();
+			}
+		}
+	}
+
+	public class RemoveServerListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			int numberOfServers = staffList.getServers().size();
+			if (numberOfServers > 2){
+				staffList.removeServer();
+			}
+		}
+	}
+
+	// inner class SpeedListener responds when user sets the Speed via the slider
+	public class SpeedListener implements ChangeListener {
+		@Override
+		public void stateChanged(ChangeEvent e) {
+			int speed = viewer.simulationSpeedSlider.getValue();
+			staffList.changeTimer(speed*1000);
+			viewer.threadsLabel.setText("Thread Processing Speed: " + Integer.toString(Staff.getThreadSleepTime()/1000)+ " Seconds"); 
+		}	
+	}
+
+}

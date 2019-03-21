@@ -54,8 +54,10 @@ public class QueueCustomer extends Observable {
 		synchronized(lock) {
 			if(!online_ords.isEmpty()) {
 				ord = online_ords.poll();
-			}else{
+			}else if(!orders.isEmpty()){
 				ord = orders.poll();
+			}else{
+				return null;
 			}
 			
 		}
