@@ -91,7 +91,7 @@ public class StatusGUI extends JFrame implements Observer {
 		JFrame frame = new JFrame("Shop Simulation");
 		frame.getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		frame.setBackground(SystemColor.text);
-		frame.setLocation(1050, 120);
+		frame.setLocation(350, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 		JPanel panel = new JPanel();
@@ -101,7 +101,7 @@ public class StatusGUI extends JFrame implements Observer {
 		panel.setBorder(BorderFactory.createTitledBorder("Waiting Queue"));
 		panel_1.setBorder(BorderFactory.createTitledBorder("Servers"));
 		
-		simulationSpeedSlider = new JSlider(1, 5);
+		simulationSpeedSlider = new JSlider(0, 10);
 		simulationSpeedSlider.setPaintTicks(true);
 		simulationSpeedSlider.setPaintLabels(true);
 		simulationSpeedSlider.setMajorTickSpacing(5);
@@ -128,7 +128,7 @@ public class StatusGUI extends JFrame implements Observer {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(94)
-							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
+							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(53)
 							.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
@@ -157,7 +157,7 @@ public class StatusGUI extends JFrame implements Observer {
 							.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))))
 					.addGap(93))
 		);
