@@ -1,3 +1,8 @@
+/* author: Stergiou Konstantinos
+ * All copyrights reserved 2019-2020
+ */
+
+
 package model;
 
 import java.text.SimpleDateFormat;
@@ -9,6 +14,7 @@ import java.util.Observable;
 import shop.Log;
 import shop.Order;
 
+// model for MVC pattern
 public class Staff extends Observable implements Runnable {
 	
 	private static int threadSleepTime = 5000;
@@ -25,13 +31,18 @@ public class Staff extends Observable implements Runnable {
 		this.qC = qCust;
 		
 	}
+	
+	// closing the server
 	public void turnOff() {
 		this.running =false;
 	}
+	
+	// return the number of threads (number of serving staff)
 	public int getNumber(){
 		return thread;
 	}
 	
+	// display the message for the order in the queue: offline/ online
 	public String getGUIDisplay(){
 		String ret = "Processing " + ord.getCustomerName() + "'s order.\n";
 		for (HashMap.Entry<String, Integer> entry : ord.getItems().entrySet()) {
@@ -43,14 +54,17 @@ public class Staff extends Observable implements Runnable {
 		return  ret;
 	}
 	
+	// thread sleep time for the servers
 	public void setThreadSleepTime(int threadSleepTime){
 		threadSleepTime = threadSleepTime*1000;
 	}
 	
+	// return the sleep time
 	public static int getThreadSleepTime(){
 		return threadSleepTime;
 	}
 	
+	// display timestamp and the message for the processed order
 	public void process(Order ord) {
 		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM");
 		Date date = new Date();
@@ -59,8 +73,11 @@ public class Staff extends Observable implements Runnable {
 				"at " + timestamp);
 	}
 	
+	//
 	@Override
 	public void run() {
+		
+		//initiate a sleep time
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e1) {
@@ -74,10 +91,14 @@ public class Staff extends Observable implements Runnable {
 				}
 				this.ord = ord;
 				process(ord);
+				
+				// methods for Observable
 				setChanged();
 				notifyObservers(this);
 		        clearChanged();
                 try {
+                	
+                	// set the sleep time to the size of ordered items*sleep time
                 	Thread.sleep(threadSleepTime*ord.getItems().size());
                 } catch (Exception e) {
                     throw new IllegalStateException(e);

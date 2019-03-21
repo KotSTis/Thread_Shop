@@ -7,6 +7,7 @@ package controller;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
@@ -37,17 +39,18 @@ import shop.Order;
 import ourExceptions.InvalidCategoryException;
 import ourExceptions.InvalidItemException;
 
-// This the AllOrders that handles all orders
+// This the AllOrders Controller for MVC that handles all orders
 public class AllOrders {
 
 	private GUI view;
 	private QueueCustomer model;
 	private Log logger;
-	
+
 	Menu m = new Menu();
 	//ArrayList to hold All of the Orders placed
 	private static ArrayList<Order> orderList;
 	TreeSet<Item> menu;
+	// store the names in a String ArrayList
 	private String[] firstNames = new String[20];
 	private String[] lastNames = new String[20];
 	//Holds a copy of the menu in Hashmap form for easy lookup and access of items using their ID
@@ -60,7 +63,7 @@ public class AllOrders {
 	public AllOrders(GUI v, QueueCustomer q, Log lg) 
 			throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 			InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException, InvalidItemIDLengthException, InvalidItemException {
-		
+
 		this.view = v;
 		this.model = q;
 		this.logger = lg;
@@ -71,6 +74,7 @@ public class AllOrders {
 		menu = reader.readMenuInfo("Menu.csv");
 		this.firstNames = reader.readFirstNames("Random-Names.csv");
 		this.lastNames = reader.readLastNames("Random-Names.csv");
+
 		//iterate through the treeset menu
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
@@ -104,6 +108,7 @@ public class AllOrders {
 			}
 		}
 		//calculate the total price of the order
+		// add order to queue and put a sleep time
 		for (Order ord : this.orderList) {
 			ord.setPrice(calculateBill(ord));
 			model.addQueue(ord);
@@ -113,11 +118,7 @@ public class AllOrders {
 		Frame frame= GUI.getFrames()[1];
 		frame.setVisible(true);
 		((JFrame) frame).getContentPane().setVisible(true);
-		
-		
-
 	}
-
 
 	public AllOrders()throws InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException, InvalidItemIDLengthException, InvalidItemException, IOException
@@ -125,10 +126,9 @@ public class AllOrders {
 		FinalReport();
 		 }
 
-
-	// This method process new orders
+	// This method processes the new orders
 	public Order makeOrder(HashMap<Item, Integer> incoming) {
-
+		
 		ArrayList<Order> ord = null;
 		//create customer id and timestamp for the order
 		String custID = "CUST" + ThreadLocalRandom.current().nextInt(0, 5000 + 1);
@@ -139,7 +139,7 @@ public class AllOrders {
 		timestamp = timestamp.replace("/", "");
 		timestamp = timestamp.replace(" ", "");
 		String customerName = firstNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)] + " " 
-							+ lastNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)];
+				+ lastNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)];
 		Order newOrder = new Order(timestamp, custID, customerName);
 		Item item;
 		int quantity;
@@ -170,8 +170,9 @@ public class AllOrders {
 		return newOrder;
 	}
 
+	// implementation for offline order in order to put them in queue and clear them after
 	public class addListener implements ActionListener{
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
@@ -179,12 +180,12 @@ public class AllOrders {
 			Order ord = makeOrder(inc_ord);
 			model.addQueue(ord);
 			view.clear();
-			
 		}
 	}
-	
+
+	// implementation for online button to process the online orders and clear them after
 	public class addOnlineListener implements ActionListener{
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
@@ -193,10 +194,9 @@ public class AllOrders {
 			ord.makeOnline();
 			model.addQueue(ord);
 			view.clear();
-			
 		}
 	}
-	
+
 	// Calculate the price for each order
 	public double calculateBill(Order order) {
 		double bill = 0;
@@ -309,5 +309,4 @@ public class AllOrders {
 
 		fw.close();
 	}
-
 }

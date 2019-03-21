@@ -91,6 +91,7 @@ public class CsvReader {
 		return itemList;
 	}
 
+	// reader for the new generated first names for the queue
 	public String[] readFirstNames(String filename){
 		File file = new File(filename);
 
@@ -102,7 +103,7 @@ public class CsvReader {
 			e.printStackTrace();
 		}
 
-		String line;// = sc.nextLine();
+		String line = sc.nextLine();
 		String[] firstNames = new String[20];
 		int counter = 0;
 		while (sc.hasNextLine()) {
@@ -114,6 +115,7 @@ public class CsvReader {
 		return firstNames;
 		}
 	
+	// reader for the new generated last names for the queue
 	public String[] readLastNames(String filename){
 		File file = new File(filename);
 
@@ -125,7 +127,7 @@ public class CsvReader {
 			e.printStackTrace();
 		}
 
-		String line;// = sc.nextLine();
+		String line = sc.nextLine();
 		String[] lastNames = new String[20];
         int counter = 0;
 		while (sc.hasNextLine()) {
@@ -136,6 +138,7 @@ public class CsvReader {
 			}
 		return lastNames;
 		}
+	
 	// Reading orders and storing them in an ArrayList since we don't care about
 	// duplicates or order
 	public ArrayList<Order> readOrdersInfo(String filename)
@@ -150,6 +153,7 @@ public class CsvReader {
 				line = sc2.nextLine();
 				String[] values = line.split(",");
 				String timestamp = values[0];
+				// check the timestamp's format
 				if ((timestamp.length() != 10)
 						|| ((!(Integer.parseInt(timestamp.substring(0, 2)) >= 0)
 								|| (!(Integer.parseInt(timestamp.substring(0, 2)) < 24))))
@@ -210,8 +214,7 @@ public class CsvReader {
 		sc2.close();
 		return orderList;
 
-	}
-	
+	}	
 	
 	// getting item for Order's constructor
 	public Item findItem(String itemID) {
