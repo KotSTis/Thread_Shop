@@ -7,6 +7,7 @@ package controller;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
@@ -43,7 +45,7 @@ public class AllOrders {
 	private GUI view;
 	private QueueCustomer model;
 	private Log logger;
-	
+
 	Menu m = new Menu();
 	//ArrayList to hold All of the Orders placed
 	private ArrayList<Order> orderList;
@@ -60,7 +62,7 @@ public class AllOrders {
 	public AllOrders(GUI v, QueueCustomer q, Log lg) 
 			throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 			InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException, InvalidItemIDLengthException, InvalidItemException {
-		
+
 		this.view = v;
 		this.model = q;
 		this.logger = lg;
@@ -69,6 +71,8 @@ public class AllOrders {
 		this.itemList = new HashMap<String, Item>();
 		CsvReader reader = new CsvReader();
 		menu = reader.readMenuInfo("Menu.csv");
+	    this.firstNames = reader.readFirstNames("Random Names.csv");
+	    this.lastNames = reader.readLastNames("Random Names.csv");
 		//iterate through the treeset menu
 		Iterator<Item> iterator;
 		iterator = menu.iterator();
@@ -111,14 +115,11 @@ public class AllOrders {
 		Frame frame= GUI.getFrames()[1];
 		frame.setVisible(true);
 		((JFrame) frame).getContentPane().setVisible(true);
-		
-		
-
 	}
-
+	
 	// This method process new orders
 	public Order makeOrder(HashMap<Item, Integer> incoming) {
-
+		
 		ArrayList<Order> ord = null;
 		//create customer id and timestamp for the order
 		String custID = "CUST" + ThreadLocalRandom.current().nextInt(0, 5000 + 1);
@@ -129,7 +130,7 @@ public class AllOrders {
 		timestamp = timestamp.replace("/", "");
 		timestamp = timestamp.replace(" ", "");
 		String customerName = firstNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)] + " " 
-							+ lastNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)];
+				+ lastNames[ThreadLocalRandom.current().nextInt(0, 19 + 1)];
 		Order newOrder = new Order(timestamp, custID, customerName);
 		Item item;
 		int quantity;
@@ -161,18 +162,18 @@ public class AllOrders {
 	}
 
 	public class addListener implements ActionListener{
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
 			view.clear();
 			model.addQueue(makeOrder(inc_ord));
-			
+
 		}
 	}
-	
+
 	public class addOnlineListener implements ActionListener{
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			HashMap<Item, Integer> inc_ord = view.getOrd();
@@ -180,10 +181,10 @@ public class AllOrders {
 			Order ord = makeOrder(inc_ord);
 			ord.makeOnline();
 			model.addQueue(ord);
-			
+
 		}
 	}
-	
+
 	// Calculate the price for each order
 	public double calculateBill(Order order) {
 		double bill = 0;
@@ -296,5 +297,4 @@ public class AllOrders {
 
 		fw.close();
 	}
-
 }

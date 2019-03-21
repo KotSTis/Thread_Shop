@@ -36,7 +36,8 @@ public class App {
 			// filenames for exceptions
 			// example: reader.readMenuInfo("MenuExceptionItemIDLength.csv");
 			reader.readMenuInfo("Menu.csv");
-
+			reader.readFirstNames("Random Names.csv");
+			reader.readLastNames("Random Names.csv");
 			// Example: reader.readOrdersInfo("OrdersExceptionCustomerID.csv");
 			reader.readOrdersInfo("Orders.csv");
 		} catch (FileNotFoundException fileNotFound) {
