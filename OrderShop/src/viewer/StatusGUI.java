@@ -50,6 +50,7 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 import javax.swing.JSpinner;
+import javax.swing.JTextArea;
 
 public class StatusGUI extends JFrame implements Observer {
 
@@ -57,29 +58,24 @@ public class StatusGUI extends JFrame implements Observer {
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private DefaultListModel<String> modelOnline = new DefaultListModel<String>();
 	private JList<String> listCustomerQueue = new JList<>();
-	private ArrayList <Staff> staff;
+	private ArrayList<JTextArea> staff = new ArrayList<JTextArea>();
 	private QueueCustomer queue;
 	private ArrayList <Order> orders = new ArrayList <Order>();
 	private JScrollPane scrollOrders;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextArea textArea_1,textArea_2,textArea_3, textArea_4,textArea_5;
 	private Staff server;
 	private JLabel simulationSpeedLabel;
 	public JLabel threadsLabel;
 	public JSlider simulationSpeedSlider;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
 	private JScrollPane scrollPane_1;
 	private JList onlineList;
 	private JButton btnRemoveServer, btnAddServer ;
 	
 	
 	
-	public StatusGUI(QueueCustomer model, ArrayList<Staff> staffs) throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
+	public StatusGUI(QueueCustomer model, ArrayList<Staff> staffs)  throws FileNotFoundException, InvalidPriceException, InvalidCategoryException,
 	InvalidOrderTimeStampException, InvalidOrderCustomerIDException, InvalidOrderCustomerNameException,
 	InvalidItemIDLengthException, InvalidItemException {
-
 		this.queue = model;
 		queue.addObserver(this);
 
@@ -95,7 +91,7 @@ public class StatusGUI extends JFrame implements Observer {
 		JFrame frame = new JFrame("Shop Simulation");
 		frame.getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		frame.setBackground(SystemColor.text);
-		frame.setLocation(1050, 120);
+		frame.setLocation(350, 120);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 		JPanel panel = new JPanel();
@@ -114,9 +110,9 @@ public class StatusGUI extends JFrame implements Observer {
 		simulationSpeedLabel = new JLabel("Simulation Speed:");
 		simulationSpeedLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JButton btnRemoveServer = new JButton("REMOVE SERVER");
+		btnRemoveServer = new JButton("REMOVE SERVER");
 		
-		JButton btnAddServer = new JButton("ADD SERVER");
+		btnAddServer = new JButton("ADD SERVER");
 		
 		threadsLabel = new JLabel("Thread's Simulation Time: 5 seconds" );
 		threadsLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -132,7 +128,7 @@ public class StatusGUI extends JFrame implements Observer {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(94)
-							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
+							.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(53)
 							.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
@@ -161,54 +157,62 @@ public class StatusGUI extends JFrame implements Observer {
 							.addComponent(simulationSpeedLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(simulationSpeedSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(threadsLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))))
 					.addGap(93))
 		);
+
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
+		textArea_1 = new JTextArea();
+		textArea_1.setColumns(10);
+		textArea_1.setEditable(false);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setColumns(10);
+		textArea_2 = new JTextArea();
+		textArea_2.setColumns(10);
+		textArea_2.setEditable(false);
+
+		textArea_3 = new JTextArea();
+		textArea_3.setColumns(10);
+		textArea_3.setEditable(false);
+
+		textArea_4 = new JTextArea();
+		textArea_4.setColumns(10);
+		textArea_4.setEditable(false);
+
+		textArea_5 = new JTextArea();
+		textArea_5.setColumns(10);
+		textArea_5.setEditable(false);
+
+		staff.add(0,textArea_1);
+		staff.add(1,textArea_2);
+		staff.add(2,textArea_3);
+		staff.add(3,textArea_4);
+		staff.add(4,textArea_5);
+
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+					.addComponent(textArea_1, GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+					.addComponent(textArea_2, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+					.addComponent(textArea_3, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+					.addComponent(textArea_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+					.addComponent(textArea_5, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
 					.addGap(0))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-						.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+						.addComponent(textArea_1, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+						.addComponent(textArea_2, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+						.addComponent(textArea_3, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+						.addComponent(textArea_4, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+						.addComponent(textArea_5, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
 					.addGap(5))
 		);
 		panel_1.setLayout(gl_panel_1);
@@ -256,18 +260,20 @@ public class StatusGUI extends JFrame implements Observer {
 	}
 
 
-
-	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 			
 		if (arg0 == queue){
 			LinkedList<Order> q = new LinkedList<Order>(((QueueCustomer) arg1).get_queue());
-			String name = q.getLast().getCustomerName();
-			int items = q.getLast().getItems().size();	
+				
 			if( model.size() > q.size()){
 				model.remove(0);
-			}else if(model.size() < q.size()){		
+			} else if(model.size() < q.size()){
+
+				String name = q.getLast().getCustomerName();
+				int items = q.getLast().getItems().size();			
+
+
 				String combo = name + " " + String.valueOf(items) + " items " + String.valueOf(q.getLast().getPrice());
 					if(model.size() < 2){
 						model.addElement(combo);
@@ -293,26 +299,31 @@ public class StatusGUI extends JFrame implements Observer {
 			
 			int server_no = ((Staff) arg1).getNumber();
 			System.out.println(server_no);
-			String temp = ((Staff) arg1).getGUIDisplay();
+			String displayOrder = ((Staff) arg1).getGUIDisplay();
+			
 			switch (server_no){
 			case 1: 
-				textField.setText(temp);
+				textArea_1.setText(displayOrder);
 				break;
 			case 2: 
-				textField_1.setText(temp);
-				break;
-			case 3:textField_2.setText(temp);
+				textArea_2.setText(displayOrder);
 		    	break;
-			case 4:textField_3.setText(temp);
+			case 3:
+				textArea_3.setText(displayOrder);
 				break;
-			case 5:textField_4.setText(temp);
-	    		break;
+			case 4:
+				textArea_4.setText(displayOrder);
+				break;
+			case 5:
+				textArea_5.setText(displayOrder);
+				break;
+
 			}
 
-			
 		}
+			
+		
 	}
-	
 	
 	public void addServer(ActionListener e) {
 		btnAddServer.addActionListener(e);
@@ -322,7 +333,6 @@ public class StatusGUI extends JFrame implements Observer {
 		btnRemoveServer.addActionListener(e);
 	}
 
-	//@ Andy - adding change listener to slider - Functionality handled in controller
 	public void addSpeedListener(ChangeListener e){
 		simulationSpeedSlider.addChangeListener(e);	
 	}

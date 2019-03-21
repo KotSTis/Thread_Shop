@@ -91,6 +91,51 @@ public class CsvReader {
 		return itemList;
 	}
 
+	public String[] readFirstNames(String filename){
+		File file = new File(filename);
+
+		Scanner sc = null;
+		try {
+			sc = new Scanner(file);
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		String line = sc.nextLine();
+		String[] firstNames = new String[20];
+		int counter = 0;
+		while (sc.hasNextLine()) {
+			line = sc.nextLine();
+			counter ++;
+			String[] values = line.split(",");
+			firstNames[counter] = values[0];
+			}
+		return firstNames;
+		}
+	
+	public String[] readLastNames(String filename){
+		File file = new File(filename);
+
+		Scanner sc = null;
+		try {
+			sc = new Scanner(file);
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		String line = sc.nextLine();
+		String[] lastNames = new String[20];
+        int counter = 0;
+		while (sc.hasNextLine()) {
+			line = sc.nextLine();
+			counter ++;
+			String[] values = line.split(",");
+			lastNames[counter] = values[1];
+			}
+		return lastNames;
+		}
 	// Reading orders and storing them in an ArrayList since we don't care about
 	// duplicates or order
 	public ArrayList<Order> readOrdersInfo(String filename)
