@@ -29,6 +29,7 @@ public class StaffManager {
 	}
 	
 	public void removeServer() {
-		staffEmployees.remove(staffEmployees.size());
+		Staff staff = staffEmployees.get(staffEmployees.size()-1);
+		staffEmployees.remove(staff);
 	}
 }

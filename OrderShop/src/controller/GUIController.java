@@ -60,10 +60,8 @@ public class GUIController{
 	public class RemoveServerListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent e) {
-			int numberOfServers = staffList.getServers().size();
-			if (numberOfServers > 2){
-				staffList.removeServer();
-			}
+			staffList.removeServer();
+			
 		}
 	}
 
